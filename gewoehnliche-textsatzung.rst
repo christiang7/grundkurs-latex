@@ -1,0 +1,769 @@
+
+.. _Gewöhnliche Textsatzung:
+
+Gewöhnliche Textsatzung
+=======================
+
+.. _Abschnitte und Überschriften:
+
+Abschnitte und Überschriften
+----------------------------
+
+Der Inhalt eines Dokuments kann mittels der folgenden Anweisungen hierarchisch
+in einzelne Abschnitte untergliedert werden:
+
+.. index:: \part{}, Part
+
+* ``\part{Text}`` kennzeichnet Buchteile. Diese Gliederungsebene existiert nur
+  bei den Dokumentklassen ``book`` und ``scrbook``.
+
+.. index:: \chapter{}, Kapitel
+
+* ``\chapter{Text}`` kennzeichnet Kapitel. Diese Gliederungsebene existiert nur
+  bei den Dokumentklassen ``book`` und ``scrbook``, ``report`` und ``scrreprt``,
+  nicht aber bei ``article`` und ``scrartcl``.
+
+.. index:: \section{}, Abschnitt
+
+* ``\section{Text}`` kennzeichent Abschnitte. Diese Gliederungsebene ist bei
+  Artikeln die höchste, bei Büchern oder Berichten die zweithöchste.
+
+.. index:: \subsection{}, \subsubsection{}
+
+* ``\subsection{Text}`` und ``\subsubsection{Text}`` kennzeichnet Unter- und
+  Unterunterabschnitte.
+
+.. index:: \paragraph{}, \subparagraph{}
+
+* ``\paragraph{Text}`` kennzeichnet einzelne Absätze (Paragraphen) im Text. Die
+  tiefste Ebene stellt schließlich der ``\subparagraph{Text}`` dar.
+
+In der Präambel kann mittels ``\setcounter{secnumdepth}{tiefe}`` beeinflusst
+werden, bis zu welcher Schachtelungstiefe eine Nummerierung der Überschriften
+erfolgt. Der Standardwert für ``tiefe`` ist :math:`2`, es erhalten also Kapitel-, Abschnitts-
+und Unterabschnittsüberschriften eine fortlaufende Nummer. Setzt man
+beispielsweise ``\setcounter{secnumdepth}{1}``, so werden nur noch die Kapitel-
+und Abschnittsüberschriften nummeriert, bei ``\setcounter{secnumdepth}{0}`` nur
+noch die Kapitelüberschriften. Setzt man ``\setcounter{secnumdepth}{-1}``, so
+wird überhaupt keine Überschrift nummeriert.
+
+Wenn bei einer Überschrift ein ``*`` vor die öffnende geschweifte Klammer
+gesetzt wird (beispielsweise ``\section*{Text}``), so erfolgt keine Nummerierung
+der Überschrift und ebenso kein Eintrag in das Inhaltsverzeichnis.
+
+.. index:: Titelseite, Abstract
+
+.. rubric:: Titelseite und Abstract
+
+Optional können zu Beginn einer LaTeX-Datei mittels der folgenden Anweisungen
+Informationen über den Autor und das aktuelle Dokument festgelegt werden:
+
+* ``\title{}``: Der Titel des Dokuments
+* ``\author{}``: Der Autor beziehungsweise die Autoren (Aufzählung mittels ``\and``)
+* ``\date{}``: Das Datum der Veröffentlichung (``\today`` für das heutige Datum)
+
+Zu Beginn des Dokuments kann dann mittels folgender Anweisung eine automatische
+Titelseite erzeugt werden:
+
+.. code-block:: tex
+
+    \maketitle
+
+Die Titelseite kann selbstverständlich auch manuell gestaltet werden. Bei
+Büchern folgt auf der zweiten Seite häufig eine kurze Beschreibung des Inhalts,
+ein so genannnter "Abstract". Dieser kann folgendermaßen
+
+.. code-block:: tex
+
+    \abstract{Text}
+
+Die Ausrichtung des Abstracts auf der zweiten Seite erfolgt dabei -- ebenso wie
+bei ``\maketitle`` -- automatisch.
+
+
+.. index:: Inhaltsverzeichnis, \tableofcontents
+.. _tableofcontents:
+
+.. rubric:: Inhaltsverzeichnis
+
+Anhand der Gliederung in Kapitel und Abschnitte kann in LaTeX mittels
+``\tableofcontents`` ein automatisch erzeugtes Inhaltsverzeichnis in das
+Dokument eingebunden werden:
+
+.. code-block:: tex
+
+    \tableofcontents
+
+üblicherweise wird das Inhaltsverzeichnis unmittelbar nach der Titelseite und
+dem Abstract gesetzt. Die Seiten des Inhaltsverzeichnisses werden von LaTeX
+automatisch mit kleinen römischen Buchstaben nummeriert, das eigentliche
+Dokument beginnt dann mit :math:`1` als Seitennummer.
+
+In der Präambel kann mittels ``\setcounter{tocdepth}{tiefe}`` beeinflusst
+werden, bis zu welcher Schachtelungstiefe die Überschriften des Dokuments
+aufgelistet werden sollen. Der Standardwert für ``tiefe`` ist wiederum ``2``, so
+dass Kapitel-, Abschnitts- und Unterabschnittsüberschriften aufgelistet werden.
+Nummer. Setzt man beispielsweise ``\setcounter{secnumdepth}{1}``,so werden nur
+noch die Kapitel- und Abschnittsüberschriften aufgelistet. Überschriften, bei
+denen vor die öffnende Klammer ein ``*`` gesetzt wurde (beispielsweise
+``\section*{Text}``), werden unabhängig davon im Inhaltsverzeichnis nicht
+aufgelistet.
+
+Werden Änderungen in der Gliederung vorgenommen, so schreibt LaTeX beim
+Übersetzen des Quellcodes mittels ``pdflatex`` die Änderungen des
+Inhaltsverzeichnisses in eine Hilfsdatei mit der Endung :math:``.toc``; erst bei
+einem nochmaligen Übersetzen des Quellcodes mittels ``pdflatex`` werden die
+Änderungen auch im PDF-Dokument sichtbar.
+
+.. index:: \listoftables, \listoffigures
+
+Neben einem Inhaltsverzeichnis kann nach Belieben auch mit ``\listoftables``
+eine Übersicht aller Tabellen und mit ``\listoffigures`` eine Übersicht über
+alle Abbildungen im Dokument ausgegeben werden. Auch hier ist gegebenenfalls
+ein zweimaliger Aufruf von ``pdflatex`` nötig, um die Listen (Hilfsdateien
+``.lot`` und ``.lof``) im PDF-Dokument zu aktualisieren.
+
+
+
+.. index:: \appendix, Anhang
+.. rubric:: Anhang
+
+Soll ein Dokument einen Anhang beinhalten, so kann dieser mittels ``\appendix``
+eingeleitet werden. Ab dieser Anweisung werden weitere Kapitel anstelle mit
+Nummern mit Großbuchstaben :math:`\rm{A}`, :math:`\rm{B}`, usw. durchnummeriert.
+Die Seitennummerierung wird unverändert fortgesetzt.
+
+.. rubric:: Zeilen- und Seitenumbruch
+
+Einzelne Absätze werden in LaTeX durch Leerzeilen gekennzeichnet. Der Abstand
+zwischen Absätzen wird als Option in Verbindung mit der Dokumentklasse
+festgelegtals, beispielsweise ``\documentclass[halfparskip]{scrbook}``.
+
+.. TODO parskip, noparskip
+
+.. index:: \newline, \\
+
+Möchte man innerhalb eines Absatzes eine neue Zeile erzeugen, so kann dies
+mittels ``\newline`` oder der Kurzform ``\\`` erfolgen. Unmittelbar im Anschluss
+an ``\\`` kann zudem in eckigen Klammern ein Längenmaß angegeben werden, um
+das der Abstand zur nächsten Zeile verkleinert oder vergrößert wird;
+beispielsweise bewirkt bei einer Schriftgröße von ``12pt`` ein Zeilenumbruch
+mittels ``\\[6pt]`` einen :math:`1,5`-fachen Zeilenabstand.
+
+.. index:: Seitenumbruch, \pagebreak, \newpage
+
+Eine Wechsel auf eine neue Seite kann mittels ``\pagebreak`` oder ``\newpage``
+manuell erzwungen werden.
+
+.. rubric:: Aufteilung eines Dokuments in mehrere Dateien
+
+Umfangreiche LaTeX-Dokumente können, beispielsweise kapitelweise, in mehrere
+``.tex``-Dateien aufgeteilt werden. In der Hauptdatei kann der Inhalt dieser
+Dateien dann mittels der Anweisung ``\input{kapitelname}`` eingefügt werden; die
+Endung ``.tex`` wird dabei automatisch ergänzt.
+
+.. code-block:: tex
+
+    % Beispiel einer aufgeteilten Haupt-Datei:
+
+    \input{preambel}
+    \input{kapitel1}
+    \input{kapitel2}
+    \input{kapitel3}
+    \input{anhang}
+
+Die einzelnen Kapitel können bei umfangreichen Dokumenten auch in verschiedene
+Unterverzeichnisse abgelegt werden, um dort beispielsweise die zugehörigen Bild-
+oder Code-Dateien mit abzuspeichern.
+
+Auf eine sehr ähnliche Weise kann die LaTeX-Anweisung ``\include{}`` verwendet
+werden. Auch bei dieser Anweisung wird der Name der angegebenen Datei um die
+Endung ``.tex`` ergänzt; der Inhalt der Datei wird allerdings erst auf einer
+neuen Seite (quasi nach einer ``\newpage``-Anweisung) eingebettet. Die
+``\include{}``-Anweisung kann folglich nur einzelne Kapitel-Dateien in das
+Dokument einbauen; beispielsweise für die Präambel muss hingegen die
+``\input{}``-Anweisung verwendet werden.
+
+
+.. index:: Schriftart, Schriftfamilie, Texthervorhebung
+.. _Schriftarten und Texthervorhebungen:
+
+Schriftfamilien und Texthervorhebungen
+--------------------------------------
+
+Üblicherweise werden mehrere Schriftarten zu einer Schriftfamilie
+zusammengefasst, die zwar das gleiche Design aufweisen, sich aber in
+Neigungsgrad, Fettschrift, Zeichenabstand und weiteren Merkmalen unterscheiden
+können. Die Standard-Schriftfamilie von LaTeX heißt "Computer Modern".
+
+Innerhalb einer Schriftfamilie kann die Darstellung von Text folgendermaßen
+verändert werden:
+
+.. _Schriftstärke:
+
+.. index:: \textbf{}
+
+* *Schriftstärke:* Mit ``textbf{Text}`` ("bold font") wird Text fettgedruckt, mit
+  ``\textmd{Text}`` ("medium", Standard) in normaler Schriftstärke ausgegeben.
+
+  .. list-table::
+      :name: tab-text-normal-fett
+      :widths: 50 50
+
+      * - ``\textbf{Ein Blindtext.}``
+        - :math:`\text{\textbf{Ein Blindtext.}}`
+      * - ``\textmd{Ein Blindtext.}``
+        - :math:`\text{\textmd{Ein Blindtext.}}`
+
+.. index:: \textsl{}, \textsc{}, \textit{}, \emph{}
+
+.. _Schriftform:
+
+* *Schriftform:* Mit ``\textit{Text}`` ("italic") wird der angegebene Text
+  kursiv, mit ``textsl{Text}`` ("slanted") schräggestellt gedruckt. Als Standard
+  wird die Text aufrecht ausgegeben  (entspricht ``\textup{Text}``).
+
+  .. list-table::
+      :name: tab-text-schraeg
+      :widths: 50 50
+
+      * - ``\textit{Ein Blindtext.}``
+        - :math:`\text{\textit{Ein Blindtext.}}`
+      * - ``\textsl{Ein Blindtext.}``
+        - :math:`\text{\textsl{Ein Blindtext.}}`
+      * - ``\textup{Ein Blindtext.}``
+        - :math:`\text{\textup{Ein Blindtext.}}`
+
+  .. index:: Kapitälchen, \emph{}
+
+  Mit ``\emph{Text}`` ("emphasize") wird Text hervorgehoben; er wird dann
+  innerhalb einer normalen Textzeile kursiv gedruckt, innerhalb einer kursiven
+  Textzeile jedoch aufrecht dargestellt.
+  Mit ``\textsc{Text}`` ("small caps") wird Text in unterschiedlich großen
+  Großbuchstaben ("Kapitälchen") ausgegeben; mittels ``\underline{Text}`` kann
+  Text unterstrichen ausgegeben werden.
+
+  .. list-table::
+      :name: tab-text-hervorhebung
+      :widths: 50 50
+
+      * - ``\emph{Ein Blindtext.}``
+        - :math:`\text{\emph{Ein Blindtext.}}`
+      * - ``\textsc{Ein Blindtext.}``
+        - :math:`\text{\textsc{Ein Blindtext.}}`
+      * - ``\underline{Ein Blindtext.}``
+        - :math:`\text{\underline{Ein Blindtext.}}`
+
+  Bindet man in der Präambel das Paket ``soul`` ein (``\usepackage{soul}``), so
+  kann Text auch durchgestrichen ausgegeben werden:
+
+  .. list-table::
+      :name: tab-text-hervorhebung-soul
+      :widths: 50 50
+
+      * - ``\st{Ein Blindtext.}``
+        - :math:`\text{\st{Ein Blindtext.}}`
+
+.. http://www.namsu.de/latex/latexeinfuehrung_2/Latexeinfuehrung.html
+.. * - ``\so{Ein Blindtext.}``
+.. - :math:`\text{\so{Ein Blindtext.}}`
+.. * - ``\caps{Ein Blindtext.}``
+.. - :math:`\text{\caps{Ein Blindtext.}}`
+
+.. _Schrifttyp:
+
+.. index:: Serifen, \textrm{}, \textsf{}, \texttt{}
+
+* *Schrifttyp:* Standardmäßig wird Text als ``\textrm{Text}`` ("roman"), d.h.
+  mit so genannten Serifen ausgegeben. Serifen sind kleine Füßchen und Häkchen
+  an den einzelnen Buchstaben, die eine Schrift für das Auge besser lesbar
+  machen. Serifen-Schiften sollten für längere Texte bevorzugt werden, während
+  beispielsweise für die Erstellung von Plakaten mit ``textsf{Text}`` ("sans
+  serif") auch eine serifenlose Schrift gewählt werden kann.
+
+  .. list-table::
+      :name: tab-text-schrifttyp
+      :widths: 50 50
+
+      * - ``\textrm{Ein Blindtext.}``
+        - :math:`\text{\textrm{Ein Blindtext.}}`
+      * - ``\textsf{Ein Blindtext.}``
+        - :math:`\text{\textsf{Ein Blindtext.}}`
+      * - ``\texttt{Ein Blindtext.}``
+        - :math:`\text{\texttt{Ein Blindtext.}}`
+
+  Üblicherweise nehmen die einzelnen Buchstaben einer Schrift beim Druck, da
+  sie unterschiedlich breit sind, unterschiedlich viel Platz ein. Beispielsweise
+  zur Darstellung von Quellcode wird jedoch bevorzugt eine nicht-proportionale
+  Schrift verwendet, um eine optische Absetzung vom restlichen Text zu bewirken.
+  Dies kann mit ``\texttt{Text}`` ("typewriter") erreicht werden.
+
+.. index:: Unterstreichung, \underline{}
+
+Die obigen Anweisungen können verschachtelt auftreten, es kann also
+beispielsweise ein Text fett *und* kursiv gedruckt werden.
+Die Anweisungen sind jedoch auf einzelne Textelemente innerhalb
+eines Absatzes begrenzt.
+
+.. \bfseries
+.. \mdseries
+
+
+.. .. _Verwendung anderer Schriftarten:
+
+.. .. rubric:: Verwendung anderer Schriftarten
+
+.. Soll eine andere Schriftfamilie als die LaTeX-Standard-Schrift "Computer Modern"
+.. verwendet werden, so muss in der Präambel ein ensprechendes Zusatzpaket geladen
+.. werden. Beispielsweise existierien die Pakete ``uarial`` als Nachbau der
+.. Schriftart "Arial", oder ``helvet`` als Nachbau der Schriftart "Helvetica".
+
+.. Ausführliche Erklärung:
+.. https://tex.stackexchange.com/questions/25249/how-do-i-use-a-particular-font-for-a-small-section-of-text-in-my-document/25251#25251
+
+.. \usepackage{uarial}
+.. \renewcommand{\familydefault}{\sfdefault}
+
+.. Die in Latex verwendete Standardschriftart heißt Computer Modern Schriftfamilie
+.. (CM), diese setzt sich aus verschieden Computer Modern Schriftarten zusammen. Da
+.. sie nicht alle europäischen Zeichen umfasst sollte das Usepackage fontenc
+.. eingebunden werden, um Probleme bei der Darstellung von Umlauten zu vermeiden.
+
+.. \usepackage[scaled]{uarial}
+.. http://www.cs.sfu.ca/pub/math/pub/lachlan/latex/arial/uarial.sty
+
+
+.. index:: Farbiger Text, \color{}
+.. _Farben:
+.. _Farbiger Text:
+
+.. rubric:: Farbiger Text
+
+Um Farben nutzen zu können, muss in der :ref:`Präambel <Präambel>` des
+LaTeX-Dokuments das Paket ``color`` geladen werden:
+
+
+.. code-block:: tex
+
+    \usepackage{color}
+
+Innerhalb des Dokuments lässt sich dann durch die Anweisung ``\color{farbname}``
+die Standardfarbe auf eine gewünschte Farbe ändern. Der Farbname kann einer
+Standardfarbe (``black``, ``white``, ``red``, ``green``, ``blue``, ``cyan``,
+``magenta`` oder ``yellow``) entsprechen oder eine selbst definierte Farbe
+bezeichnen.
+
+.. todo define color
+
+Um einen Farbwechsel nicht wieder explizit rückgängig machen zu müssen, kann die
+Wirkung des Farbwechsels mittels einer :ref:`Deklaration <Deklaration>` auf
+einen Textbblock beschränkt werden, beispielsweise ``Text { \color{red} roter
+Text hier } Text``. Derartige Textblöcke können auch mehrere Absätze umfassen.
+
+
+.. index:: \rotatebox{}
+.. _Gedrehter Text:
+
+.. rubric:: Gedrehter Text
+
+Um Text vertikal oder schräg zu setzen, muss zunächst in der :ref:`Präambel
+<Präambel>` des Dokuments das Paket ``graphicx`` geladen werden:
+
+.. code-block:: tex
+
+    \usepackage{graphicx}
+
+Innerhalb des Dokuments lässt sich dann durch die Anweisung ``\rotatebox{90}{Text}``
+der angegebene Text um den angegebenen Winkel drehen; der Drehwinkel wird dabei
+im mathematischen Sinn interpretiert, eine Angabe von ``90`` entspricht also
+einer Drehung um :math:`90\degree` gegen den Uhrzeigersinn.
+
+
+.. index:: Schriftgröße
+.. _Schriftgrößen und Längenmaße:
+
+Schriftgrößen und Längenmaße
+----------------------------
+
+In LaTeX wird die Standard-Größe für ein Dokument in Verbindung mit der
+Dokumentklasse festgelegt, beispielsweise ``\documentclass[12pt]{scrbook}`` für
+ein Buch mit einer normalen Schriftgröße von ``12pt``. Die Größe einer Schrift
+kann dann innnerhalb des Dokuments folgendermaßen angepasst werden, wobei die
+Abstufungen relativ zur Standard-Schriftgröße und in harmonischen
+Größenverhältnissen erfolgen:
+
+.. hlist::
+    :columns: 2
+
+    * ``\tiny``
+    * ``\scriptsize``
+    * ``\footnotesize``
+    * ``\small``
+    * ``\normalsize``
+    * ``\large``
+    * ``\Large``
+    * ``\LARGE``
+    * ``\huge``
+    * ``\Huge``
+
+Eine Änderung der Schriftgröße kann entweder mittels ``\normalsize`` beendet
+oder mittels einer :ref:`Deklaration <Deklaration>`  auf einen Textbblock
+beschränkt werden, beispielsweise ``Text { \large großer Text hier } Text``.
+Derartige Textblöcke können auch mehrere Absätze umfassen; ebenso kann ein
+solcher Bereich mittels ``\begin{large}`` und ``\end{large}`` begrenzt werden.
+
+.. index:: \fontsize{}
+
+Soll innerhalb des Dokuments die Standard-Größe der Schrift verändert werden, so
+ist dies mit folgender Syntax möglich:
+
+.. code-block:: tex
+
+    \fontsize{12pt}{14.4pt}
+    \selectfont
+
+Der ``\fontsize{}``-Anweisung werden hierbei die neue Schriftgröße sowie der
+neue Standard-Zeilenabstand als Argumente übergeben.
+
+.. index:: Längenmaß
+
+In LaTeX können allgemein folgende Längenmaße verwendet werden:
+
+* ``in``: Ein Zoll ("inch") entspricht :math:`\unit[2,54]{cm}`.
+* ``pt``: Der "point" ist eine Maßgröße aus der ursprünglichen Textsatzung. Es
+  gilt :math:`\unit[1]{pt} \approx \unit[0,0351]{cm}`
+* ``em``: Ein ``em`` war früher als die Breite des großen 'M' definiert. Bei der
+  LaTeX-Standard-Schrift ("Computer Modern") sind beispielsweise Ziffern ``0.5em`` breit.
+* ``ex``: Ein ``ex`` ist in etwa die Höhe des kleinen 'x'.
+
+.. _Sonderzeichen:
+.. _Spezielle Zeichen:
+
+Spezielle Zeichen
+-----------------
+
+.. todo anführungszeichen
+
+LaTeX kennt drei Arten von Zeichen: Normale Zeichen, Steuerzeichen und
+Sonderzeichen:
+
+* Normale Zeichen sind alle "normalen" Buchstaben (``a`` bis ``z``
+  beziehungsweise ``A`` bis ``Z``) sowie die Ziffern und Satzzeichen.
+
+.. index:: Steuerzeichen
+
+* Steuerzeichen steuern LaTeX. Das Steuerszeichen ``\`` bedeutet
+  beispielsweise, dass anschließend eine LaTeX-Anweisung folgt; so bewirkt
+  beispielsweise ``\textbf{Text}``, dass der Text innerhalb der geschweiften
+  Klammern fett gedruckt werden soll.
+
+  Sollen Zeichen, die in LaTeX Sonderbedeutungen als Steuerzeichen haben, als
+  normale Zeichen gedruckt werden, so müssen sie gemäß der folgenden Tabelle im
+  laufenden Text eingegeben werden:
+
+  .. list-table::
+      :name: tab-steuerzeichen
+      :widths: 50 50 50 50
+
+      * - Eingabe
+        - Ausgabe
+        - Eingabe
+        - Ausgabe
+      * - ``\{``
+        - :math:`{\color{white}|}\text{\{}{\color{white}|}`
+        - ``\}``
+        - :math:`{\color{white}|}\text{\}}{\color{white}|}`
+      * - ``\#``
+        - :math:`{\color{white}|}\text{\#}{\color{white}|}`
+        - ``\&``
+        - :math:`{\color{white}|}\text{\&}{\color{white}|}`
+      * - ``\_``
+        - :math:`{\color{white}|}\text{\_}{\color{white}|}`
+        - ``\%``
+        - :math:`{\color{white}|}\text{\%}{\color{white}|}`
+      * - ``\$``
+        - :math:`{\color{white}|}\text{\$}{\color{white}|}`
+        - ``\^{}``
+        - :math:`{\color{white}|}\text{\^{}}{\color{white}|}`
+      * - ``\textasciitilde``
+        - :math:`{\color{white}|}\text{\textasciitilde}{\color{white}|}`
+        - ``\textbackslash``
+        - :math:`{\color{white}|}\text{\textbackslash}{\color{white}|}`
+
+.. index:: Anführungszeichen
+
+* Die gewö
+
+.. index:: Umlaute
+
+* Umlaute und andere Sonderzeichen sind oftmals länderspezifisch. Für
+  deutschsprachige Dokumente sollten daher, wie bereits im Abschnitt
+  :ref:`Umlaute und deutsche Sprachunterstützung <Umlaute und deutsche
+  Sprachunterstützung>` beschrieben, in der Präambel des Dokuments folgende
+  Pakete eingebunden werden:
+
+  .. code-block:: tex
+
+      \usepackage[ngerman]{babel}
+      \usepackage[utf8]{inputenc}
+      \usepackage[T1]{fontenc}
+
+  Gewöhnliche deutschsprachige Umlaute können damit wie normale Zeichen im
+  laufenden Text eingegeben werden. Weitere Sonderzeichen werden üblicherweise
+  mittels eines ``\``-Zeichens eingeleitet.
+
+  .. list-table::
+      :name: tab-umlaute
+      :widths: 50 50 50 50
+
+      * - Eingabe
+        - Ausgabe
+        - Eingabe
+        - Ausgabe
+      * - ``\`a``
+        - :math:`{\color{white}|}\text{\`a}{\color{white}|}`
+        - ``\'a``
+        - :math:`{\color{white}|}\text{\'a}{\color{white}|}`
+      * - ``\.a``
+        - :math:`{\color{white}|}\text{\.a}{\color{white}|}`
+        - ``\^a``
+        - :math:`{\color{white}|}\text{\^a}{\color{white}|}`
+      * - ``\~a``
+        - :math:`{\color{white}|}\text{\~a}{\color{white}|}`
+        - ``\={a}``
+        - :math:`{\color{white}|}\text{\={a}}{\color{white}|}`
+      * - ``\u{a}``
+        - :math:`{\color{white}|}\text{\u{a}}{\color{white}|}`
+        - ``\v{a}``
+        - :math:`{\color{white}|}\text{\v{a}}{\color{white}|}`
+      * - ``\k{a}``
+        - :math:`{\color{white}|}\text{\k{a}}{\color{white}|}`
+        - ``\c{c}``
+        - :math:`{\color{white}|}\text{\c{c}}{\color{white}|}`
+      * - ``\"a``
+        - :math:`{\color{white}|}\text{\"a}{\color{white}|}`
+        - ``\ss``
+        - :math:`{\color{white}|}\text{\ss}{\color{white}|}`
+
+  Beispielsweise können also spanisch-sprachige Umlaute mittels ``\'`` und
+  ``\~`` vor dem eigentlichen Buchstaben erzeugt werden. So ergibt die Eingabe
+  von ``aqu\'i`` als Ausgabe :math:`\text{aqu\'i}`; eine Eingabe von
+  ``sen\~nor`` ergibt entsprechend :math:`\text{se\~nor}`. Bei Verwendung der
+  beiden obigen Pakete und einer spanisch-sprachigen Tastatur können die Umlaute
+  und Sonderbuchstaben jedoch auch als normaler Text eingegeben werden.
+
+Einige weitere Sonderzeichen sind in der folgenden Tabelle aufgelistet:
+
+.. list-table::
+    :name: tab-sonderzeichen
+    :widths: 50 50 50 50
+
+    * - Eingabe
+      - Ausgabe
+      - Eingabe
+      - Ausgabe
+    * - ``\oe``
+      - :math:`{\color{white}|}\text{\oe}{\color{white}|}`
+      - ``\OE``
+      - :math:`{\color{white}|}\text{\OE}{\color{white}|}`
+    * - ``\ae``
+      - :math:`{\color{white}|}\text{\ae}{\color{white}|}`
+      - ``\AE``
+      - :math:`{\color{white}|}\text{\AE}{\color{white}|}`
+    * - ``\aa``
+      - :math:`{\color{white}|}\text{\aa}{\color{white}|}`
+      - ``\AA``
+      - :math:`{\color{white}|}\text{\AA}{\color{white}|}`
+    * - ``\o``
+      - :math:`{\color{white}|}\text{\o}{\color{white}|}`
+      - ``\O``
+      - :math:`{\color{white}|}\text{\O}{\color{white}|}`
+    * - ``\l``
+      - :math:`{\color{white}|}\text{\l}{\color{white}|}`
+      - ``\L``
+      - :math:`{\color{white}|}\text{\L}{\color{white}|}`
+    * - ``\P``
+      - :math:`{\color{white}|}\text{\P}{\color{white}|}`
+      - ``\S``
+      - :math:`{\color{white}|}\text{\S}{\color{white}|}`
+    * - ``\textexclamdown``
+      - :math:`{\color{white}|}\text{\textexclamdown}{\color{white}|}`
+      - ``\textquestiondown``
+      - :math:`{\color{white}|}\text{\textquestiondown}{\color{white}|}`
+    * - ``\pounds``
+      - :math:`{\color{white}|}\text{\pounds}{\color{white}|}`
+      - ``\copyright``
+      - :math:`{\color{white}|}\text{\copyright}{\color{white}|}`
+
+Für manche Sonderzeichen müssen zusätzliche Pakete geladen werden;
+beispielsweise sollte in der Präambel grundsätzlich das Paket ``marvosym``
+geladen werden, da damit unter anderem mittels ``\EUR`` das Euro-Zeichen
+:math:`\text{\EUR}` gesetzt werden kann.
+
+.. _Griechische Buchstaben:
+
+.. index:: Griechische Buchstaben
+
+Griechische Buchstaben werden gewöhnlich mit Hilfe des Mathematik-Modus
+eingegeben; dabei werden sie allerdings als Bezeichnungen für Variablen
+angesehen und damit kursiv gedruckt. Sollen griechische Buchstaben in
+Normalschrift in den Text eingebaut werden, so kann beispielsweise in der
+Präambel das Paket ``textgreek`` geladen und anschließend die Buchstaben mittels
+``\textalpha``, ``\textbeta`` usw. gesetzt werden. Als Alternative kann anstelle
+des Pakets ``babel`` das Paket ``betababel`` mit den gleichen Optionen
+(beispielsweise ``ngerman``) geladen werden, um innerhalb des Dokuments
+beispielsweise mittels ``\bcode{logos}`` den Schriftzug :math:`\mathrm{\lambda o
+\gamma o \varsigma}` zu erhalten.
+
+.. http://www.ctan.org/pkg/textgreek
+
+Eine sehr ausführliche Übersicht von LaTeX-Symbolen gibt es im `LaTeX-Wikibook
+(Sonderzeichen)
+<https://de.wikibooks.org/wiki/LaTeX-Kompendium:_Sonderzeichen>`_ und in der
+PDF-Datei `Symbols-A4
+<http://mirrors.ctan.org/info/symbols/comprehensive/symbols-a4.pdf>`_.
+
+
+
+
+.. index:: Silbentrennung, \hyphenation{}
+.. _Silbentrennung:
+
+Silbentrennung
+--------------
+
+In LaTeX wird eine sprachspezifische Silbentrennung in der Präambel über das
+Paket ``babel`` aktiviert, beispielsweise wird mittels
+``\usepackage[ngerman]{babel}`` die Silbentrennung für die neue deutsche
+Rechtschreibung aktiviert. Die Silbentrennung erfolgt in LaTeX automatisch, kann
+allerdings manuell angepasst werden.
+
+* Soll an einer Leerstelle ein Zeilenumbruch verhindert werden, kann anstelle
+  eines Leerzeichens das Tilde-Zeichen ``~`` eingesetzt werden; beispielsweise
+  würde ``Seite~9`` nicht zwischen ``Seite`` und ``9`` getrennt.
+
+* Soll an einer bestimmten Stelle innerhalb eines Wortes ein Zeilenumbruch
+  erzwungen werden, so ist dies mittels ``\-`` möglich, beispielsweise
+  ``Archeo\-pterix``. Der Zeilenumbruch an dieser Stelle wird allerdings nur
+  dann durchgeführt, wenn das Wort auch am Ende einer Zeile steht und getrennt
+  werden muss; andernfalls wird die Trenn-Anweisung ``\-`` von LaTeX ignoriert.
+
+.. index:: \hyphenation{}
+
+Dank des ``babel``-Pakets werden zwar die meisten Wörter der deutschen Sprache
+bei Zeilenumbruechen richtig getrennt. Kommen im Text allerdings Wörter vor,
+fuer die keine mögliche Silbentrennung bekannt ist, so kann der
+``\hyphenation{}``-Anweisung am Ende der Präambel eine Liste mit
+Trenn-Empfehlungen festgelegt werden:
+
+.. code-block:: tex
+
+    % Trennempfehlungen für folgende Wörter festlegen:
+    \hyphenation{Ar-cheo-pte-rix Nach-kom-ma Stel-len}
+
+Die ``\hyphenation{}``-Liste kann beliebig lang sein und sollte alle Wörter
+umfassen, die beim Durchblättern des fertigen PDF-Dokuments am rechten
+Seitenrand auffallen, weil sie nicht automatisch getrennt werden konnten.
+
+
+.. index:: Abstand
+.. _Vertikale und horizontale Abstände:
+
+Vertikale und horizontale Abstände
+----------------------------------
+
+Einzelne Absätze werden in LaTeX durch leere Zeilen voneinander getrennt. Kommen
+mehrere aufeinander folgende leere Zeilen vor, so werden die folgenden
+ignoriert, der Abstand zwischen den einzelnen Absätzen bleibt somit gleich.
+
+Um den vertikalen Abstand zwischen einzelnen Zeilen zu verändern, gibt es
+mehrere Möglichkeiten:
+
+* Mit beispielsweise ``\\[6pt]`` wird eine neue Zeile eingeleitet mit einem
+  zusätzlichen Abstand von ``6pt`` (entspricht etwa :math:`\unit[2]{mm}`).
+
+* Zwischen zwei Absätzen kann mittels ``\vspace{Länge}`` ein beliebig
+  langer vertikaler Abstand an dieser Stelle eingefügt werden, beispielsweise
+  mittels ``\vspace{3cm}`` ein ``3cm`` breiter vertikaler Abstand.
+
+.. index:: Zeilenabstand
+
+* Mit ``\onehalfspacing`` beziehungsweise ``\doublespacing`` wird im folgenden
+  Dokumentteil ein eineinhalb-facher beziehungsweise doppelter Zeilenabstand
+  eingestellt. Der ursprüngliche Zeilenabstand kann mittels ``\singlespacing``
+  wieder hergestellt werden.
+
+  Eine noch feinere Gradierung des Zeilenabstands ist mit dem Paket ``spacing``
+  möglich, das in der Präambel mittels ``\usepackage{spacing}`` geladen werden
+  kann. Dieses Paket definiert eine ``spacing``-Umgebung, die es erlaubt, in einem
+  bestimmten Bereich den angegebenen Zeilenabstand zu nutzen:
+
+  .. code-block:: tex
+
+      \begin{spacing}{Zahl}
+
+          ...
+
+      \end{spacing}
+
+Innerhalb der einzelnen Zeilen wird das Leerzeichen als Worttrennzeichen
+verwendet; auch hier werden, wenn mehrere aufeinander folgende Leerzeichen
+vorkommen, die folgenden ignoriert. LaTeX richtet die Abstände zwischen den
+einzelnen Worten (und sogar den Abstand zwischen den Buchstaben innerhalb der
+Worte) automatisch so aus, dass sich unter Berücksichtigung möglicher
+Silbentrennungen innerhalb eines Absatzes ein möglichst harmonisches Gesamtbild
+ergibt.
+
+.. https://de.wikibooks.org/wiki/LaTeX-Wörterbuch:_Leerzeichen
+
+
+.. index:: Fußnote, \footnote{}
+.. _Fußnoten:
+
+Fußnoten
+--------
+
+Innerhalb eines Textabschnitts kann mit ``\footnote{Text}`` eine Fußnote
+erstellt werden. Der angegebene Text wird dabei in einer kleineren Schrift an
+das Seitenende geschrieben und automatisch mit einer Nummerierung versehen.
+
+Standardmäßig werden Fußnoten in den Dokumentenklassen ``article`` und
+``scrartcl`` durch das gesamte Dokument fortlaufend nummeriert, bei den
+Dokumentklassen ``book``, ``scrbook``, ``report`` und ``scrreprt`` findet eine
+Nummerierung kapitelweise statt.
+
+Überlange Fußnoten werden von LaTeX automatisch auf mehrere aufeinander
+folgende Seiten aufgeteilt.
+
+.. Randbemerkungen: \marginpar{Text}
+
+.. index:: Querverweise, Label, Referenz, \label{}, \ref{}, \pageref{}
+.. _Querverweise:
+
+Querverweise
+------------
+
+Innerhalb eines Dokumentes können beliebige Stellen mittels so genannten Labels
+markiert werden. Die Syntax für eine solche Markierung ist:
+
+.. code-block:: tex
+
+    % Label erzeugen:
+    \label{Stichwort}
+
+Von anderen Stellen aus kann auf die markierten Stellen mittels Querverweisen
+("Referenzen") Bezug genommen werden. Dabei kann entweder die Kapitel- oder die
+Seitennummer angezeigt werden:
+
+.. code-block:: tex
+
+    % Auf Label verweisen:
+    Siehe Kapitel \ref{Stichwort} auf Seite \pageref{Stichwort}.
+
+Innerhalb eines Dokuments können Querverweise auch auf sich weiter hinten
+befindende Labels beziehen. Die einzelnen Querverweise werden beim Erzeugen der
+fertigen PDF-Datei mittels ``pdflatex``  in eine Hilfsdatei mit der Endung
+``.aux`` gespeichert. Änderungen bei Sprungmarken werden im Allgemeinen erst
+beim zweiten Durchlauf von ``pdflatex`` wirksam.
+
+
