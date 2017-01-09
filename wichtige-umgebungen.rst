@@ -1,3 +1,4 @@
+.. index:: Umgebung
 .. _Wichtige Umgebungen:
 
 Wichtige Umgebungen
@@ -7,7 +8,10 @@ So genannte Umgebungen werden in LaTeX verwendet, um einzelne Absätze zu
 gestalten. Üblicherweise werden Umgebungen mit ``\begin{umgebung}`` eingeleitet
 und mit ``\end{umgebung}`` abgeschlossen.
 
-.. todo Verschachtelungen?
+Die im folgenden Abschnitt aufgelisteten Umgebungen sind standardmäßig in LaTeX
+definiert; weitere Umgebungen können durch das Einbinden von :ref:`Zusatzpaketen <Zusatzpakete>`
+genutzt werden.
+
 
 ``center``, ``flushleft``, ``flushright`` -- Textausrichtung
 ------------------------------------------------------------
@@ -67,6 +71,24 @@ In LaTeX gibt es folgende Umgebungen für Aufzählungen:
 
   Innerhalb der einzelnen Einträge werden Leerzeilen berücksichtigt,
   zwischen den einzelnen Einträgen werden Leerzeilen ignoriert.
+
+.. Rendtel2010
+.. Aufzählungen verändern
+
+.. Manchmal will man ja nicht nur einfache Zahlen oder Punkte als Aufzählung haben,
+.. sondern Pfeile oder ähnliches. Dazu definiert man sich das \labelitemi um mit
+.. z.B.
+
+.. \renewcommand{\labelitemi}{\ding{99}}
+
+.. Dies liefert ein Sternen in der Aufzählung.
+
+.. Um genau zu wissen, welche Zeichen einem zum Verfügung stehen, hier die Zeichen des ZapfDing-
+.. Bats. Vorher muss man übrigens das Paket pifont eingebunden haben.
+
+.. \setlength{\itemsep}{0pt}
+
+
 
 .. index:: Aufzählung; nummeriert, enumerate (Umgebung)
 
@@ -128,7 +150,28 @@ Anführungszeichen, soweit nicht manuell vorgegeben, automatisch an. Einrückung
 innerhalb des Quellcodes haben keine Auswirkung auf die PDF-Datei, sind aber für
 eine bessere Lesbarkeit empfehlenswert.
 
-.. index:: figure (Umgebung), Abbildung, Graphik, \includegraphics{}
+.. _Abstände zwischen Einträgen anpassen:
+
+.. rubric:: Abstände zwischen Einträgen anpassen
+
+LaTeX lässt zwischen den einzelnen Einträgen einer Aufzählung verhältnismäßig
+viel Abstand, um die Lesbarkeit zu erhöhen. Bisweilen ist es allerdings aus
+Platzgründen hilfreich, eine Aufzählung möglichst kompakt zu halten. In diesem
+Fall sind vor allem zwei Anweisungen nützlich:
+
+* Mit ``\vspace{-2mm}`` kann der Abstand zwischen dem vorherigen Absatz und dem
+  Beginn der Aufzählung reduziert werden.
+* Mit ``\setlength\itemsep{0mm}`` wird der *zusätzliche* Abstand zwischen
+  den einzelnen Einträgen auf Null reduziert; die einzelnen Einträge haben somit
+  nur einen normalen Zeilenabstand.
+
+Als Alternative zu dieser manuellen Anpassung kann auch das Zusatz-Paket
+:ref:`paralist <paralist>` verwendet werden, das kompakte Versionen der normalen
+Aufzählungs-Umgebungen bereitstellt.
+
+
+.. index:: \includegraphics{}, figure (Umgebung), Abbildung, Graphik,
+    Umgebung; Fließumgebung, Gleitobjekt, Fließumgebung
 .. _figure:
 
 ``figure`` -- Abbildungen
@@ -138,18 +181,27 @@ Die ``figure``-Umgebung ist zum Einbinden von Abbildungen vorgesehen; hierzu
 muss in der Präambel des Dokuments das Paket ``graphicx`` mittels
 ``\usepackage{graphicx}`` geladen werden.
 
-Bei der ``figure``-Umgebung handelt es sich um eine so genannte "Fließumgebung",
-bei der LaTeX selbst anhand von angegebenen Optionen entscheidet, an welcher
-Stelle die Abbildung am besten eingebaut wird:
+Bei der ``figure``-Umgebung handelt es sich um eine so genannte "Fließumgebung"
+(bisweilen auch "Gleitobjekt" genannt), bei der LaTeX selbst anhand von
+angegebenen Optionen entscheidet, an welcher Stelle die Abbildung am besten
+eingebaut wird:
 
 .. code-block:: tex
+
+    % In der Präambel:
+
+    \usepackage{graphicx}
+
+    % Innerhalb des Dokuments:
 
     \begin{figure}[htb]
         \centering
         \includegraphics[width=0.8\linewidth]{image-filename.png}
         \caption{Hier kommt die Bildunterschrift hin.}
-        \label{fig:image-label}
+        \label{fig-image-label}
     \end{figure}
+
+.. \includegraphics[width=0.5\linewidth,angle=90,page=1]{meinepdfdatei}
 
 In diesem Beispiel sind als Optionen für mögliche Positionierungen der Abbildung
 ``htb`` angegeben: ``h`` ("here") steht für die aktuelle Position, ``t`` ("top")
@@ -157,8 +209,8 @@ für den Beginn der aktuellen Seite, ``b`` ("bottom") für das Ende der aktuelle
 Seite; eine weitere mögliche Option ist ``p`` ("page"), bei der die Abbildung
 optional auch auf einer separaten Seite gedruckt werden darf. Mittels eines
 Ausrufezeichens kann eine Position erzwungen werden, beispielsweise bewirkt eine
-Optionsangabe von ``[h!]``, dass die Abbildung nur an der aktuellen Stelle
-eingebunden werden darf.
+Optionsangabe von ``[h!]``, dass die Abbildung unbedingt an der aktuellen Stelle
+eingebunden werden soll.
 
 Das eigentliche Einfügen der Graphik wird durch die Anweisung
 ``\includegraphics{}`` übernommen. Als Optionen kann hierbei mittels ``width``
@@ -166,6 +218,25 @@ oder ``height`` die Größe der Abbildung im Dokument festgelegt werden, mittels
 ``angle=90`` kann die Abbildung zudem bei Bedarf um den angegebenen Winkel
 (gegen den Uhrzeigersinn) gedreht werden. Als Bildformate können bei Verwendung
 von ``pdflatex`` wahlweise ``png``, ``jpg`` oder ``bmp`` verwendet werden.
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.5\textwidth]{pics/tux.png}
+        \caption{Das Linux-Maskottchen `Tux'.}
+        \label{fig-tux}
+    \end{figure}
+
+
+*Ergebnis:*
+
+.. image:: pics/figure-beispiel.png
+    :align: center
+    :width: 40%
+
 
 Befinden sich die Bilddateien nicht im gleichen Verzeichnis wie die
 ``.tex``-Datei, so kann bei der ``\includegraphics{}``-Anweisung auch ein
@@ -181,16 +252,79 @@ Die ``\includegraphics{}``-Anweisung kann auch ohne eine umschließende
 ``figure``-Umgebung verwendet werden; in diesem Fall wird die Abbildung genau an
 der Stelle im Dokument eingebunden, an der die ``\includegraphics{}``-Anweisung
 steht. In diesem Fall ist es allerdings nicht möglich, die Abbildung mit einer
-Bildunterschrift ("Caption") und einem Label zu versehen, mit dessen Hilfe an
-einer anderen Stelle im Dokument auf die Abbildung verwiesen werden kann.
-Umgekehrt können allerdings innerhalb einer ``figure``-Umgebung auch mehrere
-``\includegraphics{}``-Anweisungen vorkommen, wenn beispielsweise mehrere Bilder
-nebeneinander oder untereinander abgebildet werden sollen. Im letzteren Fall
-muss zwischen den einzelnen ``\includegraphics{}``-Anweisungen eine
-Neue-Zeile-Anweisung ``\\`` stehen, zudem können die Anweisungen ``\hspace{}``
-und ``\vspace{}`` für die Ausrichtungen der Abbildungen nützlich sein.
+Bildunterschrift ("Caption") zu versehen. Umgekehrt können allerdings innerhalb
+einer ``figure``-Umgebung auch mehrere ``\includegraphics{}``-Anweisungen
+vorkommen, wenn beispielsweise mehrere Bilder nebeneinander oder untereinander
+abgebildet werden sollen. Im letzteren Fall muss zwischen den einzelnen
+``\includegraphics{}``-Anweisungen eine Neue-Zeile-Anweisung ``\\`` stehen,
+zudem können die Anweisungen ``\hspace{}`` und ``\vspace{}`` für die
+Ausrichtungen der Abbildungen nützlich sein.
 
 
+.. _Bildunterschriften ohne automatische Nummerierung:
+
+.. rubric:: Bildunterschriften ohne automatische Nummerierung
+
+
+Wird innerhalb einer ``figure``-Umgebung mittels der ``\caption{}``-Anweisung
+eine Bildunterschrift gesetzt, so wird diese automatisch mit einer Nummerierung
+versehen, beispielsweise "Abbildung 1: Bildunterschrift."
+
+Möchte man die automatische Nummerierung verhindern, so kann in der Präambel das
+Zusatz-Paket ``caption`` eingebunden und anstelle der Anweisung ``\caption{}``
+die Anweisung ``\caption*{}`` verwendet werden.
+
+
+.. _subfigure:
+
+.. rubric:: Bilder mit ``subfigure`` nebeneinander anordnen
+
+Eine elegante Methode, um mehrere Bilder nebeneinander anzuordnen, bietet das
+Zusatz-Paket ``subfigure``: Die gleichnamige Anweisung bietet die Möglichkeit,
+die einzelnen Teil-Abbildungen mit separaten Bild-Unterschriften zu versehen und
+auf diese an anderer Stelle zu verweisen.
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    % In der Präambel:
+
+    \usepackage{subfigure}
+    \usepackage{caption}
+
+    % Im Dokument:
+
+    \begin{figure}[h!]
+        \centering
+        \subfigure[Bildunterschrift links]{
+            \includegraphics[angle=+30, origin=c, width=0.4\textwidth]{pics/tux.png}
+            \label{fig-subfig1}
+            }
+        \subfigure[Bildunterschrift rechts]{
+            \includegraphics[angle=-30, origin=c, width=0.4\textwidth]{pics/tux.png}
+            \label{fig-subfig2}
+            }
+        \label{fig:subfigure-beispiel}
+        \caption*{Gemeinsame Beschriftung für die beiden Abbildungen
+        \subref{fig-subfig1} und \subref{fig-subfig2}}
+    \end{figure}
+
+*Ergebnis:*
+
+.. image:: pics/subfigure-beispiel.png
+    :align: center
+    :width: 60%
+
+Mittels des Subfigure-Pakets können, sofern die Bildbreiten richtig gewählt
+werden, beliebig viele Bilder nebeneinander angeordnet werden. Erzwingt man
+mittels ``\\`` einen Zeilenumbruch, so lassen sich ebenfalls gekachelt
+angeordnete Bilder-Reihen erstellen.
+
+
+.. transparente Abbildungen
+.. \usepackage{transparent}
+.. {\transparent{0.4}\includegraphics[]{}}
 
 .. index:: Tabbing
 .. _tabbing:
@@ -219,7 +353,7 @@ Dialog dargestellt werden, der sich auch über mehrere Seiten erstrecken darf;
 es können allerdings auch mehrere Tabulatoren innerhalb einer Zeile auftreten.
 
 Tabulatoren können jederzeit neu gesetzt werden, wobei die bisherigen
-überschrieben werden. üblicherweise möchte man allerdings bereits in der ersten
+überschrieben werden. Üblicherweise möchte man allerdings bereits in der ersten
 Zeile die Tabulatoren anhand des längsten in einer "Spalte" vorkommenden Textes
 festlegen. Dazu gibt es im wesentlichen zwei Möglichkeiten:
 
@@ -248,6 +382,9 @@ dargestellt. Diese hat folgende Syntax:
 
     \end{tabular}
 
+.. index:: Tabelle; Spaltenoptionen
+.. _Spaltenoptionen:
+
 .. rubric:: Spaltenoptionen
 
 Mit den Spaltenoptionen wird festgelegt, wie die Ausrichtung der einzelnen
@@ -269,40 +406,16 @@ trennende Striche gezogen werden.
 Bei den Optionen ``l``, ``r`` und ``c`` wird die Spaltenbreite von LaTeX anhand
 des längsten Eintrags in der jeweiligen Spalte berechnet. Möchte man eine
 *linksbündige* Spalte mit fester Breite und gegebenenfalls automatischen
-Zeilenumbrüchen, so kann ``p{breite}`` verwendet werden.
+Zeilenumbrüchen, so kann ``p{breite}`` verwendet werden. Möchte man auch
+zentrierte oder rechtsbündige Spalten mit fester Spaltenbreite erzeugen, so muss
+zusätzlich das Paket :ref:`array <array>` verwendet werden.
 
-Möchte man eine *zentrierte* Spalte mit fester Spaltenbreite erzeugen, so ist
-die in LaTeX mittels des Pakets ``array`` möglich, das in der Präambel mittels
-``\usepackage{array}`` geladen werden muss. Am Beginn einer ``tabular``-Umgebung
-kann dann beispielsweise anstelle von ``p{5cm}`` als Spaltenoption
-``>{\centering\arraybackslash}m{5cm}`` angegeben werden. Noch praktischer ist
-es, in der Präambel hierfür eigene Spaltentypen zu definieren: [#]_
+Für Tabelleneinträge über mehrere Zeilen beziehungsweise Spalten können die
+Pakete :ref:`multirow <multirow>` und :ref:`multicol <multicol>` genutzt
+werden, die entsprechende Anweisungen bereitstellen.
 
-.. code-block:: tex
-
-    \usepackage{array}
-
-    \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-    \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-    \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
-Damit können beispielsweise ``L{5cm}``, ``R{5cm}`` oder ``C{5cm}`` als
-Spaltenoptionen verwendet werden, um linksbündige, rechtsbündige oder zentrierte
-Spalten mit fester Breite zu definieren. Der Text wird dabei vertikal stets
-zentriert ausgerichtet, also jeweils mittig in die Reihen der Tabellen gesetzt.
-
-Soll die vertikale Ausrichtung der Zeilen jeweils bündig am unteren Zeilenrand
-erfolgen, wie dies beispielsweise für das Setzen von sehr langen Spaltennamen
-mittels :ref:`\rotatebox{} <Gedrehter Text>` vorteilhaft sein kann, so können
-nach dem obigen Prinzip weitere Spaltentypen definiert werden, wobei lediglich
-``m{#1}`` ("middle") durch ``b{#1}`` ("bottom") ersetzt werden muss.
-
-Bei Verwendung von Spaltenoptionen mit fester Breite wird der Spaltentext bei
-Bedarf automatisch in der nächsten Zeile weitergeführt. Bei Verwendung der oben
-definierten Spaltenoptionen ``L``, ``C`` und ``R`` kann eine Fortsetzung des
-Spaltentexts in der nächsten Zeile manuell mittels ``\newline`` explizit
-erzwungen werden.
-
+.. \rowcolor{gray}
+.. Ganze Zeile mit grauem Hintergrund einfärben
 
 .. _Spaltentrennzeichen:
 
@@ -350,43 +463,6 @@ ist dies folgendermaßen möglich:
     \renewcommand{\arraystretch}{1}
 
 
-.. index:: \multicolumn{}
-.. _multicolumn und multirow:
-
-.. rubric:: multicolumn und multirow
-
-Soll sich ein Eintrag einer Reihe über mehrere Spalten erstrecken, so ist dies
-mittels des Pakets ``multicol``, das in der Präambel mittels
-``\usepackage{multicol}`` geladen werden muss, und folgender Syntax möglich:
-
-.. code-block:: tex
-
-    \multicolumn{AnzahlSpalten}{Ausrichtung}{Text}
-
-Die Ausrichtung des angegebenen Textes beginnt dann mit in der Spalte, in der
-die ``\multicol{}``-Anweisung steht, und umfasst insgesamt die mit
-``AnzahlSpalten`` angegebene Anzahl an Spalten. Als Ausrichtung kann ``l``,
-``c`` oder ``r`` gewählt werden, Trennstriche mittels ``|`` sind ebenfalls
-erlaubt.
-
-.. index:: \multirow{}
-
-Mittels des Pakets ``multirow``, das in der Präambel mittels
-``\usepackage{multirow}`` geladen werden muss, kann ein Eintrag einer Reihe
-vertikal über mehrere Reihen hinweg ausgerichtet werden:
-
-.. code-block:: tex
-
-    \multirow{AnzahlReihen}{Breite}{Text}
-
-Die Ausrichtung des angegebenen Textes innerhalb der Spalte, in der die
-``\multirow{}``-Anweisung steht,  beginnt mit der aktuellen Reihe und umfasst
-insgesamt die mit ``AnzahlReihen`` angegebene Anzahl an Reihen. Der Inhalt der
-Reihe wird zentriert zu den mit ``AnzahlReihen`` angegebenen Reihen
-ausgerichtet. Als vertikal für den Text zu reservierende Breite wird meist
-``*`` für eine automatische Breite gewählt, die Breite der auszurichtenden Reihe
-entspricht dann der Breite der angegebenen Anzahl von Reihen.
-
 .. index:: table (Umgebung)
 .. _table:
 
@@ -402,7 +478,7 @@ selbst vornimmt.
 
     \begin{table}[htpb]
     \centering
-    \caption{cHier kommt die Tabellenbeschriftung hin.}
+    \caption{Hier kommt die Tabellenbeschriftung hin.}
     \label{tab:table-label}
 
     \begin{tabular}{|c|l|}
@@ -429,8 +505,6 @@ allerdings *über* die eigentliche Tabelle gesetzt. Mittels der
 ``\label{}``-Anweisung kann die Tabelle zudem mit einem Label versehen werden,
 so dass auf sie an einer anderen Stelle im Dokument verwiesen werden kann.
 
-.. TODO snippets ref href
-
 
 .. _Mehrseitige Tabellen:
 
@@ -438,8 +512,8 @@ so dass auf sie an einer anderen Stelle im Dokument verwiesen werden kann.
 
 Tabellen, die mittels einer ``tabular`` bzw. ``table``-Umgebung erstellt werden,
 erlauben keinen Seitenumbruch innerhalb der Tabelle. Bei längeren Tabellen
-empfiehlt sich die Verwendung des Pakets ``longtable``, mit dem sich mehrseitige
-Tabellen erstellen lassen.
+empfiehlt sich die Verwendung des Pakets :ref:`longtable <longtable>`, mit dem
+sich mehrseitige Tabellen erstellen lassen.
 
 
 
@@ -459,31 +533,6 @@ Innerhalb eines Absatzes können kurze Quelltext-Passagen mittels ``\verb|
 Quelltext |`` hervorgehoben werden. Kommt in dem angegebenen Quelltext das
 Symbol ``|`` vor, so kann auch ein anderes Begrenzungszeichen für ``\verb``
 verwendet werden, beispielsweise ``\verb= Quelltezt =``.
-
-.. index:: landscape (Umgebung), Querformat
-.. _landscape:
-
-``landscape`` -- Text im Querformat
------------------------------------
-
-Die ``landscape``-Umgebung wird dazu verwendet, um beispielsweise einen
-Textteil, eine Tabelle oder eine Abbildung im Querformat auszugeben.
-Hierfür muss in der Präambel das Paket ``lscape`` geladen werden:
-
-.. code-block:: tex
-
-    % In der Präambel:
-    \usepackage{lscape}
-
-    % ...
-
-    % Im Dokument:
-
-    \begin{landscape}
-
-    %%% Der eigentliche Inhalt %%%
-
-    \end{landscape}
 
 
 .. _quote:
@@ -526,8 +575,6 @@ Hierfür muss in der Präambel das Paket ``lscape`` geladen werden:
 .. only:: html
 
     .. rubric:: Anmerkungen:
-
-.. [#] Siehe: https://tex.stackexchange.com/questions/12703/how-to-create-fixed-width-table-columns-with-text-raggedright-centered-raggedlef
 
 .. [#] Die Quelltext-Umgebung ``verbatim`` kann auch durch ``\begin{verbatim*}``
     und ``\end{verbatim*}`` begrenzt werden, wobei bei dieser Version

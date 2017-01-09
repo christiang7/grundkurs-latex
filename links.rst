@@ -5,41 +5,52 @@ Links
 
 .. rubric:: Dokumentationen:
 
-* `LaTeX-Kurs <http://lefti.amigager.de/latex/main.html>`_
-* `LaTeX-Tutorial der TU Graz <http://latex.tugraz.at/latex/tutorial>`_
+* `LaTeX-Kurs <http://lefti.amigager.de/latex/main.html>`__
+* `LaTeX-Tutorial der TU Graz <http://latex.tugraz.at/latex/tutorial>`__
+* `KOMA-Script Anleitung <http://www.komascript.de>`__ (`PDF
+  <http://ftp.fernuni-hagen.de/ftp-dir/pub/mirrors/www.ctan.org/macros/latex/contrib/koma-script/doc/scrguide.pdf>`__)
+* `LaTeX Documentation (en.) <https://de.sharelatex.com/learn/Main_Page>`__
+* `LaTeX-Wikibook (en.) <https://en.wikibooks.org/wiki/LaTeX/>`__
 
 .. rubric:: Tutorials:
 
-* `LaTeX-Tutorial für Einsteiger (de, PDF) <http://latex.tugraz.at/latex/tutorial>`_
-* `LaTeX-Tutorial für Fortgeschrittene (de, PDF) <http://latex.tugraz.at/latex/fortgeschrittene>`_
-* `Einführung in LaTeX (Sascha Frank) <http://www.namsu.de/latex/latexeinfuehrung_2/Latexeinfuehrung.html>`_
-* `Ein LaTeX-Skript (de, PDF) <http://mschimmels.de/?q=DasBuch.pdf>`_
-* `LaTeX-Grundlagen (de, PDF) <http://www2.hs-esslingen.de/~dhommel/skript.pdf>`_
+* `LaTeX-Tutorial für Einsteiger (de, PDF) <http://latex.tugraz.at/latex/tutorial>`__
+* `LaTeX-Tutorial für Fortgeschrittene (de, PDF) <http://latex.tugraz.at/latex/fortgeschrittene>`__
+* `LaTeX-Skript von Martin Schimmels (PDF) <http://mschimmels.de/?q=DasBuch.pdf>`__
+* `LaTeX-Grundlagen von Daniel Hommel (PDF) <http://www2.hs-esslingen.de/~dhommel/skript.pdf>`__
+* `LaTeX-Tutorial von Sebastian Stein <http://latex.hpfsc.de/>`__
+* `Einführung in LaTeX von Sascha Frank <http://www.namsu.de/latex/latexeinfuehrung_2/Latexeinfuehrung.html>`__
+* `LaTeX-Einführung 1 (Fernuni Hagen) <http://www.fernunihagen.de/imperia/md/content/zmi_2010/a026_latex_einf.pdf>`__
+* `LaTeX-Einführung 2 (Fernuni Hagen) <ftp://ftp.fernuni-hagen.de/pub/pdf/urz-broschueren/broschueren/a0279510.pdf>`__
+* `LaTeX 2e Kurzbeschreibung <http://sunsite.informatik.rwth-aachen.de/ftp/pub/mirror/ctan/info/lshort/german/l2kurz.pdf>`__
+* `LaTeX-Linksammlung <http://www.matthiaspospiech.de/latex/dokumentation/einfuehrung/>`__
+* `LaTeX for Complete Novices (en) <http://www.dickimaw-books.com/latex/novices/index.html>`__
+* `Getting Started with LaTeX (en) <http://www.atmospheric-chemistry-and-physics.net/getting_started_with_latex.pdf>`__
+* `The Not So Short Introduction to LaTeX (en) <ftp://ftp.tu-chemnitz.de/pub/tex/info/lshort/english/lshort.pdf>`__
 
-* `LaTeX-Einführung 1 (Fernuni Hagen) <http://www.fernunihagen.de/imperia/md/content/zmi_2010/a026_latex_einf.pdf>`_
-* `LaTeX-Einführung 2 (Fernuni Hagen) <ftp://ftp.fernuni-hagen.de/pub/pdf/urz-broschueren/broschueren/a0279510.pdf>`_
-* `LaTeX 2e Kurzbeschreibung <http://sunsite.informatik.rwth-aachen.de/ftp/pub/mirror/ctan/info/lshort/german/l2kurz.pdf>`_
-* `LaTeX-Linksammlung <http://www.matthiaspospiech.de/latex/dokumentation/einfuehrung/>`_
-* `LaTeX for Complete Novices (en) <http://www.dickimaw-books.com/latex/novices/index.html>`_
+.. http://www.andy-roberts.net/writing/latex/
 
 .. rubric:: Referenzen:
 
-* `Latex-Befehlsübersicht <http://www.weinelt.de/latex/>`_
-* `LaTeX-Woerterbuch <https://de.wikibooks.org/wiki/LaTeX-Wörterbuch:_InDeX>`_
-* `Mathematische Symbole (de) <https://de.wikipedia.org/wiki/Liste_mathematischer_Symbole>`_
-* `Mathematische Symbole (en, 1) <https://en.wikibooks.org/wiki/LaTeX/Mathematics>`_
-* `Mathematische Symbole (en, 2) <https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics>`_
-* `Mathematische Symbole (en, PDF) <http://mirrors.ctan.org/info/symbols/comprehensive/symbols-a4.pdf>`_
-
-.. rubric:: Typographie:
-
-* `Practical Typography (en) <http://practicaltypography.com/>`_
-
-
+* `Latex-Befehlsübersicht <http://www.weinelt.de/latex/>`__
+* `LaTeX-Wörterbuch <https://de.wikibooks.org/wiki/LaTeX-Wörterbuch:_InDeX>`__
+* `Mathematische Symbole (de) <https://de.wikipedia.org/wiki/Liste_mathematischer_Symbole>`__
+* `Mathematische Symbole (en, 1) <https://en.wikibooks.org/wiki/LaTeX/Mathematics>`__
+* `Mathematische Symbole (en, 2) <https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics>`__
+* `Mathematische Symbole (en, PDF) <ftp://ftp.fu-berlin.de/tex/CTAN/info/symbols/comprehensive/symbols-a4.pdf>`__
+* `LaTeX CheatSheet (en) <http://wch.github.io/latexsheet/>`__
 
 .. rubric:: Tips:
 
-* `Briefe mit "scrlttr2" <https://meinnoteblog.wordpress.com/2010/11/12/latex-vorlagen-fur-briefe-und-rechnung/>`_
+* `LaTeX Stack Exchange <http://tex.stackexchange.com/>`__
+* `TeX-Welt Fragen und Antworten <http://texwelt.de/wissen/fragen/>`__
+* `LaTeX-Codeschnipsel (Uwe Ziegenhagen) <http://uweziegenhagen.de/?page_id=132>`__
+* `Briefe mit "scrlttr2" <https://meinnoteblog.wordpress.com/2010/11/12/latex-vorlagen-fur-briefe-und-rechnung/>`__
+
+.. rubric:: Typographie:
+
+* `Practical Typography (en) <http://practicaltypography.com/>`__
+
 
 .. * `Tips zum Inhaltsverzeichnis <http://faculty.uoit.ca/bohun/latex/toc.html>`_
 
@@ -78,3 +89,9 @@ Links
 
 .. http://moser-isi.ethz.ch/docs/typeset_equations.pdf
 
+.. GENIAL
+.. Embedding Python in LaTeX
+.. http://www.texample.net/weblog/2008/oct/24/embedding-python-latex/
+
+.. Run TeX from Python
+.. https://stackoverflow.com/questions/8085520/generating-pdf-latex-with-python-script

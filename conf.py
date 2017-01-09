@@ -3,15 +3,15 @@ import sys, os
 sys.path.append(os.path.abspath('_exts'))
 
 extensions = [
-    'matplotlib.sphinxext.mathmpl',
-    'matplotlib.sphinxext.only_directives',
-    'matplotlib.sphinxext.plot_directive',
+    # 'matplotlib.sphinxext.mathmpl',
+    # 'matplotlib.sphinxext.only_directives',
+    # 'matplotlib.sphinxext.plot_directive',
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
-    'sphinx.ext.pngmath',
+    'sphinx.ext.imgmath',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     # "sphinxcontrib.blockdiag",
@@ -30,9 +30,9 @@ project = 'Grundkurs LaTeX'
 htmlhelp_basename = 'Grundkurs LaTeX'
 html_short_title  = 'Grundkurs LaTeX'
 
-version = '0.0.5b'
-release = '0.0.5b'
-copyright = '2015-2016, Bernhard Grotz'
+version = '0.0.9b'
+release = '0.0.9b'
+copyright = '2015-2017, Bernhard Grotz'
 language = 'de'
 spelling_lang = 'de_DE'
 pygments_style = 'sphinx'
@@ -40,7 +40,7 @@ html_theme = 'sphinxdoc'
 html_logo = "logo.png"
 html_favicon = "favicon.ico"
 html_static_path = ['_static']
-html_last_updated_fmt = '%d. %b %Y'
+html_last_updated_fmt = '%d.%m.%Y'
 html_use_smartypants = True
 html_additional_pages = {'home': 'home.html'}
 html_domain_indices = False
@@ -51,6 +51,10 @@ html_show_sphinx = False
 html_show_copyright = False
 html_search_language = 'en'
 html_search_options = {'type': 'default'}
+
+today_fmt = '%d.%m.%Y'
+exclude_patterns = ["notes.rst", "*/notes.rst",
+                    "**/notes.rst","todos.rst","README.rst"]
 
 
 # latex_logo = "logo.png"
@@ -65,18 +69,28 @@ latex_preamble = r'''
 \setlength{\headheight}{15pt}
 \setcounter{tocdepth}{2}
 \sloppy
+\clubpenalty  = 10000 % Disable single lines at the start of a page (Schusterjungen)
+\widowpenalty = 10000 % Disable single lines at the end   of a page (Hurenkinder)
+\displaywidowpenalty = 10000
+\usepackage{hyperref,url}
+\hypersetup{
+pdftitle={Grundkurs LaTeX},
+pdfsubject={Eine Einführung in das Textsatzungssystem LaTeX},
+pdfauthor={Bernhard Grotz},
+pdfkeywords={LaTeX} {Textsatzung} {Tutorial} {Einführung} {Howto},
+}
 '''
 
-pngmath_latex_preamble = latex_preamble
+imgmath_latex_preamble = latex_preamble
 
 latex_elements = {
     "preamble": latex_preamble,
     "babel": "\\usepackage[ngerman]{babel}",
-    "classoptions": 'oneside,openany',
-    "papersize": 'a4paper',
+    "classoptions": 'oneside,openany,',
+    "papersize": 'a4paper,',
     "pointsize": '12pt',
     "fontpkg": '',
-    "fncychap": '\\usepackage[Conny]{fncychap}'
+    "fncychap": ''
 }
 
 latex_domain_indices = False

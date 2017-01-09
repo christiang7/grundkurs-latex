@@ -25,7 +25,7 @@ in einzelne Abschnitte untergliedert werden:
 
 .. index:: \section{}, Abschnitt
 
-* ``\section{Text}`` kennzeichent Abschnitte. Diese Gliederungsebene ist bei
+* ``\section{Text}`` kennzeichnet Abschnitte. Diese Gliederungsebene ist bei
   Artikeln die höchste, bei Büchern oder Berichten die zweithöchste.
 
 .. index:: \subsection{}, \subsubsection{}
@@ -52,6 +52,7 @@ gesetzt wird (beispielsweise ``\section*{Text}``), so erfolgt keine Nummerierung
 der Überschrift und ebenso kein Eintrag in das Inhaltsverzeichnis.
 
 .. index:: Titelseite, Abstract
+.. _Titelseite und Abstract:
 
 .. rubric:: Titelseite und Abstract
 
@@ -83,6 +84,7 @@ bei ``\maketitle`` -- automatisch.
 
 .. index:: Inhaltsverzeichnis, \tableofcontents
 .. _tableofcontents:
+.. _Inhaltsverzeichnis:
 
 .. rubric:: Inhaltsverzeichnis
 
@@ -94,7 +96,7 @@ Dokument eingebunden werden:
 
     \tableofcontents
 
-üblicherweise wird das Inhaltsverzeichnis unmittelbar nach der Titelseite und
+Üblicherweise wird das Inhaltsverzeichnis unmittelbar nach der Titelseite und
 dem Abstract gesetzt. Die Seiten des Inhaltsverzeichnisses werden von LaTeX
 automatisch mit kleinen römischen Buchstaben nummeriert, das eigentliche
 Dokument beginnt dann mit :math:`1` als Seitennummer.
@@ -109,6 +111,25 @@ denen vor die öffnende Klammer ein ``*`` gesetzt wurde (beispielsweise
 ``\section*{Text}``), werden unabhängig davon im Inhaltsverzeichnis nicht
 aufgelistet.
 
+.. Namen des Inhaltsverzeichnisses ändern:
+.. \renewcommand*\contentsname{Summary}
+
+Mit folgender Anweisung kann mitten im Dokument manuell ein Eintrag zum
+Inhaltsverzeichnis hinzugefügt werden, der dann auf die jeweilige Textstelle
+verweist:
+
+.. code-block:: tex
+
+    % Eintrag manuell zum Inhaltsverzeichnis hinzufügen:
+    \addcontentsline{toc}{section}{Name des Eintrags}
+
+Anstelle ``section`` kann selbstverständlich auch eine andere Gliederungsebene
+wie ``chapter`` oder ``subsection`` gewählt werden. Manuelle Einträge sind an
+Stellen sinnvoll, an denen man den Navigations-Komfort des Inhaltsverzeichnisses
+(inklusive der automatisch generierten Sprungmarken) nutzen mag, ohne im
+Dokument (beispielsweise aus Platzgründen) tatsächlich eine Überschrift setzen
+zu wollen.
+
 Werden Änderungen in der Gliederung vorgenommen, so schreibt LaTeX beim
 Übersetzen des Quellcodes mittels ``pdflatex`` die Änderungen des
 Inhaltsverzeichnisses in eine Hilfsdatei mit der Endung :math:``.toc``; erst bei
@@ -116,6 +137,7 @@ einem nochmaligen Übersetzen des Quellcodes mittels ``pdflatex`` werden die
 Änderungen auch im PDF-Dokument sichtbar.
 
 .. index:: \listoftables, \listoffigures
+.. rubric:: Tabellen- und Abbildungsverzeichnis
 
 Neben einem Inhaltsverzeichnis kann nach Belieben auch mit ``\listoftables``
 eine Übersicht aller Tabellen und mit ``\listoffigures`` eine Übersicht über
@@ -132,6 +154,9 @@ Soll ein Dokument einen Anhang beinhalten, so kann dieser mittels ``\appendix``
 eingeleitet werden. Ab dieser Anweisung werden weitere Kapitel anstelle mit
 Nummern mit Großbuchstaben :math:`\rm{A}`, :math:`\rm{B}`, usw. durchnummeriert.
 Die Seitennummerierung wird unverändert fortgesetzt.
+
+
+.. _Zeilen- und Seitenumbruch:
 
 .. rubric:: Zeilen- und Seitenumbruch
 
@@ -150,10 +175,41 @@ das der Abstand zur nächsten Zeile verkleinert oder vergrößert wird;
 beispielsweise bewirkt bei einer Schriftgröße von ``12pt`` ein Zeilenumbruch
 mittels ``\\[6pt]`` einen :math:`1,5`-fachen Zeilenabstand.
 
+.. ``\\*[abstand]``
+.. Die ``*``-Form verhindert, dass nach dem Zeilenwechsel ein Seitenumbruch vor der
+.. nächsten Zeile auftreten kann.
+
 .. index:: Seitenumbruch, \pagebreak, \newpage
 
 Eine Wechsel auf eine neue Seite kann mittels ``\pagebreak`` oder ``\newpage``
 manuell erzwungen werden.
+
+.. \newpage
+..     Der Rest der Seite bleibt leer. Bei twocolumn wird die laufende Spalte
+..     beendet und eine neue begonnen.
+
+.. \clearpage
+..     Die laufende Seite wird beendet und alle bis hierher definierten und noch
+..     nicht ausgegebenen Tabellen und Bilder werden ggf. auf einer oder oder
+..     mehreren daran anschließenden Seiten ausgegeben.
+
+.. \cleardoublepage
+..     Bei twoside beendet die laufende Seite. Alle noch nicht bearbeiteten
+..     gleitenden Bilder und Tabellen auf eigenen Seiten ausgegeben. Als nächste
+..     Seite wird dann stets eine ungerade Seite gestartet.
+
+
+.. \samepage
+..     erlaubt einen Seitenumbruch nur zwischen Absätzen. Ein Seitenumbruch wird
+..     zusätzlich unmittelbar vor oder hinter abgesetzten Formeln oder Einrückungen
+..     verhindert. Im Vorspann wirkt auf das ganze Dokument, andernfalls bis zum
+..     Ende der laufenden Umgebung.
+
+.. \begin {samepage} Text \end {samepage}
+..     Umgebung mit der Wirkung wie bei \samepage.
+
+
+.. _Aufteilung eines Dokuments in mehrere Dateien:
 
 .. rubric:: Aufteilung eines Dokuments in mehrere Dateien
 
@@ -183,6 +239,40 @@ neuen Seite (quasi nach einer ``\newpage``-Anweisung) eingebettet. Die
 ``\include{}``-Anweisung kann folglich nur einzelne Kapitel-Dateien in das
 Dokument einbauen; beispielsweise für die Präambel muss hingegen die
 ``\input{}``-Anweisung verwendet werden.
+
+.. _frontmatter, mainmatter und backmatter:
+
+.. rubric:: ``\frontmatter``, ``\mainmatter`` und ``\backmatter``
+
+Bücher werden oftmals in Vorspann, Hauptteil und Nachspann aufgeteilt.
+Auch bei den LaTeX-Dokumentklassen ``book`` beziehungsweise ``scrbook``
+exisiteren entsprechende Gliederungsebenen:
+
+.. code-block:: tex
+
+    % Vorspann einleiten:
+    \frontmatter
+
+    % Hauptteil einleiten:
+    \mainmatter
+
+    % Nachspann einleiten:
+    \backmatter
+
+* Im Vorspann werden die Seiten mit kleinen römischen Ziffern durchnummeriert.
+  Der Vorspann enthält üblicherweise nur die Titelseite, das Inhaltsverzeichnis
+  (bisweilen auch ein Abbildungs- und Tabellenverzeichnis) sowie möglicherweise
+  ein Vorwort. Meist kommt der Vorspann daher mit einer einzigen
+  Kapitelüberschrift aus, die ohne Nummerierung erscheint. [#]_
+
+* Im Hauptteil werden die Seiten mit arabischen Zahlen nummeriert, wobei die
+  Nummerierung erneut mit ``1`` beginnt.
+
+* Im Nachspann wird bisweilen nur das Literatur- und/oder Stichwortverzeichnis
+  gesetzt, manchmal jedoch auch der gesamte Anhang. Der Nachspann gleicht
+  bezüglich der Gliederungsüberschriften dem Vorspann, die Kapitel werden jedoch
+  mit Großbuchstaben gekennzeichnet (beginnend mit ``A``). Eine getrennte
+  Seitennummerierung ist nicht vorgesehen.
 
 
 .. index:: Schriftart, Schriftfamilie, Texthervorhebung
@@ -308,6 +398,8 @@ eines Absatzes begrenzt.
 .. \bfseries
 .. \mdseries
 
+.. In TeX werden die Buchstabenkombinationen ff, fi, fl, ffi, ffl als Ligaturen gesetzt.
+.. Mit \/ innerhalb einer Ligatur kann dies unterbunden werden.
 
 .. .. _Verwendung anderer Schriftarten:
 
@@ -340,24 +432,39 @@ eines Absatzes begrenzt.
 .. rubric:: Farbiger Text
 
 Um Farben nutzen zu können, muss in der :ref:`Präambel <Präambel>` des
-LaTeX-Dokuments das Paket ``color`` geladen werden:
+LaTeX-Dokuments das Paket ``xcolor`` geladen werden: [#]_
 
 
 .. code-block:: tex
 
-    \usepackage{color}
+    \usepackage[table]{color}
 
 Innerhalb des Dokuments lässt sich dann durch die Anweisung ``\color{farbname}``
 die Standardfarbe auf eine gewünschte Farbe ändern. Der Farbname kann einer
-Standardfarbe (``black``, ``white``, ``red``, ``green``, ``blue``, ``cyan``,
-``magenta`` oder ``yellow``) entsprechen oder eine selbst definierte Farbe
-bezeichnen.
+Standardfarbe (``black``, ``white``, ``darkgray``, ``gray``, ``lightgray``,
+``brown``, ``red``, ``green``, ``blue``, ``cyan``, ``magenta`` oder ``yellow``)
+entsprechen oder eine selbst definierte Farbe bezeichnen.
+
+.. http://tobiw.de/tbdm/farben
 
 .. todo define color
+.. \textcolor[rgb]{1,0.25,0.25}{Hellrot (rgb)}
+.. \textcolor[RGB]{255,64,64}{Hellrot (RGB)}
+.. \textcolor[HTML]{FF4040}{Hellrot (HTML)}
+.. \textcolor[cmyk]{0.8,0.5,0,0.2}{Dunkelblau (cmyk)}
+.. \textcolor[wave]{430}{Blau (wave)} % Wellenlänge
+.. \textcolor[gray]{0.6}{Grau (gray)}
+
+.. \definecolor{farbe1}{cmyk}{1,0,0.5,0}
+
+.. Farbige Rahmen und/oder Hinterlegungen für einzelne Wörter erzeugen wir mit
+.. \colorbox und \fcolorbox.
+.. \colorbox{yellow}{Gelber Kasten}
+.. \fcolorbox{blue}{yellow}{Gelb-blauer Kasten}
 
 Um einen Farbwechsel nicht wieder explizit rückgängig machen zu müssen, kann die
 Wirkung des Farbwechsels mittels einer :ref:`Deklaration <Deklaration>` auf
-einen Textbblock beschränkt werden, beispielsweise ``Text { \color{red} roter
+einen Textblock beschränkt werden, beispielsweise ``Text { \color{red} roter
 Text hier } Text``. Derartige Textblöcke können auch mehrere Absätze umfassen.
 
 
@@ -367,16 +474,25 @@ Text hier } Text``. Derartige Textblöcke können auch mehrere Absätze umfassen
 .. rubric:: Gedrehter Text
 
 Um Text vertikal oder schräg zu setzen, muss zunächst in der :ref:`Präambel
-<Präambel>` des Dokuments das Paket ``graphicx`` geladen werden:
+<Präambel>` des Dokuments das Paket ``graphicx`` geladen werden. Innerhalb des
+Dokuments lässt sich dann durch die Anweisung ``\rotatebox{Winkel}{Text}`` der
+angegebene Text um den angegebenen Winkel drehen.
+
+*Beispiel:*
 
 .. code-block:: tex
 
+    % In der Präambel:
+
     \usepackage{graphicx}
 
-Innerhalb des Dokuments lässt sich dann durch die Anweisung ``\rotatebox{90}{Text}``
-der angegebene Text um den angegebenen Winkel drehen; der Drehwinkel wird dabei
-im mathematischen Sinn interpretiert, eine Angabe von ``90`` entspricht also
-einer Drehung um :math:`90\degree` gegen den Uhrzeigersinn.
+    % Innerhalb des Dokuments:
+
+    \rotatebox{90}{Hallo Welt!}
+
+Der Drehwinkel wird dabei im mathematischen Sinn interpretiert, eine Angabe von
+``90`` entspricht also einer Drehung um :math:`90\degree` gegen den
+Uhrzeigersinn.
 
 
 .. index:: Schriftgröße
@@ -423,9 +539,14 @@ ist dies mit folgender Syntax möglich:
     \selectfont
 
 Der ``\fontsize{}``-Anweisung werden hierbei die neue Schriftgröße sowie der
-neue Standard-Zeilenabstand als Argumente übergeben.
+neue Standard-Zeilenabstand als Argumente übergeben. Möchte man eine andere
+Schriftgröße angeben, so sollte das Verhältnis von Schriftgröße sowie
+Zeilenabstand beibehalten, also beide Werte um den gleichen Faktor skaliert
+werden.
 
-.. index:: Längenmaß
+.. index:: Längenmaß, pt (Einheit), em (Einheit), ex (Einheit)
+.. _Einheiten:
+.. _Längenmaße:
 
 In LaTeX können allgemein folgende Längenmaße verwendet werden:
 
@@ -490,9 +611,9 @@ Sonderzeichen:
         - ``\textbackslash``
         - :math:`{\color{white}|}\text{\textbackslash}{\color{white}|}`
 
-.. index:: Anführungszeichen
+.. .. index:: Anführungszeichen
 
-* Die gewö
+.. * Die gewöhnlichen
 
 .. index:: Umlaute
 
@@ -624,9 +745,7 @@ PDF-Datei `Symbols-A4
 <http://mirrors.ctan.org/info/symbols/comprehensive/symbols-a4.pdf>`_.
 
 
-
-
-.. index:: Silbentrennung, \hyphenation{}
+.. index:: Silbentrennung
 .. _Silbentrennung:
 
 Silbentrennung
@@ -651,15 +770,15 @@ allerdings manuell angepasst werden.
 .. index:: \hyphenation{}
 
 Dank des ``babel``-Pakets werden zwar die meisten Wörter der deutschen Sprache
-bei Zeilenumbruechen richtig getrennt. Kommen im Text allerdings Wörter vor,
-fuer die keine mögliche Silbentrennung bekannt ist, so kann der
+bei Zeilenumbrüchen richtig getrennt. Kommen im Text allerdings Wörter vor,
+für die keine mögliche Silbentrennung bekannt ist, so kann der
 ``\hyphenation{}``-Anweisung am Ende der Präambel eine Liste mit
-Trenn-Empfehlungen festgelegt werden:
+Trenn-Empfehlungen festgelegt werden: [#]_
 
 .. code-block:: tex
 
     % Trennempfehlungen für folgende Wörter festlegen:
-    \hyphenation{Ar-cheo-pte-rix Nach-kom-ma Stel-len}
+    \hyphenation{Ar-cheo-pte-rix Stau-becken Nach-kom-ma Stel-len}
 
 Die ``\hyphenation{}``-Liste kann beliebig lang sein und sollte alle Wörter
 umfassen, die beim Durchblättern des fertigen PDF-Dokuments am rechten
@@ -676,6 +795,8 @@ Einzelne Absätze werden in LaTeX durch leere Zeilen voneinander getrennt. Komme
 mehrere aufeinander folgende leere Zeilen vor, so werden die folgenden
 ignoriert, der Abstand zwischen den einzelnen Absätzen bleibt somit gleich.
 
+.. index:: Abstand; vertikal, Vertikale Abstände
+
 Um den vertikalen Abstand zwischen einzelnen Zeilen zu verändern, gibt es
 mehrere Möglichkeiten:
 
@@ -686,54 +807,119 @@ mehrere Möglichkeiten:
   langer vertikaler Abstand an dieser Stelle eingefügt werden, beispielsweise
   mittels ``\vspace{3cm}`` ein ``3cm`` breiter vertikaler Abstand.
 
-.. index:: Zeilenabstand
+.. \par
+..     fügt eine Leerzeile zur Absatztrennung ein.
 
-* Mit ``\onehalfspacing`` beziehungsweise ``\doublespacing`` wird im folgenden
-  Dokumentteil ein eineinhalb-facher beziehungsweise doppelter Zeilenabstand
-  eingestellt. Der ursprüngliche Zeilenabstand kann mittels ``\singlespacing``
-  wieder hergestellt werden.
+.. index:: Zeilenabstand, spacing (Umgebung)
 
-  Eine noch feinere Gradierung des Zeilenabstands ist mit dem Paket ``spacing``
-  möglich, das in der Präambel mittels ``\usepackage{spacing}`` geladen werden
-  kann. Dieses Paket definiert eine ``spacing``-Umgebung, die es erlaubt, in einem
-  bestimmten Bereich den angegebenen Zeilenabstand zu nutzen:
+* Lädt man in der Präambel mittels ``\usepackage{setspace}`` das Zusatz-Paket
+  `setspace <http://ftp.fau.de/ctan/help/Catalogue/entries/setspace.html>`__, so
+  kann man mittels der Anweisungen ``\onehalfspacing`` beziehungsweise
+  ``\doublespacing`` im folgenden Dokumentteil einen eineinhalb-fachen
+  beziehungsweise doppelten Zeilenabstand einstellen. Der ursprüngliche
+  Zeilenabstand kann mittels ``\singlespacing`` wieder hergestellt werden.
+
+* Möchte man einen anderen, selbst definierten Zeilenabstand wählen, so ist
+  dies mittels der ``spacing``-Umgebung möglich:
 
   .. code-block:: tex
 
+      % In der Präambel:
+
+      \usepackage{setspace}
+
+      % Innerhalb des Dokuments:
+
+
       \begin{spacing}{Zahl}
 
-          ...
+          % ... Inhalt ...
 
       \end{spacing}
 
+  Im diesem Beispiel würde ein angegebener Zahlenwert von :math:`1,5` zu einem
+  eineinhalb-fachen Zeilenabstand führen. Gibt man einen Wert kleiner als Eins
+  an, so wird der Zeilenabstand entsprechend verkleinert.
+
+.. index:: Abstand; horizontal, Horizontale Abstände
+
 Innerhalb der einzelnen Zeilen wird das Leerzeichen als Worttrennzeichen
-verwendet; auch hier werden, wenn mehrere aufeinander folgende Leerzeichen
-vorkommen, die folgenden ignoriert. LaTeX richtet die Abstände zwischen den
-einzelnen Worten (und sogar den Abstand zwischen den Buchstaben innerhalb der
-Worte) automatisch so aus, dass sich unter Berücksichtigung möglicher
-Silbentrennungen innerhalb eines Absatzes ein möglichst harmonisches Gesamtbild
-ergibt.
+verwendet; hierbei werden, wenn mehrere aufeinander folgende Leerzeichen
+vorkommen, die folgenden ignoriert. LaTeX richtet in Textbereichen *automatisch*
+die Abstände zwischen den einzelnen Worten (und sogar den Abstand zwischen den
+Buchstaben innerhalb der Worte) so aus, dass sich -- unter Berücksichtigung
+möglicher Silbentrennungen -- innerhalb des jeweiligen Absatzes ein möglichst
+harmonisches Gesamtbild ergibt.
+
+Um horizontale Abstände einzufügen, gibt es ebenfalls mehrere Möglichkeiten:
+
+.. index:: \hspace{}
+
+* Mittels ``\hspace{}`` kann an der jeweiligen Stelle ein horizntaler Abstand
+  mit einer festgelegten Länge erzeugt werden, beispielsweise mittels
+  ``\hspace{1 in}`` ein Abstand von einem Zoll. Auch beliebige andere
+  :ref:`Längeneinheiten <Längeneinheiten>` können gewählt werden.
+
+* Mittels :math:`\hfill` wird in der aktuellen Zeile so viel Platz eingefügt,
+  dass der anschließend eingegebene Text rechtsbündig am Zeilenrand gedruckt
+  wird. Beispielsweise kann man mittels ``\hfill \today`` erreichen, dass das
+  aktuelle Datum am rechten Rand der aktuellen Zeile ausgegeben wird.
+
+.. index:: \phantom{}, Phantom-Text
+
+* Mittels der ``\phantom{}``-Anweisung kann man einen horizontalen Abstand
+  einfügen, der ebenso lang ist wie der innerhalb der geschweiften Klammern
+  angegebene Text. Mit dieser Anweisung wird also Platz für den als Argument
+  agegebenen Text freigehalten, dieser aber nicht gedruckt.
+
+.. Die ``\phantom{}``-Anweisung kann auch in Tabellen oder in Mathe-Umgebungen
+.. genutzt werden.
+
+
+.. \setlength {\parindent} {tiefe}
+..     legt die Einrücktiefe der ersten Zeile eines jeden Absatzes fest.
+
+.. \noindent
+.. \indent
+..     wirken nur auf den unmittelbar folgenden Absatz.
+
+.. todo manueller horizontaler Abstand
 
 .. https://de.wikibooks.org/wiki/LaTeX-Wörterbuch:_Leerzeichen
 
 
-.. index:: Fußnote, \footnote{}
-.. _Fußnoten:
+.. index:: Fußnote, Randnotiz, \footnote{}, \marginpar{}
+.. _Fußnote:
+.. _Randnotiz:
+.. _Fußnoten und Randnotizen:
 
-Fußnoten
---------
+Fußnoten und Randnotizen
+------------------------
 
 Innerhalb eines Textabschnitts kann mit ``\footnote{Text}`` eine Fußnote
 erstellt werden. Der angegebene Text wird dabei in einer kleineren Schrift an
 das Seitenende geschrieben und automatisch mit einer Nummerierung versehen.
 
+*Beispiel:*
+
+.. code-block:: tex
+
+    Hier ist ein Text.\footnote{Und hier ist die zugehörige Fußnote --
+    automatisch nummeriert und an der richtigen Stelle platziert!}
+
 Standardmäßig werden Fußnoten in den Dokumentenklassen ``article`` und
 ``scrartcl`` durch das gesamte Dokument fortlaufend nummeriert, bei den
 Dokumentklassen ``book``, ``scrbook``, ``report`` und ``scrreprt`` findet eine
-Nummerierung kapitelweise statt.
+Nummerierung kapitelweise statt. Überlange Fußnoten werden von LaTeX automatisch
+auf mehrere aufeinander folgende Seiten aufgeteilt.
 
-Überlange Fußnoten werden von LaTeX automatisch auf mehrere aufeinander
-folgende Seiten aufgeteilt.
+Neben Fußnoten können beispielsweise einzelne Schlagwörter oder
+Kurzbeschreibungen auch auf den Seitenrändern ausgegeben werden. Die Anweisung
+hierfür lautet ``\marginpar{Text}``, wobei der angegebene Text an der jeweiligen
+Stelle im Dokument auf den Außenrand der Seite gedruckt wird. Möchte man auf den
+anderen Rand der Seite drucken, so kann die Standard-Einstellung mittels
+``\reversemarginpar`` geändert werden.
+
 
 .. Randbemerkungen: \marginpar{Text}
 
@@ -752,7 +938,14 @@ markiert werden. Die Syntax für eine solche Markierung ist:
     \label{Stichwort}
 
 Von anderen Stellen aus kann auf die markierten Stellen mittels Querverweisen
-("Referenzen") Bezug genommen werden. Dabei kann entweder die Kapitel- oder die
+("Referenzen") Bezug genommen werden. Es ist empfehlenswert, für
+unterschiedliche Arten von Sprungmarken eigene Label-Präfixe zu verwenden,
+beispielsweise können mit ``eq-`` beginnende Labels für :ref:`Gleichungen
+<Gleichungen>` , mit ``fig-`` beginnende Labels für :ref:`Abbildungen
+<Abbildungen>`, und mit ``tab-`` beginnende Labels :ref:`Tabellen <Tabellen>`
+gesetzt werden.
+
+Beim Verweis auf die Sprungmarke kann entweder die Kapitel- oder die
 Seitennummer angezeigt werden:
 
 .. code-block:: tex
@@ -765,5 +958,328 @@ befindende Labels beziehen. Die einzelnen Querverweise werden beim Erzeugen der
 fertigen PDF-Datei mittels ``pdflatex``  in eine Hilfsdatei mit der Endung
 ``.aux`` gespeichert. Änderungen bei Sprungmarken werden im Allgemeinen erst
 beim zweiten Durchlauf von ``pdflatex`` wirksam.
+
+Sprungmarken können nicht nur auf andere Stellen im gleichen Dokument, sondern
+unter Verwendung des Zusatz-Pakets :ref:`hyperref <hyperref>` beispielsweise
+auch auf Web-Adressen gesetzt werden.
+
+.. index:: Box
+.. _Boxen, Balken und Minipages:
+
+Boxen, Balken und Minipages
+---------------------------
+
+Ein Grundprinzip von LaTeX besteht darin, sämtliche Inhalte einer Seite auf
+verschiedene Boxen aufzuteilen und diese dann zu platzieren. Die wichtigsten
+Typen von Boxen sind folgende:
+
+.. index:: Box; LR-Box
+.. _LR-Box:
+
+* ``LR-Box``:
+
+  In einer solchen Box wird Text von links nach rechts *ohne* Zeilenumbruch
+  gesetzt.
+
+  LR-Boxen können wahlweise mit oder ohne Rahmen gesetzt werden. Soll sich die
+  Größe der Box nach dem darin enthaltenen Text richten, so können folgende
+  Anweisungen genutzt werden:
+
+  .. code-block:: tex
+
+      % LR-Box ohne Rahmen setzen:
+      \mbox{Ein Text-Beispiel.}
+
+      % LR-Box mit Rahmen setzen:
+      \fbox{Ein Text-Beispiel.}
+
+  Die Höhe einer LR-Box wird von LaTeX automatisch anhand der Größe des Inhalts
+  ermittelt. Enthält beispielsweise eine ``fbox`` nur einen kurzen Text, so wird
+  die Höhe der Box auf eine Zeilenhöhe festgelegt; enthält sie hingegen eine
+  Abbildung mit Bildunterschrift, so wird die Höhe der Box daran festgelegt.
+  Mittels LR-Boxen können also beliebige Objekte mit einem Rahmen versehen
+  werden.
+
+  Weitere LR-Boxen ohne feste Breite können beispielsweise mittels der
+  Anweisungen ``\shadowbox{}``, ``\doublebox{}`` oder ``\ovalbox{}`` gesetzt
+  werden; diese Boxen sind dann mit einer Schattierung hinterlegt
+  beziehungsweise doppelt oder oval umrandet.
+
+  .. index:: \makebox{}, \framebox{}
+
+
+  Soll die Breite einer LR-Box explizit vorgegeben werden, so können folgende
+  Anweisungen genutzt werden:
+
+  .. code-block:: tex
+
+      % LR-Box mit fester Breite setzen (ohne Rahmen):
+      % Optionale Argumente: Breite, Ausrichtung (l,c,r)
+      \makebox[8.0cm][c]{Ein Text-Beispiel (zentriert).}
+
+      % LR-Box mit fester Breite setzen (mit Rahmen):
+      \framebox[8.0cm][c]{Ein Text-Beispiel (zentriert).}
+
+
+
+  Bei LR-Boxen *mit* Umrandung kann die Dicke des Rahmens und der Leerraum
+  zwischen Umrandung und Inhalt über folgende zwei Variablen festgelegt werden:
+
+    .. code-block:: tex
+
+        % Rahmenbreite festlegen:
+        \setlength{\fboxrule}{0.1cm}
+
+        % Abstand zwischen Rahmen und Inhalt festlegen:
+        \setlength{\fboxsep }{0.5cm}
+
+  Da bei LR-Boxen ein Zeilenumbruch nicht möglich ist, muss man selbst darauf
+  achten, dass der Inhalt nicht über den Rand der Box beziehungsweise über den
+  Rand der Seite hinausragt.
+
+  .. Paket fancybox für Schmuck-Rahmen
+
+.. index:: Box; Parbox, \parbox{}
+.. _Parbox:
+
+* ``Parbox``:
+
+  In einer solchen Box wird Text als Blocksatz gesetzt, also gegebenenfalls
+  *mit* Zeilenumbruch. Insgesamt darf der Text, wie der Name der Box schon
+  andeutet, maximal einen Absatz ("Paragraph") umfassen. Die Syntax dafür lautet
+  etwa folgendermaßen:
+
+  .. code-block:: tex
+
+      % Parbox mit 8cm Breite erstellen:
+      \parbox[c]{8.0cm}{\blindtext}
+
+  Die ``\parbox{}``-Anweisung kann auch mit zusätzlichen Argumenten aufgerufen
+  werden, und zwar mit der Syntax ``\parbox[pos][hoehe][ipos]{breite}{Text}``.
+  Hierbei gibt ``pos`` die vertikale Ausrichtung der Box am aktuellen Absatz an;
+  als mögliche Ausrichtungen sind dabei ``t`` für "top", ``c`` für "center" oder
+  ``b`` für "bottom" möglich. Wird zudem über das optionale Argument ``hoehe``
+  die Höhe der Parbox explizit angegeben, so kann mittels des optionalen
+  Arguments ``ipos`` festgelegt werden, wie die vertikale Positionierung
+  innerhalb der Parbox erfolgen soll. Neben ``b``, ``c`` und ``t`` gibt es hier
+  auch die Option ``s`` ("stretched") für eine gleichmäßige Verteilung des
+  Inhalts auf die gesamte Höhe der Box.
+
+.. index:: Box; Rule-Box, \rule{}
+.. _Rule-Box:
+
+* ``Rule-Box``:
+
+  Eine solche Box dient vorwiegend zum Setzen von Linien und Balken.
+
+  Rule-Boxen werden hauptsächlich benutzt, um einzelne Text-Abschnitte
+  untereinander abzugrenzen.
+
+  .. code-block:: tex
+
+      % Horizontale Linie mit 5 cm Breite und 0.5 cm Höhe erstellen:
+      % Allgemeine Syntax: \rule[verschiebung]{breite}{hoehe}
+      \rule[0cm]{5.0cm}{0.5cm}
+
+  Über das erste (optionale) Argument kann eine vertikale Verschiebung des
+  Balkens gegenüber der Grundlinie der aktuellen Zeile angegeben werden. Für die
+  Breite oder die Höhe kann bei Bedarf auch der Wert Null angegeben werden, um
+  einen unsichtbaren Balken zu erstellen; hierdurch kann beispielsweise ein
+  vertikaler Versatz an einer Stelle bewirkt werden, an dem die Anweisung
+  ``\vspace{}`` nicht möglich ist (beispielsweise innerhalb eines Absatzes oder
+  innerhalb einer LR-Box).
+
+.. index:: Minipage
+.. _Minipage:
+.. _Minipages:
+
+.. rubric:: Minipages
+
+Eine ``parbox`` kann nur einen einzelnen Absatz beinhalten. Möchte man
+allerdings mehrere Absätze oder sogar Abbildungen und Tabellen in eine einzelne
+Box packen, so bietet sich hierfür die sogenannte "Minipage"-Umgebung an. [#]_
+
+Die Syntax der Minipage-Umgebung ist der einer :ref:`parbox <Parbox>` sehr
+ähnlich:
+
+.. code-block:: tex
+
+    % Minipage mit 8cm Breite erstellen:
+
+    \begin{minipage}[c]{8.0cm}
+
+        % ... Inhalt ...
+
+    \end{minipage}
+
+Auch die ``minipage``-Umgebung kann auch mit zusätzlichen Argumenten aufgerufen
+werden, und zwar mit der Syntax ``\begin{minipage}[pos][hoehe][ipos]{breite}``.
+Hierbei gibt ``pos`` wiederum die vertikale Ausrichtung der Box zwischen dem
+vorherigen und dem nächsten Absatz an; als mögliche Ausrichtungen sind dabei
+``t`` für "top", ``c`` für "center" oder ``b`` für "bottom" möglich. Wird zudem
+über das optionale Argument ``hoehe`` die Höhe der Parbox explizit angegeben, so
+kann mittels des optionalen Arguments ``ipos`` festgelegt werden, wie die
+vertikale Positionierung innerhalb der Parbox erfolgen soll.
+
+.. Minipages können auch beispielsweise innerhalb einer ``figure``-Umgebung
+.. verwendet werden, um mehrere unterschiedlich breite Graphiken nebeneinander zu
+.. positionieren
+
+.. \begin{figure}[h]
+.. \begin{minipage}[b]{0.45\textwidth}
+.. \includegraphics...
+.. \end{minipage}
+.. \hfill
+.. \begin{minipage}[b]{0.45\textwidth}
+.. \includegraphics...
+.. \end{minipage}
+.. \caption{}
+.. \end{figure}
+
+
+.. Eine Minipage stellt somit gewissermaßen eine eigene "kleine Seite" dar.
+.. Aufteilung auf mehrere Seiten:
+.. \usepackage{framed}
+
+.. \begin{framed}
+.. Here is text
+.. \begin{quote}
+.. Here is quote
+.. \end{quote}
+.. \end{framed}
+
+.. \fbox {\rule [-lift] {0cm} {höhe} text }
+..     «Der einzurahmende Text besteht aus einem unsichtbaren vertikalen Strich,
+..     der lift unterhalb der Grundlinie beginnt und höhe lang ist, gefogt von dem
+..     Wort text.» Der vertikale Strich bleibt zwar unsichtbar, aber er bestimmt
+..     die Unterkante und Höhe des Rahmens.
+
+
+
+.. Möchte man die Rahmen noch weiter verändern, so kann man mit den Befehlen
+.. \setlenght{\fboxrule}{}
+.. \setlenght{\fboxsep}{}
+.. die Strichstärke des Rahmens verändern und den Abstand zwischen dem Boxenrand und dem Inhalt
+.. festsetzen.
+
+.. \colorbox{white}{}
+.. \parbox[t]{}
+.. \shadowbox{}
+
+.. ... to be continued ...
+
+.. Horizontale Linie außerhalb von Tabelle:
+..     \rule{\linewidth}{0.5pt}
+
+.. \usepackage{tgheros} % Kommt Helvetica sehr nahe und hat gute Mathe Einbindung "Klon von Helvetica"
+.. \renewcommand{\familydefault}{\sfdefault} % Schriftartwechsel komplett
+
+.. "\usepackage{times}": sieht alles passabel nach Times aus.
+.. \usepackage[scaled=.9]{helvet} für helvetica
+.. Übrigens ist das Paket "times" veraltet (läd z. B. keine passenden
+.. Matheschriften), siehe LaTeX-Sündenregister
+.. `LaTeX Font Catalogue <http://www.tug.dk/FontCatalogue/>`_
+.. Vicentino ist ne coole Schrift (handschrift-artig)
+.. http://www.tug.dk/FontCatalogue/gnufreefontsans/
+.. http://www.tug.dk/FontCatalogue/opensans/
+.. http://www.tug.dk/FontCatalogue/dejavusans/
+
+.. Using TrueType fonts with TeX (LaTeX) and pdfTeX (pdfLaTeX):
+.. http://www.radamir.com/tex/ttf-tex.htm
+
+.. --
+.. http://www.latex-kurs.de/fragen/schriftart.html
+
+.. Klon der Schriftart Arial
+.. \documentclass{article}
+.. \usepackage[latin1]{inputenc}
+.. \usepackage[T1]{fontenc}
+.. \usepackage{ngerman}
+.. \usepackage[scaled]{uarial}
+.. \begin{document}
+.. Dieser Text ist in so was ähnlichem wie Arial!
+.. \end{document}
+
+.. Mehrere Schriften
+.. \usepackage{mathptmx} % Hier steckt Times drin
+.. \usepackage[scaled]{helvet}
+.. \usepackage{courier}
+.. \begin{document}
+.. Dieser Text ist normaler Text und deshalb in Times.\\
+.. \textsf{Dieser Text ist serifenfreier Text und deshalb in Helvetica.}\\
+.. \texttt{Dieser Text ist in Maschienenschrift und deshalb in Courier.}\\
+.. \end{document}
+
+.. Ich habe mich für meine Dokumente für die Schriftgröße 11pt entschieden.
+.. Zusätzlich nutze ich als Serifenfamilie Palatino, als serifenlose Avant Garede Gothic und Adobe Cou-
+.. rier als Schreibmaschinenschrift:
+.. \usepackage{mathpazo,avant,courier}
+.. \fontfamily{pag} \selectfont
+
+.. Dies kann man mit verschiedenen Schrifttypen erreichen, die man mit
+.. \fontfamily{schrift } \selectfont
+.. setzt.
+
+.. mathpazo die Schrift Palatino
+
+.. TimesRoman ptm
+.. Palatino ppl
+.. NewCenturySchoolBook pnc
+.. Bookmann pbk
+.. Helvetiica phv
+.. AvantGard pag
+.. Courier pcr
+
+.. http://tobiw.de/tbdm/layout-1
+.. Die Times wurde ursprünglich für den Einsatz in schmalen Zeitungsspalten
+.. entworfen und hat dem entsprechend eine sehr geringe Laufweite. Für diesen Zweck
+.. ist sie gut geeignet, für Hausarbeiten im Format DIN A4 aber eher weniger, da
+.. hier immer ein schlechter Kompromiss aus zu großen Rändern, zu großem
+.. Zeilenabstand (ja, 1,5-fach ist zu groß) oder zu hoher Schriftgröße geschlossen
+.. werden muss. Stattdessen sollte man besser weiter laufende Schriften wie die
+.. Latin Modern (Paket lmodern) oder die Platino (Paket pxfonts) verwenden. Das ist
+.. im Einzelfall natürlich mit dem betreuenden Dozenten zu besprechen.
+
+
+.. Mehrspaltiger Text (Hommel 48)
+.. In LaTeX ist es möglich, das gesamte Dokument zweispaltig zu setzen. Dazu wird
+.. der Parameter twocolumn als Option in der Dokumententklasse angegeben. Will man
+.. nur einen Teil des Dokuments mit zwei Spalten setzen, kann man dies mit dem
+.. Befehl \twocolumn [Einleitung] erreichen. Dieser beginnt eine neue Seite und
+.. setzt fortan das Dokument zweispaltig. Der Inhalt des optionalen Parameters
+.. Einleitung wird dabei über beide Spalten hinweg gesetzt. Soll wieder in einer
+.. Spalte fortgefahren werden, muss man den Befehl \onecolumn aufrufen. Auch dieser
+.. beginnt eine neue Seite. Für mehr als zwei Spalten gibt es die
+.. multicols-Umgebung. Damit lassen sich beliebig viele Spalten nebeneinander
+.. setzen. Der Befehl dazu lautet \begin{multicols} {Spaltenanzahl} [Titel]
+.. [Spaltenabstand].
+
+
+.. raw:: html
+
+    <hr />
+
+.. only:: html
+
+    .. rubric:: Anmerkungen:
+
+.. [#] Sollte der Vorspann, was nicht empfehlenswert ist, durch
+    ``\section{}``-Anweisungen weiter untergliedert werden, so sollte bevorzugt
+    die ``\section*{}``-Anweisung für nicht-nummerierte Abschnitts-Überschriften
+    gewählt werden.
+
+.. [#] Die zusätzliche Option ``table`` sollte hierbei gesetzt werden, um Farben
+    auch innerhalb von :ref:`Tabellen <Tabellen>` nutzen zu können.
+
+.. [#] Man kann sich innerhalb des Dokuments auch beispielsweise mittels
+    ``\showhyphens{Staubecken}`` ausgeben lassen, wie das angegebene Wort von
+    LaTeX automatisch getrennt würde; als Ergebnis erhält man an dieser Stelle
+    als Ausgabe ``\tenrm Stau-becken``.
+
+.. [#] Eine Einschränkung bei Minipages besteht darin, dass sie keine
+    Fließumgebungen beinhalten dürfen; beispielsweise dürfen mittels der
+    :ref:`tabular <tabular>`-Umgebung gesetzte Tabellen enthalten sein; diese
+    darf jedoch nicht von einer :ref:`table <table>`-Umgebung umschlossen sein,
+    da bei dieser die konkrete Position nicht unmittelbar festgelegt ist.
 
 

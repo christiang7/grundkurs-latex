@@ -153,6 +153,8 @@ folgendermaßen aus:
 
     \end{document}
 
+
+
 ..  :emphasize-lines: 3,5
 
 Die Anweisung ``\newpage`` bewirkt hierbei, dass an der entsprechenden Stelle
@@ -167,8 +169,8 @@ LaTeX ist ursprünglich für den englischen Sprachraum entwickelt worden. Es gib
 allerdings Zusatzpakete, die eine Erkennung von beispielsweise deutschen
 Umlauten sowie passender Silbentrennung ermöglichen.
 
-In der :ref:`Präambel <Präambel>` eines deutschsprachigen LaTeX-Dokuments
-sollten folgende Pakete geladen werden:
+In der Präambel eines deutschsprachigen LaTeX-Dokuments sollten folgende Pakete
+geladen werden:
 
 .. code-block:: tex
 
@@ -182,6 +184,7 @@ sollten folgende Pakete geladen werden:
 Sollte die deutsche Version des Sprachpakets ``babel`` nicht gefunden werden, so
 muss das Paket ``texlive-lang-german`` nachinstalliert werden (``sudo aptitude
 install texlive-lang-german``).
+
 
 .. index:: pdflatex, Hilfsdatei
 .. _Erstellen eines PDF-Dokuments aus einer Quelldatei:

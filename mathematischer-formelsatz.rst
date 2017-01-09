@@ -1,4 +1,5 @@
 .. index:: Mathematische Formel, Formel
+.. _Gleichungen:
 .. _Mathematischer Formelsatz:
 
 Mathematischer Formelsatz
@@ -13,12 +14,13 @@ mathematischer Formeln. Wahlweise können Formeln innerhalb einer Absatzes
 * Mit ``$$ Formel $$`` wird eine Formel als eigenständiger Absatz zentriert
   eingefügt.
 
-Sollen mehrzeilige Formeln gesetzt werden, so muss eine spezielle
-Mathematik-Umgebung wie beispielsweise ``align`` beziehungsweise  ``align*`` für
-nummerierte beziehungsweise nicht nummerierte Formeln gewählt werden.
+Sollen auch Zeilenumbrüche innerhalb einer Formel erlaubt sein, so sollte die
+Umgebung ``align`` (beziehungsweise ``align*`` für nummerierte beziehungsweise
+nicht nummerierte Formeln) gewählt werden:
 
 .. code-block:: tex
 
+    % Standard-Mathe-Umgebung:
     \begin{align}
         E \underset{Einstein}{=} m \cdot c^2
         \underset{Pythagoras}{=} m \cdot (a^2 + b^2)
@@ -31,13 +33,26 @@ nummerierte beziehungsweise nicht nummerierte Formeln gewählt werden.
 
     E \underset{Einstein}{=} m \cdot c^2 \underset{Pythagoras}{=} m \cdot (a^2 + b^2)
 
+
+Der Gleichungs-Zähler kann bei Bedarf mittels ``\setcounter{equation}{1}``
+wieder auf den Wert ``1`` (oder einen beliebigen anderen Wert) gesetzt werden.
+Mit ``\numberwithin{equation}{section}`` kann zudem festgelegt werden, welcher
+Gliederungstiefe die Formeln zugerechnet werden sollen, ob also eine
+Nummerierung in der Art :math:`(1), (2), \ldots` oder abschnittsweise
+als :math:`(1.1), (1.2), \ldots` erfolgen soll.
+
+.. _Formeln mit mehreren Nummerierungen:
+
+.. rubric:: Formeln mit mehreren Nummerierungen
+
 Die Umgebungen ``align`` und ``align*`` sind für fast alle abgesetzten
-Formeln die beste Wahl. Eine Ausnahme bilden mehrere einzeilig Formeln, die
+Formeln die beste Wahl. Eine Ausnahme bilden mehrere einzeilige Formeln, die
 zueinander ausgerichtet, aber einzeln nummeriert werden sollen. Für diesen
 Zweck gibt es die Umgebung ``eqnarray``:
 
 .. code-block:: tex
 
+    % Umgebung für mehrere nummerierte Zeilen:
     \begin{eqnarray}
         x^2 &=& 2 \\
         \to x &=& \pm \sqrt{2}
@@ -64,12 +79,62 @@ Zweck gibt es die Umgebung ``eqnarray``:
         \to x &=& \pm \sqrt{2}
     \end{eqnarray}
 
-Der Gleichungs-Zähler kann bei Bedarf mittels ``\setcounter{equation}{1}``
-wieder auf den Wert ``1`` (oder einen beliebigen anderen Wert) gesetzt werden.
-Mit ``\numberwithin{equation}{section}`` kann zudem festgelegt werden, welcher
-Gliederungstiefe die Formeln zugerechnet werden sollen, ob also eine
-Nummerierung in der Art :math:`(1), (2), \ldots` oder abschnittsweise
-als :math:`(1.1), (1.2), \ldots` erfolgen soll.
+Sollen bei verwendung einer ``eqnarray``-Umgebung einzelne Zeilen *nicht*
+nummeriert werden, so kann man am Ende der jeweiligen Zeile die Anweisung
+``\notag`` einfügen, um eine Nummerierung zu verhindern.
+
+Sollen die einzelnen Zeilen eines Formel-Absatzes zwar eigenständig nummeriert
+werden und eigene Labels erhalten, aber letztlich nur als Teile einer ganzen
+Formel angesehen werden, so ist dies mittels der ``subequations``-Umgebung
+möglich:
+
+*Beispiel:*
+
+
+.. code-block:: tex
+
+    \begin{subequations}
+    \label{maxwell-gleichungen}
+        \begin{align}
+            \text{div }(\vec{D}) &= 4 \cdot \pi \cdot \rho
+            \label{coulomb-gesetz}\\
+            \text{rot }(\vec{H}) &= \frac{4 \cdot \pi}{c} \cdot \vec{j}
+            \label{ampere-gesetz}\\
+            \text{rot }(\vec{E}) &= - \frac{1}{c} \cdot \frac{\partial \vec{B}}{\partial t}
+            \label{faraday-gesetz-1} \\
+            \text{div }(\vec{B}) &= 0
+            \label{faraday-gesetz-2}
+        \end{align}
+    \end{subequations}
+
+
+*Ergebnis:*
+
+.. raw:: latex
+
+    \begin{subequations}
+    \label{maxwell-gleichungen}
+        \begin{align}
+            \text{div }(\vec{D}) &= 4 \cdot \pi \cdot \rho
+            \label{coulomb-gesetz}\\
+            \text{rot }(\vec{H}) &= \frac{4 \cdot \pi}{c} \cdot \vec{j}
+            \label{ampere-gesetz}\\
+            \text{rot }(\vec{E}) &= - \frac{1}{c} \cdot \frac{\partial \vec{B}}{\partial t}
+            \label{faraday-gesetz-1} \\
+            \text{div }(\vec{B}) &= 0
+            \label{faraday-gesetz-2}
+        \end{align}
+    \end{subequations}
+
+.. only:: html
+
+    .. image:: pics/subequations.png
+        :align: center
+        :width: 100%
+
+Auf einzelne Gleichungen kann dann via ``\eqref{}`` wahlweise auf ein Label der
+Teilgleichung oder auch auf das Label der gesamten Gleichung verwiesen werden.
+
 
 .. _Besonderheiten im Mathematik-Modus:
 
@@ -283,7 +348,7 @@ Möglichkeiten, die Form oder den Typ einer Schrift zu verändern:
 
   .. math::
 
-      \mathbb{ABCDEF} \quad \phantom{\mathtt{abcdef}} \quad \phantom{\mathtt{123456}}
+      \mathbb{ABCDEF}
 
 .. index:: \mathcal{}
 .. _\mathcal{}:
@@ -380,68 +445,68 @@ Allgemein können die obigen Relationssymbole, wie am Beispiel :math:`\not\in`
 (``\not \in``) gezeigt, durch ein Voranstellen von ``\not`` invertiert werden;
 beispielsweise ergibt eine Eingabe von ``\not\ge`` das Zeichen :math:`{\color{white}|}\not\ge{\color{white}|}`.
 
-.. index:: Pfeilsymbole
-.. _Pfeilsymbole:
+.. .. index:: Pfeilsymbole
+.. .. _Pfeilsymbole:
 
-.. rubric:: Pfeilsymbole
+.. .. rubric:: Pfeilsymbole
 
-.. list-table::
-    :name: tab-pfeilsymbole
-    :widths: 55 50 50 50
-    :header-rows: 0
+.. .. list-table::
+..     :name: tab-pfeilsymbole
+..     :widths: 55 50 50 50
+..     :header-rows: 0
 
-    * - Eingabe
-      - Ausgabe
-      - Eingabe
-      - Ausgabe
-    * - ``\rightarrow`` oder ``\to``
-      - :math:`{\color{white}|}\rightarrow{\color{white}|}`
-      - ``\Rightarrow``
-      - :math:`{\color{white}|}\Rightarrow{\color{white}|}`
-    * - ``\leftarrow``
-      - :math:`{\color{white}|}\leftarrow{\color{white}|}`
-      - ``\Leftarrow``
-      - :math:`{\color{white}|}\Leftarrow{\color{white}|}`
-    * - ``\longrightarrow``
-      - :math:`{\color{white}|}\longrightarrow{\color{white}|}`
-      - ``\Longrightarrow``
-      - :math:`{\color{white}|}\Longrightarrow{\color{white}|}`
-    * - ``\longleftarrow``
-      - :math:`{\color{white}|}\longleftarrow{\color{white}|}`
-      - ``\Longleftarrow``
-      - :math:`{\color{white}|}\Longleftarrow`
-    * - ``\leftrightarrow``
-      - :math:`{\color{white}|}\leftrightarrow{\color{white}|}`
-      - ``\Leftreftarrow``
-      - :math:`{\color{white}|}\Leftrightarrow{\color{white}|}`
-    * - ``\longleftrightarrow``
-      - :math:`{\color{white}|}\longleftrightarrow{\color{white}|}`
-      - ``\Longleftreftarrow``
-      - :math:`{\color{white}|}\Longleftrightarrow{\color{white}|}`
-    * - ``\uparrow``
-      - :math:`{\color{white}|}\uparrow{\color{white}|}`
-      - ``\Uparrow``
-      - :math:`{\color{white}|}\Uparrow{\color{white}|}`
-    * - ``\downarrow``
-      - :math:`{\color{white}|}\downarrow{\color{white}|}`
-      - ``\Downarrow``
-      - :math:`{\color{white}|}\Downarrow{\color{white}|}`
-    * - ``\updownarrow``
-      - :math:`{\color{white}|}\updownarrow{\color{white}|}`
-      - ``\Updownarrow``
-      - :math:`{\color{white}|}\Updownarrow{\color{white}|}`
-    * - ``\hookrightarrow``
-      - :math:`{\color{white}|}\hookrightarrow{\color{white}|}`
-      - ``\hookleftarrow``
-      - :math:`{\color{white}|}\hookleftarrow{\color{white}|}`
-    * - ``\nwarrow``
-      - :math:`{\color{white}|}\nwarrow{\color{white}|}`
-      - ``\nearrow``
-      - :math:`{\color{white}|}\nearrow{\color{white}|}`
-    * - ``\swarrow``
-      - :math:`{\color{white}|}\swarrow{\color{white}|}`
-      - ``\searrow``
-      - :math:`{\color{white}|}\searrow{\color{white}|}`
+..     * - Eingabe
+..       - Ausgabe
+..       - Eingabe
+..       - Ausgabe
+..     * - ``\rightarrow`` oder ``\to``
+..       - :math:`{\color{white}|}\rightarrow{\color{white}|}`
+..       - ``\Rightarrow``
+..       - :math:`{\color{white}|}\Rightarrow{\color{white}|}`
+..     * - ``\leftarrow``
+..       - :math:`{\color{white}|}\leftarrow{\color{white}|}`
+..       - ``\Leftarrow``
+..       - :math:`{\color{white}|}\Leftarrow{\color{white}|}`
+..     * - ``\longrightarrow``
+..       - :math:`{\color{white}|}\longrightarrow{\color{white}|}`
+..       - ``\Longrightarrow``
+..       - :math:`{\color{white}|}\Longrightarrow{\color{white}|}`
+..     * - ``\longleftarrow``
+..       - :math:`{\color{white}|}\longleftarrow{\color{white}|}`
+..       - ``\Longleftarrow``
+..       - :math:`{\color{white}|}\Longleftarrow`
+..     * - ``\leftrightarrow``
+..       - :math:`{\color{white}|}\leftrightarrow{\color{white}|}`
+..       - ``\Leftreftarrow``
+..       - :math:`{\color{white}|}\Leftrightarrow{\color{white}|}`
+..     * - ``\longleftrightarrow``
+..       - :math:`{\color{white}|}\longleftrightarrow{\color{white}|}`
+..       - ``\Longleftreftarrow``
+..       - :math:`{\color{white}|}\Longleftrightarrow{\color{white}|}`
+..     * - ``\uparrow``
+..       - :math:`{\color{white}|}\uparrow{\color{white}|}`
+..       - ``\Uparrow``
+..       - :math:`{\color{white}|}\Uparrow{\color{white}|}`
+..     * - ``\downarrow``
+..       - :math:`{\color{white}|}\downarrow{\color{white}|}`
+..       - ``\Downarrow``
+..       - :math:`{\color{white}|}\Downarrow{\color{white}|}`
+..     * - ``\updownarrow``
+..       - :math:`{\color{white}|}\updownarrow{\color{white}|}`
+..       - ``\Updownarrow``
+..       - :math:`{\color{white}|}\Updownarrow{\color{white}|}`
+..     * - ``\hookrightarrow``
+..       - :math:`{\color{white}|}\hookrightarrow{\color{white}|}`
+..       - ``\hookleftarrow``
+..       - :math:`{\color{white}|}\hookleftarrow{\color{white}|}`
+..     * - ``\nwarrow``
+..       - :math:`{\color{white}|}\nwarrow{\color{white}|}`
+..       - ``\nearrow``
+..       - :math:`{\color{white}|}\nearrow{\color{white}|}`
+..     * - ``\swarrow``
+..       - :math:`{\color{white}|}\swarrow{\color{white}|}`
+..       - ``\searrow``
+..       - :math:`{\color{white}|}\searrow{\color{white}|}`
 
 
 .. rubric:: Weitere mathematische Symbole
@@ -507,16 +572,23 @@ beispielsweise ergibt eine Eingabe von ``\not\ge`` das Zeichen :math:`{\color{wh
       - :math:`{\color{white}||}\Box{\color{white}|}`
       - ``\checkmark``
       - :math:`{\color{white}||}\checkmark{\color{white}|}`
+    * - ``\clubsuit``
+      - :math:`{\color{white}||}\clubsuit{\color{white}|}`
+      - ``\spadesuit``
+      - :math:`{\color{white}||}\spadesuit{\color{white}|}`
+    * - ``\heartsuit``
+      - :math:`{\color{white}||}\heartsuit{\color{white}|}`
+      - ``\diamondsuit``
+      - :math:`{\color{white}||}\diamondsuit{\color{white}|}`
 
 .. http://latex.wikia.com/wiki/List_of_LaTeX_symbols
 .. https://de.wikipedia.org/wiki/Liste_mathematischer_Symbole
 
+.. index:: Mathematische Ausdrücke
 .. _Mathematische Ausdrücke:
 
 Mathematische Ausdrücke
 -----------------------
-
-.. todo:: lim
 
 .. index:: Index, Exponent
 .. _Indizes und Exponenten:
@@ -539,59 +611,262 @@ x^n` lauten. Auch bei Exponenten müssen geschweifte Klammern gesetzt werden,
 sofern diese aus mehr als einem Zeichen bestehen.
 
 In Exponenten werden Buchstaben in LaTeX standardmäßig aufrecht gedruckt, in
-Indizes hingegen kursiv. Möchte man aufrechte Indizes erhalten, so müssen diese
-in geschweifte Klammern gesetzt und mittels ``\mathrm{}`` explizit in aufrechter
-Form ausgegeben werden.
+Indizes hingegen kursiv. Möchte man, wie es in der Textsatzung üblich ist,
+aufrechte Indizes erhalten, so müssen diese in geschweifte Klammern gesetzt und
+mittels ``\mathrm{}`` explizit in aufrechter Form ausgegeben werden (Zahlen
+werden auch in LaTeX stets aufrecht gedruckt).
 
-.. index:: Klammern, Pfeile
-.. _Klammern und Pfeile:
 
-.. rubric:: Klammern und Pfeile
+.. _Einheiten:
+
+.. rubric:: Einheiten
+
+In Mathe-Umgebungen können Einheiten -- ebenso wie in normalen Text-Bereichen --
+am einfachsten mittels des :ref:`units <units>`-Pakets gesetzt werden. Die
+Syntax dafür ist denkbar einfach:
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    % Größe mit Einheit setzen:
+    \unit[1]{Liter} = \unit[1]{dm^3}
+
+*Ergebnis:*
+
+.. math::
+
+    % Größe mit Einheit setzen:
+    \unit[1]{Liter} = \unit[1]{dm^3}
+
+Die ``units``-Anweisung hat einerseits den Effekt, dass die in den geschweiften
+Klammern angegebene Einheit nicht wie im Mathe-Modus üblich kursiv, sondern
+aufrecht gedruckt wird; andererseits wird der Abstand zwischen dem Zahlenwert
+und der Einheit etwas reduziert. Die ``units{}``-Anweisung kann auch ohne Angabe
+eines Zahlenwerts genutzt werden, beispielsweise um reine Einheits-Gleichungen
+zu setzen. Innerhalb der geschweiften Klammern sind auch weitere
+LaTeX-Anweisungen, wie beispielsweise :ref:`Brüche <Brüche>` oder :ref:`Wurzeln
+<Wurzeln>`, erlaubt.
+
+.. .. rubric:: Standard-Funktionen
+
+.. \arccos
+.. \arcsin
+.. \arctan
+.. \arg
+.. \cos
+.. \cosh
+.. \cot
+.. \coth
+.. \csc
+.. \deg
+.. \det
+.. \dim
+.. \exp
+.. \gcd
+.. \hom
+.. \inf
+.. \ker
+.. \lg
+.. \lim
+.. \liminf
+.. \limsup
+.. \ln
+.. \log
+.. \max
+.. \min
+.. \Pr
+.. \sec
+.. \sin
+.. \sinh
+.. \sup
+.. \tan
+.. \tanh
+
+
+.. index:: Klammern
+.. _Klammern:
+
+.. rubric:: Klammern
 
 Runde und eckige Klammern können in LaTeX-Formeln als gewöhnliche Zeichen
 gesetzt werden, bei geschweiften Klammern muss ein Backslash-Zeichen vor die
-öffnende und schließende Klammer gesetzt werden. Möchte man allerdings die
-Größe einer Klammer anpassen, wenn beispielsweise ein Bruch innerhalb der
-Klammer vorkommt, so kann die Klammergröße automatisch oder manuell festgelegt
-werden:
+öffnende und schließende Klammer gesetzt werden.
 
-* Mit ``\left( ... \right)`` wird die Größe der öffnenden bzw. schließenden
-  runden Klammer automatisch an den Inhalt der Klammer angepasst. Das gleiche
-  funktioniert auch mit eckigen Klammern.
-* Mit ``\big( ... \big)``, ``\Big( ... \Big)`` kann die Größe der öffnenden
-  bzw. schließenden runden Klammern manuell festgelegt werden. Das gleiche
-  funktioniert ebenfalls mit vertikalen Strichen (z.B. Betragstrichen), die
-  direkt mittels des Pipe-Zeichens ``|`` eingegeben werden können.
+*Beispiel:*
 
-Pfeilen können entweder über oder zwischen mathematischen Symbolen stehen.
-Pfeile *über* mathematischen Symbolen markieren Vektoren oder gerichtete
-Strecken. Im Fall von Vektoren, wenn sich der Pfeil über ein einzelnes Zeichen
-erstreckt, kann man die Anweisung ``\vec{}`` verwenden, für Pfeile über
-mehreren mathematischen Symbolen muss hingegen ``\overrightarrow{}`` verwendet
-werden:
+.. code-block:: tex
+
+    % Verschiedene Klammern in LaTeX:
+    (a)     \qquad [b] \qquad \{c\} \qquad |d| \quad \langle e \rangle
+
+*Ergebnis:*
+
+.. math::
+
+    (a)     \qquad [b] \qquad \{c\} \qquad |d| \quad \langle e \rangle
+
+Möchte man die Größe einer Klammer anpassen, wenn beispielsweise ein Bruch
+innerhalb der Klammer vorkommt, so kann die Klammergröße automatisch oder
+manuell festgelegt werden:
+
+* Mit ``\left`` und ``\right`` wird die Größe der darauf folgenden öffnenden
+  beziehungsweise schließenden Klammer automatisch an den Inhalt der Klammer
+  angepasst. Für runde Klammern mit autoamtische Größenanpassung kann man also
+  ``\left(`` beziehungsweise ``\right)`` schreiben:
+
+  *Beispiel:*
+
+  .. code-block:: tex
+
+      (a^{b^{c^d}}) \ne \left( d^{c^{b^a}} \right)
+
+  *Ergebnis:*
+
+  .. math::
+
+      (a^{b^{c^d}}) \ne \left( d\;\!^{c^{b^a}} \right)
+
+  Das gleiche funktioniert auch mit eckigen und geschweiften
+  Klammern, wobei bei letzteren ``\left\{`` beziehungsweise ``\right\}``
+  geschrieben werden müssen.
+
+* Mit ``\big( ... \big)``, ``\Big( ... \Big)``, ``\bigg( ... \bigg)`` oder
+  ``\Bigg( ... \Bigg)`` kann die Größe der öffnenden beziehungsweise
+  schließenden runden Klammern manuell festgelegt werden. Das gleiche
+  funktioniert ebenfalls mit vertikalen Strichen (beispielsweise
+  Betragstrichen), die direkt mittels des Pipe-Zeichens ``|`` eingegeben werden
+  können.
+
+Bisweilen sind auch "liegende" geschweifte Klammern nützlich, um beispielsweise
+eine Erklärung für einen auftretenden Term in die Gleichung mit aufzunehmen.
+Bindet man in der Präambel das Paket ``mathtools`` mit ein, so kann man dafür
+Anweisung die Anweisungen ``\underbrace{}`` beziehungsweise ``\overbrace{}``
+nutzen:
+
+*Beispiel:*
+
+.. code-block:: tex
+
+     \overbrace{n \cdot n \cdot n \cdot \ldots \cdot n}^{\text{$k$ mal} } = n^k \\
+    \underbrace{n \cdot n \cdot n \cdot \ldots \cdot n}_{\text{$k$ mal} } = n^k
+
+*Ergebnis:*
+
+.. math::
+
+     \overbrace{n \cdot n \cdot n \cdot \ldots \cdot n}^{\text{$k$ mal} } &= n^k \\[6pt]
+    \underbrace{n \cdot n \cdot n \cdot \ldots \cdot n}_{\text{$k$ mal} } &= n^k
+
+
+
+.. index:: Pfeile
+.. _Pfeile:
+
+.. rubric:: Pfeile
+
+Pfeile können entweder über oder zwischen mathematischen Symbolen stehen.
+Pfeile über mathematischen Symbolen markieren Vektoren oder gerichtete Strecken.
+Im Fall von Vektoren, wenn sich der Pfeil über ein einzelnes Zeichen erstreckt,
+kann man die Anweisung ``\vec{}`` verwenden, für Pfeile über mehreren
+mathematischen Symbolen muss hingegen ``\overrightarrow{}`` (oder
+``\overline{}`` für Strecken ohne Richtung) verwendet werden:
 
 *Beispiel:*
 
 .. code-block:: tex
 
     \begin{align*}
-        \vec{v}
-        \overrightarrow{OP}
+        \vec{a}
+        \overrightarrow{\mathrm{BC}}
+        \overline{\mathrm{DE}}
     \end{align*}
 
 *Ergebnis:*
 
 .. math::
 
-    \vec{v}  \qquad \overrightarrow{OP}
+    \vec{a} \qquad \overrightarrow{\mathrm{BC}} \qquad \overline{\mathrm{DE}}
 
-Für Pfeile *zwischen* mathematischen Symbolen gibt es mehrere Anweisungen. Ein
+Für Pfeile zwischen mathematischen Symbolen gibt es mehrere Anweisungen. Ein
 einfacher waagrechter Pfeil, wie er beispielsweise geschrieben wird, wenn eine
-Zahl gegen einen bestimmten Grenzwert geht, kann einfach mit ``\to`` gesetzt
-werden. Mehr Flexibilität bieten die Anweisungen der Art ``\leftarrow`` und
-``\rightarrow``: Sie können auch als lange Varianten (``\longrightarrow``) oder
-mit doppeltem waagrechten Strich (``\Rightarrow)`` ausgegeben werden; auch eine
-Kombination beider Varianten ist mittels ``\Longrightarrow`` möglich.
+Zahl gegen einen bestimmten Grenzwert geht, kann einfach mit ``\to`` gesetzt werden.
+Mehr Flexibilität bieten die Anweisungen der Art ``\leftarrow`` und ``\rightarrow``:
+
+.. list-table::
+    :name: tab-pfeile
+    :widths: 60 40 50
+
+    * - LaTeX-Code
+      - Ergebnis
+      - Beschreibung
+    * - ``\leftarrow`` und ``\rightarrow``
+      - :math:`\leftarrow \;\; \text{ und } \;\; \rightarrow`
+      - waagrechter Pfeil
+    * - ``\Leftarrow`` und ``\Rightarrow``
+      - :math:`\Leftarrow \;\; \text{ und } \;\; \Rightarrow`
+      - waagrechter Pfeil mit Doppelstrich
+    * - ``\longleftarrow`` und ``\longrightarrow``
+      - :math:`\longleftarrow \text{ und } \longrightarrow`
+      - langer waagrechter Pfeil
+    * - ``\Longleftarrow`` und ``\Longrightarrow``
+      - :math:`\Longleftarrow \text{ und } \Longrightarrow`
+      - langer waagrechter Pfeil mit Doppelstrich
+    * - ``\leftrightarrow`` und ``\Leftrightarrow``
+      - :math:`\leftrightarrow \;\; \text{ und } \;\; \Leftrightarrow`
+      - beidseitiger Pfeil
+    * - ``\longleftrightarrow`` und ``\Longleftrightarrow``
+      - :math:`\Longleftrightarrow \! \text{ und } \! \Longleftrightarrow`
+      - langer beidseitiger Pfeil
+
+Mittels ``\uparrow`` und ``\downarrow`` lassen sich entsprechend nach oben
+(:math:`\uparrow`) beziehungsweise nach unten (:math:`\downarrow`) zeigende
+Pfeile setzen; auch diese können wie ``\leftarrow`` und ``\rightarrow`` gemäß
+der obigen Tabelle modifiziert werden. Für diagonale Pfeile gibt es die
+Anweisungen ``\nwarrow`` und ``\nearrow`` (:math:`\nwarrow` und
+:math:`\nearrow`) beziehungsweise ``\swarrow`` und ``\searrow``
+(:math:`\swarrow` und :math:`\searrow`), wobei die ersten beiden Buchstaben
+jeweils die Himmelsrichtung angeben, in die der Pfeil zeigen soll.
+
+Mittels ``\circlearrowleft`` und ``\circlearrowright`` lassen
+sich die zur Kennzeichnung von Drehmomenten verwendeten kreisförmige Pfeile
+(:math:`\circlearrowleft` und :math:`\circlearrowright`) setzen, mittels
+``\curvearrowleft`` beziehungsweise ``\curvearrowright`` gebogene Pfeile
+(:math:`\curvearrowleft` und :math:`\curvearrowright`).
+
+Beschriftete waagrechte Pfeile können zudem mittels ``\xleftarrow{}``
+beziehungsweise ``\xrightarrow{}`` erstellt werden. Die Länge eines solchen
+Pfeils wird von LaTeX automatisch anhand der Länge des über beziehungsweise
+unter dem Pfeil stehenden Textes bestimmt.
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    \mathrm{A} \quad \xleftarrow[\phantom{\text{was sonst?}}]{-1} \quad
+    \mathrm{B} \quad \xrightarrow[\text{was sonst?}]{+1} \quad C
+
+*Ergebnis:*
+
+.. math::
+
+    \mathrm{A} \quad \xleftarrow[\phantom{\text{was sonst?}}]{-1} \quad
+    \mathrm{B} \quad \xrightarrow[\text{was sonst?}]{+1} \quad C
+
+Eine vollständige Übersicht über die verschiedenen Pfeil gibt es beispielsweise
+`hier <http://www.latex-pfeile.de/>`__.
+
+
+.. index::
+    single: Mathematische Ausdrücke; Wurzeln
+    single: Mathematische Ausdrücke; Brüche
+    single: Mathematische Ausdrücke; Binomialkoeffizienten
+
+.. _Wurzeln, Brüche und Binomialkoeffizienten:
+.. _Wurzeln:
+.. _Brüche:
+.. _Binomialkoeffizienten:
+.. _Binomial-Koeffizienten:
 
 .. rubric:: Wurzeln, Brüche und Binomialkoeffizienten
 
@@ -600,13 +875,102 @@ Quadrat-Wurzel ausgeben, sondern eine Wurzel mit einem anderen Wurzelexponenten,
 so kann für die :math:`n`-te Wurzel aus einer Zahl ``\sqrt[n]{Zahl}``
 geschrieben werden.
 
-Brüche werden in LaTeX mittels ``\frac{Zähler}{Nenner}`` gesetzt.
+*Beispiel:*
+
+.. code-block:: tex
+
+    % "Normale" Quadrat-Wurzel:
+    \sqrt{16} = 4
+
+    % Kubische Wurzel:
+    \sqrt[3]{8} = 2
+
+*Ergebnis:*
+
+.. math::
+
+    \sqrt{16} = 4 \\[8pt]
+    \sqrt[3]{8} = 2
+
+
+Innerhalb der ``\sqrt{}``-Anweisung können auch andere Mathe-Anweisungen wie
+Pfeile oder Brüche gesetzt werden; Diese werden in LaTeX mittels
+``\frac{Zähler}{Nenner}`` gesetzt:
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    \begin{align*}
+        \frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}
+    \end{align*}
+
+*Ergebnis:*
+
+.. math::
+
+    \frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}
+
+Innerhalb des Zähler und/oder Nenners können wiederum ``\frac{}``-Anweisungen
+auftreten, so dass sich damit auch verschachtelte Brüche bilden lassen. Die
+Größe der Schriften sowie die Dicke der Bruchstriche werden dabei automatisch
+angepasst:
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    \begin{align*}
+        \frac{\frac{a}{b}}{\frac{c}{d}} = \frac{a \cdot d}{b \cdot c}
+    \end{align*}
+
+*Ergebnis:*
+
+.. math::
+
+    \frac{\frac{a}{b}}{\frac{c}{d}} = \frac{a \cdot d}{b \cdot c}
+
+Die automatische Anpassung der Schriftgröße bei der ``\frac{}``-Anweisung kann
+umgangen werden, wenn man mit ansonsten gleicher Syntax die ``\tfrac{}`` oder
+``\dfrac{}``-Anweisung verwendet:
+
+* Bei der ``\tfrac{}``-Anweisung wird automatisch die Option ``\textstyle``
+  aktiviert; der Bruch wird dadurch möglichst so dimensioniert, dass er in eine
+  normale Textzeile passt.
+
+* Bei der ``\dfrac{}``-Anweisung wird automatisch die Option ``\displaystyle``
+  aktiviert; eine automatische Verkleinerung der Schriftgröße findet dabei auch
+  bei verschachtelten Brüchen nicht statt.
+
+In ähnlicher Weise wie Brüche lassen sich auch :ref:`Binomial-Koeffizienten
+<gwm:Kombinationen ohne Wiederholung>` setzen. Auch wenn diese aus
+mathematischer Sicht eine andere Bedeutung haben, sind sie aus Sicht der
+Textsatzung den Brüchen ähnlich, nur dass der Bruchstrich zwischen der oberen
+und der unteren Zahl fehlt.
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    % Binomialkoeffizient:
+    \begin{align*}
+        \binom{n}{k} = \frac{n!}{(n - k)! \cdot k!}
+    \end{align*}
+
+*Ergebnis:*
+
+.. math::
+
+    \binom{n}{k} = \frac{n!}{(n - k)! \cdot k!}
+
 
 
 .. index:: Summenzeichen, \sum
-.. _Summen und Integrale:
+.. _Summen, Produkte und Integrale:
+.. _Summenzeichen:
+.. _Integrale:
 
-.. rubric:: Summen und Integrale
+.. rubric:: Summen, Produkte und Integrale
 
 Das Summenzeichen :math:`\sum` kann im Mathe-Modus mittels ``\sum`` gedruckt
 werden. Üblicherweise wird dabei unterhalb des Summenzeichens die Untergrenze
@@ -628,35 +992,293 @@ dazu die für Indizes und Exponenten übliche Syntax genutzt und somit
 
     \sum_{i=1}^{n} i =  \frac{n \cdot (n+1)}{2}
 
-.. index:: Integralzeichen, \int
-
-Das Integralzeichen :math:`\int` kann im Mathe-Modus mittels ``\int`` gedruckt
-werden. Üblicherweise wird auch hierbei unterhalb des Integralzeichens die
-Untergrenze und oberhalb die Obergrenze der zu integrierenden Größe angegeben.
-In LaTeX wird dazu wiederum die für Indizes und Exponenten übliche Syntax genutzt und
-somit ``\int_{}^{}`` geschrieben:
+In gleicher Weise kann das (seltener vorkommende) Produkt-Zeichen :math:`\prod`
+genutzt werden:
 
 *Beispiel:*
 
 .. code-block:: tex
 
     \begin{align*}
-        \int_{a}^{b} f(x) \cdot \mathrm{d} x = F(b) - F(a)
+        \sum_{i=1}^{n} i =  \frac{n \cdot (n+1)}{2}
     \end{align*}
 
 *Ergebnis:*
 
 .. math::
 
-    \int_{a}^{b} f(x) \cdot \mathrm{d} x = F(b) - F(a)
+    \prod_{i=1}^{n} i = n \cdot (n-1) \cdot (n-2) \cdot \ldots \cdot 1 = n!
 
+.. index:: Integralzeichen, \int
+
+Das Integralzeichen :math:`\int` kann im Mathe-Modus mittels ``\int`` gedruckt
+werden. Üblicherweise wird auch hierbei unterhalb des Integralzeichens die
+Untergrenze und oberhalb die Obergrenze der zu integrierenden Größe angegeben.
+In LaTeX wird dazu wiederum die für Indizes und Exponenten übliche Syntax genutzt und
+somit ``\int_{}^{}`` geschrieben. Ohne weitere Voreinstellungen werden die
+Integralgrenzen etwas versetzt gedruckt; möchte man dies unterbinden, so kann
+man dies durch ein Einfügen von ``\limits`` vor den Integralgrenzen erreichen:
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    \begin{align*}
+        \int_{a}^{b}        f(x) \cdot \mathrm{d} x = F(b) - F(a) \\
+        \int\limits_{a}^{b} f(x) \cdot \mathrm{d} x = F(b) - F(a)
+    \end{align*}
+
+*Ergebnis:*
+
+.. math::
+
+    \int_{a}^{b} f(x) \cdot \mathrm{d} x &= F(b) - F(a)  \\[4pt]
+    \int\limits_{a}^{b} f(x) \cdot \mathrm{d} x &= F(b) - F(a)
+
+Mehrfachintegrale (Flächen- und Volumenintegrale) können entsprechend mittels
+``\iint``, ``\iiint`` gesetzt werden, geschlossene Linien-Integrale mittels
+``\oint``.
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    % Gaußscher Integralsatz:
+    \iiint_{V}^{} \text{div } \vec{E} (\vec{r}) \cdot \mathrm{d}^3 r  =
+    \oint\limits_{S(V)}^{} \vec{E} \cdot \mathrm{d} \vec{f}
+
+
+*Ergebnis:*
+
+.. math::
+
+    \iiint_{V}^{} \text{div } \vec{E} (\vec{r}\,) \cdot \mathrm{d}^3 r  =
+    \oint\limits_{S(V)}^{} \vec{E} \cdot \mathrm{d} \vec{f}
+
+.. Limits direkt unter/über Summen- beziehungsweise Integralzeichen:
+.. \newcommand{\I}{\int\limits}
+.. \newcommand{\Sum}{\sum\limits}
+.. \newcommand{\Prod}{\prod\limits}
+
+.. todo  Mehrfachintegrale Kurvenintegrale
+
+.. index:: 
+    single: Mathematische Ausdrücke; Determinanten
+    single: Mathematische Ausdrücke; Matrizen
+    single: Mathematische Ausdrücke; Vektoren
+
+.. _Matrizen und Determinanten:
 
 .. rubric:: Matrizen und Determinanten
 
+Zum Setzen von :ref:`Matrizen <gwm:Matrizen>`  beziehungsweise Determinanten
+stellt das Paket ``amsmath`` für den Mathe-Modus mehrere Umgebungen bereit:
+
++-------------+-------------------------------------+
+| ``matrix``  | Matrizen ohne Klammern              |
++-------------+-------------------------------------+
+| ``pmatrix`` | Matrizen mit runden Klammern        |
++-------------+-------------------------------------+
+| ``bmatrix`` | Matrizen mit eckigen Klammern       |
++-------------+-------------------------------------+
+| ``vmatrix`` | Matrizen mit eckigen Betragstrichen |
++-------------+-------------------------------------+
+
+Innerhalb einer Matrix-Umgebung werden die einzelnen Spalten, ähnlich wie bei
+:ref:`Tabellen <Tabellen>`, durch ``&``-Zeichen getrennt; Zeilenumbrüche lassen
+sich wie gewöhnlich mittels ``\\`` erreichen.
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{pmatrix}
+
+*Ergebnis:*
+
+.. math::
+
+    \begin{pmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{pmatrix}
+
+Die ``vmatrix``-Umgebung kann insbesondere zur Erzeugung von :ref:`Determinanten
+<gwm:Determinanten>` genutzt werden; mittels der ``pmatrix``-Umgebung hingegen
+können auch :ref:`Vektoren <gwm:Vektoren>` als einspaltige Matrizen gesetzt
+werden.
+
+
+.. index:: 
+    single: Mathematische Ausdrücke; Fallunterscheidungen
+.. _Fallunterscheidungen:
+
 .. rubric:: Fallunterscheidungen
+
+Fallunterscheidungen können im Mathe-Modus mittels der ``cases``-Umgebung
+verwirklicht werden. Innerhalb einer solchen Umgebung können die einzelnen
+Elemente mittels eines ``&``-Zeichens ausgerichtet werden; die vertikale
+Ausrichtung übernimmt LaTeX (bis auf manuell zu setzende Zeilenumbrüche)
+automatisch.
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    | a | = \begin{cases}
+        +a     & \text{ falls } a > 0 \\
+        \;\;0  & \text{ falls } a = 0 \\
+        -a     & \text{ falls } a < 0
+    \end{cases}
+
+
+*Ergebnis:*
+
+.. math::
+
+    | a | = \begin{cases}
+    +a  & \text{ falls } a > 0 \\
+    \;\;0  & \text{ falls } a = 0 \\
+    -a & \text{ falls } a < 0
+    \end{cases}
+
+
 
 .. Zeichen über istgleich setzen:
 .. \stackrel{\wedge}=
+
+.. index:: array (Umgebung)
+.. _array:
+
+.. rubric:: Die ``array``-Umgebung
+
+Die ``array``-Umgebung kann innerhalb von Formeln verwendet werden, um eine
+horizontale Ausrichtung der einzelnen Formel-Elemente zu erreichen. Die Syntax
+ist dabei der :ref:`tabular <tabular>`-Umgebung sehr ähnlich:
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    \begin{align*}
+        \begin{array}{lcr}
+            \text{Erste Zahl}   & x         &  8 \\
+            \text{Zweite Zahl}  & y         & 15 \\ \hline
+            \text{Summe}        & x + y     & 23 \\
+            \text{Differenz}    & x - y     & -7 \\
+            \text{Produkt}      & x \cdot y & 120
+        \end{array}
+    \end{align*}
+
+*Ergebnis:*
+
+.. math::
+
+    \begin{align*}
+        \begin{array}{lcr}
+            \text{Erste Zahl}   & x         &  8 \\
+            \text{Zweite Zahl}  & y         & 15 \\ \hline
+            \text{Summe}        & x + y     & 23 \\
+            \text{Differenz}    & x - y     & -7 \\
+            \text{Produkt}      & x \cdot y & 120
+        \end{array}
+    \end{align*}
+
+Direkt hinter ``\begin{align}`` werden in geschweiften Klammern die gewünschten
+Spalten-Optionen angegeben, wobei ``l`` für eine Links-Ausrichtung der Spalte,
+``c`` für eine Zentrierung und ``r`` für eine Rechts-Ausrichtung steht. Die
+Anzahl an Spaltenoptionen muss mit der tatsächlichen Spaltenanzahl innerhalb der
+Tabelle übereinstimmen. In die einzelnen Felder der ``array``-Umgebung können
+wiederum beliebige Formel-Elemente gesetzt werden (sogar Matrizen).
+
+Zwischen den einzelnen Spalten-Optionen können nach Belieben ``|``-Zeichen
+eingefügt werden, um (wie bei einer Tabelle) vertikale Striche zwischen den
+jeweiligen Spalten (oder am Rand der Tabelle) einzuzeichnen; horizontale Linien
+lassen sich jeweils zu Beginn einer neuen Zeile mittels der ``\hline``-Anweisung
+verwirklichen.
+
+.. ----
+
+.. .. math:: e^{i\pi} + 1 = 0
+..    :label: euler
+
+.. Euler's identity, equation :eq:`euler`, was elected one of the most
+.. beautiful mathematical formulas.
+
+.. ----
+
+.. \left[
+..   \begin{array}{ c c }
+..      1 & 2 \\
+..      3 & 4
+..   \end{array} \right]
+
+.. Operator-Namen selbst definieren:
+.. \newcommand{\arcsinh}{\operatorname{arcsinh}}
+
+.. Zahlenmengen setzen
+.. Die natürlichen Zahlen N, R etc. Sollen nat
+.. \newcommand{\N}{\ensuremath{\mathbb {N}}}
+.. \newcommand{\Z}{\ensuremath{\mathbb {Z}}}
+.. \newcommand{\Q}{\ensuremath{\mathbb {Q}}}
+.. \newcommand{\R}{\ensuremath{\mathbb {R}}}
+.. \newcommand{\C}{\ensuremath{\mathbb {C}}}
+
+.. Polynomdivision setzen:
+.. Paket polynom
+.. $\polylongdiv[style=C,div=:]{x^3 − 6x^2+11x − 6}{x − 2}$
+
+.. Gauß-Algorithmus setzen
+.. Paket gauss
+.. $ \begin{gmatrix}[p]
+.. − 1 & 8 & 4 && 3,75 \\
+.. 5 & 5 & 3 && 4 \\
+.. 9 & − 5 & 8 && 5
+.. \rowops
+.. \mult{0}{5}\add{0}{1}
+.. \end{gmatrix} $
+.. $ \begin{gmatrix}[p]
+.. − 1 & 8 & 4 && 3,75 \\
+.. 0 & 45 & 23 && 22,75 \\
+.. 9 & − 5 & 8 && 5
+.. \rowops
+.. \mult{0}{9}\add{0}{2}
+.. \end{gmatrix}$
+.. $ \begin{gmatrix}[p]
+.. − 1 & 8 & 4 && 3,75 \\
+.. 0 & 45 & 23 && 22,75 \\
+.. 0 & 67 & 44 && 38,75
+.. \rowops
+.. \mult{2}{45}
+.. \mult{1}{67}\add{1}{2}
+.. \end{gmatrix}$
+.. \end{gmatrix}$
+.. $ \begin{gmatrix}[p]
+.. − 1 & 8 & 4 && 3,75 \\
+.. 0 & 45 & 23 && 22,75 \\
+.. 0 & 0 & 439 && 219,5
+.. \end{gmatrix}$
+
+.. Damit ist $x_3 = 0,5 $, $x_2 = 0,25$ und $x_1 = 0,25$
+
+.. Grundrechenarten:
+.. Paket xlop, Rendtel2009
+
+.. Einheiten im Mathemodus
+.. $v = \unitfrac [1]{ m}{s} = \unitfrac [3,6]{ km}{h}$
+
+.. displaystyle bei Brüchen... http://www.andy-roberts.net/writing/latex/mathematics_2
+
+
+
+
 
 .. raw:: html
 
@@ -673,6 +1295,5 @@ somit ``\int_{}^{}`` geschrieben:
 
     Anstelle mit ``$$ ... $$`` können eigenständige Formeln auch mit ``\[ ...
     \]`` begrenzt werden.
-
 
 

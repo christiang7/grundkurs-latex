@@ -6,12 +6,13 @@ Grundkurs LaTeX
 
 .. only:: html
 
-    ... Erst im Aufbau ...
-
     .. sidebar:: Hinweis
 
-        Eine Druckversion dieser Seite ist als :download:`PDF-Dokument
-        <grundkurs-latex.pdf>` verfügbar.
+        Dieses Projekt kann als Quellcode von `GitHub
+        <https://www.github.com/grund-wissen/grundkurs-latex>`_
+        heruntergeladen werden.
+
+        Druckversion: :download:`(PDF) Grundkurs LaTeX <grundkurs-latex.pdf>`
 
     LaTeX ist definitiv der Standard als wissenschaftliches Textsatzungssystem. Es
     wurde bereits ab Beginn der 1980er Jahre von `Donald Knuth
@@ -35,13 +36,15 @@ Grundkurs LaTeX
     installation.rst
     einfuehrung.rst
     gewoehnliche-textsatzung.rst
-    wichtige-umgebungen.rst
     mathematischer-formelsatz.rst
+    wichtige-umgebungen.rst
+    zusatzpakete.rst
     seitenlayout.rst
+    weitere-dokumentklassen.rst
     links.rst
 
 .. bibtex.rst
 
-.. hilfreiche-pakete.rst
 .. tips.rst
 
+.. 2016-09-09 46 Seiten
