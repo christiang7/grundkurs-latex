@@ -1,1 +1,54 @@
-/home/waldgeist/data/tex/own/briefe/testbrief.tex
+\documentclass[a4paper, 12pt, halfparskip]{scrlttr2}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx, blindtext}
+
+\KOMAoptions{
+	backaddress,            % Adresse des Absenders im Adressfenster anzeigen
+	foldmarks=on,           % Faltungs-Markierungen drucken
+	fromalign=left,         % Ausrichtung des Briefkopfes (Absender)
+  % fromfax,                % Faxnummer des Absenders angeben
+	fromemail,              % Emailadresse des Absenders anzeigen
+	fromphone,              % Telefonnummer anzeigen
+	fromlogo,               % Logo drucken
+	fromurl,				% Verweis auf Webseite
+	}
+
+\setkomavar{fromname}{Vorname Nachname}
+\setkomavar{fromurl}[Web: \quad]{http://webadresse.de}
+\setkomavar{fromaddress}{Straßenname 1 \\ 123456 Ortsname}
+\setkomavar{fromphone}{01234- 56\,78\,90}
+\setkomavar{fromemail}{vorname.nachname@email.de}
+
+\setkomavar{backaddressseparator}{
+	~\raisebox{0.25ex}{\textbf{\Large.}}~
+	}
+
+\setkomafont{backaddress}{\sffamily\tiny}
+\setkomafont{fromaddress}{\rmfamily\footnotesize}
+
+\begin{document}
+
+\begin{letter}{
+	Name des Empfängers \\
+	Anschrift des Empfängers \\
+	PLZ Ort
+	}
+
+	\opening{Sehr geehrte Person(en),}
+
+	\blindtext % Das eigentliche Anschreiben
+
+	\closing{Mit freundlichen Grüßen,}
+
+	\ps{P.S.: Hier noch ein kurzer Nachsatz, ausschließlich zu Demonstrationszwecken.}
+
+	\encl{Anhang 1 \\ Anhang 2}
+
+\end{letter}
+
+\end{document}
+
+

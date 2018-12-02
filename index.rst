@@ -6,14 +6,6 @@ Grundkurs LaTeX
 
 .. only:: html
 
-    .. sidebar:: Hinweis
-
-        Dieses Projekt kann als Quellcode von `GitHub
-        <https://www.github.com/grund-wissen/grundkurs-latex>`_
-        heruntergeladen werden.
-
-        Druckversion: :download:`(PDF) Grundkurs LaTeX <grundkurs-latex.pdf>`
-
     LaTeX ist definitiv der Standard als wissenschaftliches Textsatzungssystem. Es
     wurde bereits ab Beginn der 1980er Jahre von `Donald Knuth
     <http://de.wikipedia.org/wiki/Donald_Ervin_Knuth>`_ entwickelt und wurde bzw.
@@ -30,6 +22,20 @@ Grundkurs LaTeX
     <gwl:Sphinx>`, können so aus einer eigenen (meist kürzeren) Syntax heraus
     LaTeX- bzw. PDF-Dokumente erzeugen.
 
+.. only:: html
+
+    .. sidebar:: Hinweis
+
+        Dieses Projekt kann als Quellcode von `GitLab
+        <https://gitlab.com/grund-wissen/grundkurs-latex>`_
+        heruntergeladen werden.
+
+        Offline-Version:
+
+        :download:`(PDF) Grundwissen LaTeX
+        <../../../build/informatik/latex/latex/grundkurs-latex.pdf>`
+
+
 .. toctree::
     :maxdepth: 2
 
@@ -40,6 +46,7 @@ Grundkurs LaTeX
     wichtige-umgebungen.rst
     zusatzpakete.rst
     seitenlayout.rst
+    zaehler-und-makros.rst
     weitere-dokumentklassen.rst
     links.rst
 

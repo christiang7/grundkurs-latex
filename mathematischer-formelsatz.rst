@@ -4,6 +4,7 @@
 
 Mathematischer Formelsatz
 =========================
+.. {{{
 
 LaTeX unterstützt wie kaum ein anderes Textsatzungsprogramm das Einfügen
 mathematischer Formeln. Wahlweise können Formeln innerhalb einer Absatzes
@@ -157,8 +158,11 @@ Der Mathematik-Modus weist gegenüber normalem Text einige Besonderheiten auf:
 .. index:: Mathematische Symbole
 .. _Mathematische Symbole:
 
+.. }}}
+
 Mathematische Symbole
 ---------------------
+.. {{{
 
 .. index:: Griechisches Alphabet
 .. _Griechisches Alphabet:
@@ -580,6 +584,21 @@ beispielsweise ergibt eine Eingabe von ``\not\ge`` das Zeichen :math:`{\color{wh
       - :math:`{\color{white}||}\heartsuit{\color{white}|}`
       - ``\diamondsuit``
       - :math:`{\color{white}||}\diamondsuit{\color{white}|}`
+    * - ``\%``
+      - :math:`{\color{white}||}\%{\color{white}|}`
+      - ``\permil``
+      - :math:`{\color{white}||}\permil{\color{white}|}`
+
+Die Anweisung ``\permil`` setzt voraus, dass in der Präambel das Paket
+``wasysym`` geladen wird (``\usepackage{wasysym}``).
+
+.. Paket ``euosym`` -> \euro als symbol.
+
+.. Minus-Zeichen
+.. http://tex.stackexchange.com/questions/79141/is-there-a-designated-symbol-for-the-negative-sign-in-say-16
+.. \newcommand{\minus}{\scalebox{0.5}[1.0]{$-$}}
+.. $\minus 16$
+.. $-16$
 
 .. http://latex.wikia.com/wiki/List_of_LaTeX_symbols
 .. https://de.wikipedia.org/wiki/Liste_mathematischer_Symbole
@@ -587,8 +606,11 @@ beispielsweise ergibt eine Eingabe von ``\not\ge`` das Zeichen :math:`{\color{wh
 .. index:: Mathematische Ausdrücke
 .. _Mathematische Ausdrücke:
 
+.. }}}
+
 Mathematische Ausdrücke
 -----------------------
+.. {{{
 
 .. index:: Index, Exponent
 .. _Indizes und Exponenten:
@@ -992,6 +1014,12 @@ dazu die für Indizes und Exponenten übliche Syntax genutzt und somit
 
     \sum_{i=1}^{n} i =  \frac{n \cdot (n+1)}{2}
 
+.. $\sum_{\substack{0 \leq 1<m\\ 0<j<n}} a(i,j) $
+.. % Linksbündig:
+
+.. $\sum_{\begin{subarray}{l}
+.. 0 \leq 1 <m\\ 0<j<n\end{subarray}}
+
 In gleicher Weise kann das (seltener vorkommende) Produkt-Zeichen :math:`\prod`
 genutzt werden:
 
@@ -1225,11 +1253,11 @@ verwirklichen.
 
 .. Zahlenmengen setzen
 .. Die natürlichen Zahlen N, R etc. Sollen nat
-.. \newcommand{\N}{\ensuremath{\mathbb {N}}}
-.. \newcommand{\Z}{\ensuremath{\mathbb {Z}}}
-.. \newcommand{\Q}{\ensuremath{\mathbb {Q}}}
-.. \newcommand{\R}{\ensuremath{\mathbb {R}}}
-.. \newcommand{\C}{\ensuremath{\mathbb {C}}}
+.. \newcommand{\N}{\ensuremath{\mathbb {N}} }
+.. \newcommand{\Z}{\ensuremath{\mathbb {Z}} }
+.. \newcommand{\Q}{\ensuremath{\mathbb {Q}} }
+.. \newcommand{\R}{\ensuremath{\mathbb {R}} }
+.. \newcommand{\C}{\ensuremath{\mathbb {C}} }
 
 .. Polynomdivision setzen:
 .. Paket polynom
@@ -1278,7 +1306,9 @@ verwirklichen.
 
 
 
+.. http://latex.wikia.com/wiki/List_of_LaTeX_symbols
 
+.. }}}
 
 .. raw:: html
 

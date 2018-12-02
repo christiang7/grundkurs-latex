@@ -4,6 +4,9 @@
 Zusatzpakete
 ============
 
+.. Siehe auch:
+.. http://www.namsu.de/Extra/latex-pakete.html
+
 In diesem Abschnitt sollen in alphabetischer Reihenfolge einige Pakete
 aufgelistet werden, die mittels der ``\usepackage``-Anweisung eingebunden werden
 können und weitere hilfreiche Funktionen für spezielle Zwecke bereitstellen.
@@ -14,7 +17,7 @@ können und weitere hilfreiche Funktionen für spezielle Zwecke bereitstellen.
 .. ------------------------------------------
 
 .. index:: array (Paket), Tabelle; Spaltenoptionen
-.. _array:
+.. _array (Paket):
 
 ``array`` -- Bessere Spaltenoptionen für Tabellen
 -------------------------------------------------
@@ -152,6 +155,8 @@ keine weiteren Anweisungen nötig.
 .. ``color`` -- Farbiger Text
 .. --------------------------
 
+.. index:: colortbl (Paket)
+.. _colortbl:
 
 ``colortbl`` -- Tabellen mit farbigem Hintergrund
 -------------------------------------------------
@@ -194,6 +199,13 @@ Spalten farblich hervorzuheben, beispielsweise
 ``\multicolumn{3}{c}{\cellcolor{grey}Hallo Welt!}``. Dabei muss allerdings genau
 diese Verschachtelungs-Reihenfolge eingehalten werden, andernfalls erhält man
 eine Fehlermeldung.
+
+.. csquotes -- Zitierhilfe
+
+.. http://ctan.org/pkg/csquotes
+.. TODO
+.. \usepackage[style=english]{csquotes}
+.. \enquote{}-Anweisung
 
 .. index:: geometry (Paket), \newgeometry{}, Seitenränder
 .. _geometry:
@@ -409,7 +421,7 @@ wie Google diese in ihren Algorithmen mit auswerten.
     }
 
 Eine vollständige Liste der ``hyperref``-Optionen findet sich auch im
-`LaTeX-Wörterbuch <https://de.wikibooks.org/wiki/LaTeX-Wörterbuch:_hyperref>`__.
+`LaTeX-Wörterbuch <https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_hyperref>`__.
 
 .. \hypersetup{
     .. bookmarks=true,
@@ -752,6 +764,9 @@ verwendet, welches die mittels der ``\url{}``-Anweisung erstellten Links
 .. cyan, darkgray, gray, green, lightgray, lime, magenta, olive, orange, pink,
 .. purple, red, teal, violet, white und yellow; weitere Farben können selbst
 .. definiert werden.
+
+.. https://www.latex-kurs.de/pakete/pakete.html
+.. http://www.namsu.de/Extra/latex-pakete.html
 
 .. raw:: html
 

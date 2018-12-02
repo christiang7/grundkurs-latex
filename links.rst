@@ -3,20 +3,11 @@
 Links
 =====
 
-.. rubric:: Dokumentationen:
-
-* `LaTeX-Kurs <http://lefti.amigager.de/latex/main.html>`__
-* `LaTeX-Tutorial der TU Graz <http://latex.tugraz.at/latex/tutorial>`__
-* `KOMA-Script Anleitung <http://www.komascript.de>`__ (`PDF
-  <http://ftp.fernuni-hagen.de/ftp-dir/pub/mirrors/www.ctan.org/macros/latex/contrib/koma-script/doc/scrguide.pdf>`__)
-* `LaTeX Documentation (en.) <https://de.sharelatex.com/learn/Main_Page>`__
-* `LaTeX-Wikibook (en.) <https://en.wikibooks.org/wiki/LaTeX/>`__
-
 .. rubric:: Tutorials:
 
-* `LaTeX-Tutorial für Einsteiger (de, PDF) <http://latex.tugraz.at/latex/tutorial>`__
-* `LaTeX-Tutorial für Fortgeschrittene (de, PDF) <http://latex.tugraz.at/latex/fortgeschrittene>`__
-* `LaTeX-Skript von Martin Schimmels (PDF) <http://mschimmels.de/?q=DasBuch.pdf>`__
+* `LaTeX-Tutorial für Einsteiger (de, PDF) <https://latex.tugraz.at/latex/tutorial>`__
+* `LaTeX-Tutorial für Fortgeschrittene (de, PDF) <https://latex.tugraz.at/latex/fortgeschrittene>`__
+* `LaTeX-Skript von Martin Schimmels (PDF) <http://www.mschimmels.de/sites/default/files/2017-02/DasBuch.pdf>`__
 * `LaTeX-Grundlagen von Daniel Hommel (PDF) <http://www2.hs-esslingen.de/~dhommel/skript.pdf>`__
 * `LaTeX-Tutorial von Sebastian Stein <http://latex.hpfsc.de/>`__
 * `Einführung in LaTeX von Sascha Frank <http://www.namsu.de/latex/latexeinfuehrung_2/Latexeinfuehrung.html>`__
@@ -24,16 +15,25 @@ Links
 * `LaTeX-Einführung 2 (Fernuni Hagen) <ftp://ftp.fernuni-hagen.de/pub/pdf/urz-broschueren/broschueren/a0279510.pdf>`__
 * `LaTeX 2e Kurzbeschreibung <http://sunsite.informatik.rwth-aachen.de/ftp/pub/mirror/ctan/info/lshort/german/l2kurz.pdf>`__
 * `LaTeX-Linksammlung <http://www.matthiaspospiech.de/latex/dokumentation/einfuehrung/>`__
-* `LaTeX for Complete Novices (en) <http://www.dickimaw-books.com/latex/novices/index.html>`__
-* `Getting Started with LaTeX (en) <http://www.atmospheric-chemistry-and-physics.net/getting_started_with_latex.pdf>`__
+* `LaTeX for Complete Novices (en) <https://www.dickimaw-books.com/latex/novices/index.html>`__
+* `Getting Started with LaTeX (en) <https://www.atmospheric-chemistry-and-physics.net/getting_started_with_latex.pdf>`__
 * `The Not So Short Introduction to LaTeX (en) <ftp://ftp.tu-chemnitz.de/pub/tex/info/lshort/english/lshort.pdf>`__
 
 .. http://www.andy-roberts.net/writing/latex/
 
+.. rubric:: Dokumentationen:
+
+* `KOMA-Script Anleitung <https://www.komascript.de>`__ (`PDF
+  <http://ftp.fernuni-hagen.de/ftp-dir/pub/mirrors/www.ctan.org/macros/latex/contrib/koma-script/doc/scrguide.pdf>`__)
+* `LaTeX Documentation (en.) <https://www.overleaf.com/learn/latex/Main_Page>`__
+* `LaTeX-Wikibook (en.) <https://en.wikibooks.org/wiki/LaTeX/>`__
+
+.. * `LaTeX-Kurs <http://lefti.amigager.de/latex/main.html>`__
+
 .. rubric:: Referenzen:
 
 * `Latex-Befehlsübersicht <http://www.weinelt.de/latex/>`__
-* `LaTeX-Wörterbuch <https://de.wikibooks.org/wiki/LaTeX-Wörterbuch:_InDeX>`__
+* `LaTeX-Wörterbuch <https://de.wikibooks.org/wiki/LaTeX-W%C3%B6rterbuch:_InDeX>`__
 * `Mathematische Symbole (de) <https://de.wikipedia.org/wiki/Liste_mathematischer_Symbole>`__
 * `Mathematische Symbole (en, 1) <https://en.wikibooks.org/wiki/LaTeX/Mathematics>`__
 * `Mathematische Symbole (en, 2) <https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics>`__
@@ -42,14 +42,14 @@ Links
 
 .. rubric:: Tips:
 
-* `LaTeX Stack Exchange <http://tex.stackexchange.com/>`__
-* `TeX-Welt Fragen und Antworten <http://texwelt.de/wissen/fragen/>`__
-* `LaTeX-Codeschnipsel (Uwe Ziegenhagen) <http://uweziegenhagen.de/?page_id=132>`__
+* `LaTeX Stack Exchange <https://tex.stackexchange.com/>`__
+* `TeX-Welt Fragen und Antworten <https://texwelt.de/wissen/fragen/>`__
+* `LaTeX-Codeschnipsel (Uwe Ziegenhagen) <http://www.uweziegenhagen.de/?page_id=132>`__
 * `Briefe mit "scrlttr2" <https://meinnoteblog.wordpress.com/2010/11/12/latex-vorlagen-fur-briefe-und-rechnung/>`__
 
 .. rubric:: Typographie:
 
-* `Practical Typography (en) <http://practicaltypography.com/>`__
+* `Practical Typography (en) <https://practicaltypography.com/>`__
 
 
 .. * `Tips zum Inhaltsverzeichnis <http://faculty.uoit.ca/bohun/latex/toc.html>`_

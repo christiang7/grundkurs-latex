@@ -37,6 +37,8 @@ zwischen ungeradzahligen und geradzahligen Seiten unterschieden werden muss:
 Ungeradzahlige Seiten befinden sich bei einem aufgeschlagenen Buch stets auf der
 rechten, geradzahlige entsprechend auf der linken Seite.
 
+.. _oneside:
+
 Da Bücher meist von vorne nach hinten durchblättert werden, beginnen neue
 Kapitel meist auf den rechten, also ungeradzahligen Seiten; notfalls wird dabei
 in Kauf genommen, dass die linke (geradzahlige) Buchseite leer bleibt. Bei der
@@ -161,12 +163,11 @@ dann wie üblich mittels ``\\`` erreicht werden.
 
 .. https://www.ctan.org/pkg/scrlayer-scrpage?lang=de
 
-Das Paket `scrlayer-scrpage
-<http://mirror.physik-pool.tu-berlin.de/tex-archive/help/Catalogue/entries/scrlayer-scrpage.html>`__,
-das für die Dokumentklassen ``scrartcl``, ``scrrprt`` und ``scrbook`` vorgesehen
-ist, stellt den neuen Pagestyle ``scrheadings`` bereit. Die Syntax für das
-Einbinden des Pakets und die Festlegung der einzelnen Informationen sieht für
-einseitige Dokumente beispielsweise folgendermaßen aus: [#]_
+Das Paket `scrlayer-scrpage <https://ctan.org/pkg/scrlayer-scrpage>`__, das für
+die Dokumentklassen ``scrartcl``, ``scrrprt`` und ``scrbook`` vorgesehen ist,
+stellt den neuen Pagestyle ``scrheadings`` bereit. Die Syntax für das Einbinden
+des Pakets und die Festlegung der einzelnen Informationen sieht für einseitige
+Dokumente beispielsweise folgendermaßen aus: [#]_
 
 
 .. code-block:: tex
@@ -301,11 +302,9 @@ als Anweisung ``\enlargethispage{3cm}`` o.ä. verwendet werden.
 .. rubric:: Abstände manuell festlegen
 
 In LaTeX gibt es mehrere Variablen, die das Seitenlayout beeinflussen. Mittels
-der Pakete `layout
-<http://ftp.fau.de/ctan/help/Catalogue/entries/layout.html>`__  beziehungsweise
-`layouts <http://ftp.fau.de/ctan/help/Catalogue/entries/layouts.html>`__ können
-die Namen dieser Variablen sowie die bei den aktuellen Einstellungen
-vorherrschenden Werte angezeigt werden.
+der Pakete `layout <https://ctan.org/pkg/layout>`__  beziehungsweise `layouts
+<https://ctan.org/pkg/layouts>`__ können die Namen dieser Variablen sowie die
+bei den aktuellen Einstellungen vorherrschenden Werte angezeigt werden.
 
 * Die für das Seitenlayout relevanten Variablen sowie ihre aktuellen Werte
   können mittels des ``layout``-Pakets folgendermaßen angezeigt werden:
@@ -413,7 +412,7 @@ vorherrschenden Werte angezeigt werden.
       :width: 50%
 
 In der `Dokumentation des layouts-Pakets
-<http://mirror.ctan.org/macros/latex/contrib/layouts/layman.pdf>`__ sind
+<http://ftp.gwdg.de/pub/ctan/macros/latex/contrib/layouts/layman.pdf>`__ sind
 weitere entsprechende Beispiele aufgelistet, welche die Platzierung von Fußnoten
 sowie das Aussehen des Inhaltsverzeichnisses näher beschreiben.
 
@@ -465,9 +464,9 @@ sowie das Aussehen des Inhaltsverzeichnisses näher beschreiben.
 
 
 
-.. todo:: margins
+.. TODO margins
 
-.. todo:: titelseite, siehe http://tobiw.de/tbdm/titelseiten
+.. TODO titelseite, siehe http://tobiw.de/tbdm/titelseiten
 
 .. raw:: html
 

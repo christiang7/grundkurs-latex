@@ -159,7 +159,7 @@ Dieses Codebeispiel liefert folgendes Ergebnis: :download:`testbrief.pdf <testbr
 .. raw:: latex
 
     \begin{center}
-    \fbox{\includegraphics[width=0.80\textwidth]{../../testbrief.pdf}}
+    \fbox{\includegraphics[width=0.80\textwidth]{/home/grund-wissen/source/informatik/latex/testbrief.pdf}}
     \end{center}
 
 Werden keine weiteren Layout-Vorgaben getroffen, so werden die Briefseiten bei
@@ -216,8 +216,416 @@ folgende Variablen:
 .. http://tobiw.de/tbdm/index-1
 .. http://tobiw.de/tbdm/index-2
 
+.. Todo Curriculum Vitae
 .. http://www.howtotex.com/general/a-guide-to-building-a-plain-and-simple-latex-cv/
 .. http://www.howtotex.com/templates/creating-a-designers-cv-in-latex/
+
+.. ``beamer`` -- Präsentationen
+.. ----------------------------
+
+.. Anders als bei den bisher vorgestellten Klassen, gibt es in Beamer keine Seiten,
+.. sondern so genanten "Frames" (Rahmen). Diese stellen den Platz für die
+.. Präsentation zur Verfügung. Innerhalb der Frames spielen die Overlays die
+.. entscheidende Rolle, sie ermöglichen es das ein Frame mehrere Slides haben kann.
+.. Zudem sind zusätzliche Pakete in die Beamer Class eingebunden wie beispielsweise
+.. ``xcolor`` und ``hyperref``.
+.. Für die Beamer Class gibt eine umfangreiche Sammlung von Vorlagen, eine
+.. Übersicht findet sich auf einer meiner Seiten: Beamer Theme Übersicht
+.. http://www.namsu.de/latex/themes/uebersicht_beamer.html
+
+.. Die Dokumentenklasse Beamer hat wie die anderen Klassen auch zusätzliche Optionen:
+
+.. * handout -- ignoriert Overlays
+.. * draft -- ignoriert Bilder
+
+.. Innerhalb der Präambel kann das spätere Erscheinungsbild mittels eines Themes
+.. festgelegt werden:
+
+.. .. rubric:: Frames
+
+.. Wie eingangs erwähnt gibt es keine Seiten sondern Frame's. Der Rahmen selbst hat
+.. je nach gewähltem Erscheinungsbild der Präsentation einen oberen, unteren,
+.. linken und oder rechten Rand. Neben LaTeX-typischen Umgebungen wie Listen,
+.. Aufzählungen usw. gibt es zusätzliche Umgebungen wie z.B. die Blockumgebung.
+
+.. Aufbau des Frames Die Frame Umgebung wird mit \begin{frame} geöffnet und mit
+.. \end{frame} geschlossen. Jede Folien sollte einen Titel haben z.B.
+.. \frametitle{Keine Folie ohne Titel} ggf. auch einen Untertitle
+.. \framesubtitle{falls es noch mehr gibt} .
+
+.. Beispiel:
+
+.. .. code-block:: tex
+
+..     \begin{frame}
+..         \frametitle{Titel}
+..         % Optional: \framesubtitle{Untertitel}
+..         % Inhalt (Text, Bilder, usw.)
+..     \end{frame}
+
+
+.. Mit vordefinierten Blockumgebungen bietet Beamer eine relativ einfache
+.. Möglichkeit, Texte innerhalb eines Frames zu strukturieren sowie Beispiele oder
+.. Warnungen hervorzuheben:
+
+.. * Standard-Blockumgebung (Farbe: blau)
+
+.. .. code-block:: tex
+
+..     \begin{block}{Block Titel}
+..         Text
+..     \end{block}
+
+.. * Beispiel-Blockumgebung (Farbe: grün)
+
+.. .. code-block:: tex
+
+..     \begin{exampleblock}{Block Titel}
+..         Text
+..     \end{exampleblock}
+
+.. * Alarm-Blockumgebung (Farbe: rot)
+
+.. .. code-block:: tex
+
+..     \begin{alertblock}{Block Titel}
+..         Text
+..     \end{alertblock}
+
+.. Frames erlauben nicht nur eine Einteilung in oben und unten, sondern auch eine
+.. aufteilung in links und rechts. Zusammen sollten die Spalten nicht mehr wie 10cm
+.. haben.
+
+.. .. code-block:: tex
+
+..     \begin{columns}
+
+..         \begin{column}{5cm}
+..             Text der ersten (linken) Spalte ....
+..         \end{column}
+
+..         \begin{column}{5cm}
+..             Text der zweiten Spalte....
+..         \end{column}
+
+..     \end{columns}
+
+.. Overlays
+.. Unter einem Overlay versteh ich einen Teil der Folie, der nicht die komplette
+.. Zeit in der die Folie als ganzes sichtbar ist, selbst sichtbar ist. Zum Beispiel
+.. das einzelne Punkte erst nach und nach erscheinen, oder das beim
+.. weiterklicken die alten Punkte verschwinden. Ich setze dies auch oft bei
+.. Aufzählungen ein, ein Grund dafür, ist daÿmeiner Meinung nach, die Aufmerk-
+.. samkeit des Publikums sich nicht im Gesamttext verliert. Sie sehen das neue
+.. und werden nicht durch weiteren Text zu dem man aber erst später kommt
+
+.. Aufzählung zu einem bestimmten Zeitpunkt
+
+.. .. code-block:: tex
+
+..     \begin{itemize}
+..     \item<1-> erster Punkt
+..     \item<2-> zweiter Punkt
+..     \item<3-> dritter Punkt
+..     \item<4-> \dots
+..     \end{itemize}
+
+.. Innerhalb von Aufzählungen geht das auch recht einfach, man gibt an ab
+.. welchem 'Klick' der Punkt erscheien soll. Angenommen er soll ab dem dritten
+.. Klick und bis zum Ende erscheinen ``\item<3-> Punkt`` . Soll er nur beim 3,4,5
+.. erscheinen ``\item<3-5> Punkt``. Will man einen bestimmten Zeitpunkt bzw. Klick
+.. haben muss dies genau angegeben werden.
+
+.. Bei fortlaufenden Aufzählungen lässt sich das ganze zu abkürzen.
+
+.. .. code-block:: tex
+
+..     \begin{itemize}[<+->]
+..     \item erster Punkt
+..     \item zweiter Punkt
+..     \item dritter Punkt
+..     \item \dots
+..     \end{itemize}
+
+.. .. \pause Mit dem Befehl \pause lassen sich \pause einfach
+.. .. Overlays einf\"ugen. \pause
+
+.. .. Neben der Pause gibt es noch die Möglichkeit Text usw. unsichtbar zu machen. Sie
+.. .. erscheinen während dieser Zeit nicht auf dem Bildschirm, aber ihr Platz wird
+.. .. trotzdem freigehalten. Soll etwas zum Zeitpunkt
+
+.. .. \pause Mit dem \invisible<3,4>{Befehl}
+.. .. \invisible \pause werden Dinge unsichtbar.
+.. .. \pause Sie sind aber immer noch da.\pause
+
+.. Themes Die Themes in Beamer sind Präsentationsvorlagen, standardmäßig sind 28
+.. Stück bei der Beamer class mit dabei. Davon sind 26 Stück nach Städten benannt.
+.. Themes bestehen aus mehreren Bestandteilen, die verschiedene Teile der
+.. Präsentation bestimmen. Aussehen, Struktur, Farbe, Schrift
+
+
+.. Inhalt eines Präsentationsthemes
+
+.. * inner theme
+.. * outer theme
+.. * color theme
+.. * font theme
+
+
+.. Inner Themes verändern
+
+.. * Titelseite
+.. * Umgebungen
+.. * Aufzählungen
+.. * Block ... usw.
+
+.. Einbinden mit \useinnertheme[Option]{inner theme}
+
+.. Outer Themes verändern
+
+.. * Sidebars (Übersicht)
+.. * Kopf- und Fuÿzeile
+.. * Logo
+.. * Folientitel
+
+.. Einbinden mit \useoutertheme{outer theme}
+
+.. Color Themes verändern
+
+.. * Farbe der Präsentation Komplett
+.. * Outer Theme
+.. * Inner Theme
+
+.. Font Themes verändert Aussehen der Schrift
+
+.. Einbinden mit \usefonttheme{font theme}
+
+.. Es gibt zwei (große) Unterschiede zwischen einer Titelseite in Beamer und in
+.. einer anderen Dokumentenklasse. Der Befehl hier ist: \titlepage .
+.. Der zweite ist das man für den Titel und den Autor Kurzfassungen mitgeben kann,
+.. die dann so auf jeder Folie vorhanden sind. Ein Logo wird durch folgende
+.. Anweisung eingefügt:
+
+.. \logo{\includegraphics{dateiname}}
+
+.. \title[Kurztitel]{lange Fassung f\"ur die Titelseite}
+.. \author[Autor]{lange Fassung des Autors}
+.. \logo{\includegraphics[optionen]{datei}}
+
+.. Schlichte Variante
+.. * Titel
+.. * Autor
+.. * Datum
+
+.. Titelseite (2): etwas mehr
+
+.. * Titel nur noch auf der Titelseite
+.. * Kurztitel für alle Folien
+.. * Kurzform für den Autor
+.. * Logo einbauen
+
+.. \title[Beamer Class]{Pr\"asentationen mit \LaTeX}
+.. \author[Sascha Frank]{Sascha Frank\\www.namsu.de}
+.. \logo{\includegraphics[scale=0.13]{logo-SF}}
+
+.. Titel und Übersicht
+
+.. .. code-block:: tex
+
+..     \begin{document}
+..     \begin{frame}
+..     \titlepage
+..     \end{frame}
+
+.. Ein Inhaltsverzeichnis in Beamer, ist \tableofcontens
+.. in einem Frame:
+
+.. \begin{frame}
+.. \frametitle{Übersicht}
+.. \tableofcontents
+.. \end{frame}
+
+
+.. Anbei ein Beispiel für eine gute Präsentation mit Latex Beamer Class.
+
+.. Übersicht der usethemes der Beamer class
+
+.. .. code-block:: tex
+
+..     % zusaetzlich ist das usepackage{beamerthemeshadow} eingebunden
+..     %
+..     % \beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+..     % sorgt dafuer das die Elemente die erst noch kommen nur schwach
+..     % angedeutet erscheinen
+..     \documentclass{beamer}
+..     \usepackage{beamerthemeshadow}
+..     \beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+..     \begin{document}
+..     \title{Beamer Class ganz nett}
+..     \author{Sascha Frank}
+..     \date{\today}
+
+..     \frame{\titlepage}
+
+..     \frame{\frametitle{Inhaltsverzeichnis}\tableofcontents}
+
+..     \section{Abschnitt Nr.1}
+
+..     \frame{\frametitle{Titel}
+..         Die einzelnen Frames sollte einen Titel haben
+..     }
+
+..     \subsection{Unterabschnitt Nr.1.1 }
+
+..     \frame{
+..         Denn ohne Titel fehlt ihnen was
+..     }
+
+..     \section{Abschnitt Nr. 2}
+..     \subsection{Listen I}
+
+..     \frame{\frametitle{Aufz\"ahlung}
+..         \begin{itemize}
+..             \item Einf\"uhrungskurs in \LaTeX
+..             \item Kurs 2
+..             \item Seminararbeiten und Pr\"asentationen mit \LaTeX
+..             \item Die Beamerclass
+..         \end{itemize}
+..     }
+
+..     \frame{\frametitle{Aufz\"ahlung mit Pausen}
+..         \begin{itemize}
+..             \item Einf\"uhrungskurs in \LaTeX \pause
+..             \item Kurs 2 \pause
+..             \item Seminararbeiten und Pr\"asentationen mit \LaTeX \pause
+..             \item Die Beamerclass
+..         \end{itemize}
+..     }
+
+..     \subsection{Listen II}
+
+..     \frame{\frametitle{Numerierte Liste}
+..         \begin{enumerate}
+..             \item Einf\"uhrungskurs in \LaTeX
+..             \item Kurs 2
+..             \item Seminararbeiten und Pr\"asentationen mit \LaTeX
+..             \item Die Beamerclass
+..         \end{enumerate}
+..     }
+
+..     \frame{\frametitle{Numerierte Liste mit Pausen}
+..         \begin{enumerate}
+..             \item Einf\"uhrungskurs in \LaTeX \pause
+..             \item Kurs 2 \pause
+..             \item Seminararbeiten und Pr\"asentationen mit \LaTeX \pause
+..             \item Die Beamerclass
+..         \end{enumerate}
+..     }
+
+..     \section{Abschnitt Nr.3}
+..     \subsection{Tabellen}
+
+..     \frame{\frametitle{Tabellen}
+..         \begin{tabular}{|c|c|c|}
+..             \hline
+..             \textbf{Zeitpunkt} & \textbf{Kursleiter} & \textbf{Titel} \\
+..             \hline
+..             WS 04/05 & Sascha Frank & Erste Schritte mit \LaTeX \\
+..             \hline
+..             SS 05 & Sascha Frank & \LaTeX \ Kursreihe \\
+..             \hline
+..         \end{tabular}
+..     }
+
+..     \frame{\frametitle{Tabellen mit Pause}
+..         \begin{tabular}{c c c}
+..             A & B & C \\
+..             \pause
+..             1 & 2 & 3 \\
+..             \pause
+..             A & B & C \\
+..         \end{tabular} 
+..     }
+
+..     \section{Abschnitt Nr. 4}
+..     \subsection{Bl\"ocke}
+
+..     \frame{\frametitle{Bl\"ocke}
+..         \begin{block}{Blocktitel}
+..         Blocktext
+..         \end{block}
+..         \begin{exampleblock}{Blocktitel}
+..         Blocktext
+..         \end{exampleblock}
+..         \begin{alertblock}{Blocktitel}
+..         Blocktext
+..         \end{alertblock}
+..     }
+
+..     \section{Abschnitt Nr. 5}
+..     \subsection{Geteilter Bildschirm}
+
+..     \frame{\frametitle{Zerteilen des Bildschirmes}
+..         \begin{columns}
+..         \begin{column}{5cm}
+..             \begin{itemize}
+..                 \item Beamer
+..                 \item Beamer Class
+..                 \item Beamer Class Latex
+..             \end{itemize}
+..         \end{column}
+..         \begin{column}{5cm}
+..             \begin{tabular}{|c|c|}
+..             \hline
+..             \textbf{Kursleiter} & \textbf{Titel} \\
+..             \hline
+..             Sascha Frank & \LaTeX \ Kurs 1 \\
+..             \hline
+..             Sascha Frank & \LaTeX \ Kursreihe \\
+..             \hline
+..             \end{tabular}
+..         \end{column}
+..         \end{columns}
+..     }
+
+..     \subsection{Bilder}
+
+..     \frame{\frametitle{Bilder in Beamer}
+..         \begin{figure}
+..         \includegraphics[scale=0.5]{PIC1}
+..         \caption{Die Abbildung zeigt ein Beispielbild}
+..         \end{figure}
+..     }
+
+..     \subsection{Bilder und Listen kombiniert}
+
+..     \frame{
+..         \frametitle{Bilder und Itemization in Beamer}
+..         \begin{columns}
+..         \begin{column}{5cm}
+..             \begin{itemize}
+..             \item<1-> Stichwort 1
+..             \item<3-> Stichwort 2
+..             \item<5-> Stichwort 3
+..             \end{itemize}
+..             \vspace{3cm}
+..         \end{column}
+..         \begin{column}{5cm}
+..             \begin{overprint}
+..             \includegraphics<2>{PIC1}
+..             \includegraphics<4>{PIC2}
+..             \includegraphics<6>{PIC3}
+..             \end{overprint}
+..         \end{column}
+..         \end{columns}
+..     }
+
+..     \end{document}
+
+.. http://www.namsu.de/latex/themes/uebersicht_beamer.html
+.. http://www.namsu.de/latex/themes/Goettingen.html
+
+
 
 .. raw:: html
 
@@ -273,4 +681,11 @@ folgende Variablen:
 
 .. convert -verbose -density 150 testbrief.pdf -quality 100 -sharpen 0x1.0  tmp.png && convert tmp.png -quality 100 -border 2x2 testbrief.png
 
+.. http://www.namsu.de/latex/beamer/Thumbnails.html
+.. http://www.namsu.de/latex/themes/Goettingen.html
+.. https://www.latex-kurs.de/pakete/pakete.html
+.. https://www.latex-kurs.de/vorlagen/vorlagen.html
+.. http://www.namsu.de/Extra/latex-fehler.html
+.. http://www.namsu.de/Extra/pakete/Acronym.html
+.. http://www.namsu.de/Extra/latex-pakete.html
 

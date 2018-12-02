@@ -219,6 +219,13 @@ oder ``height`` die Größe der Abbildung im Dokument festgelegt werden, mittels
 (gegen den Uhrzeigersinn) gedreht werden. Als Bildformate können bei Verwendung
 von ``pdflatex`` wahlweise ``png``, ``jpg`` oder ``bmp`` verwendet werden.
 
+.. Option Wirkung
+.. angle Winkel der Drehung des Bildes
+.. orgin Ursprung des Bildes
+.. width Breite vorgeben
+.. height Höhe vorgeben
+.. scale Skalierung
+
 *Beispiel:*
 
 .. code-block:: tex
@@ -429,7 +436,13 @@ dies einer besseren Lesbarkeit dient.
 Innerhalb einer Reihe bewirkt das Zeichen ``&`` ein Trennen der einzelnen
 Spalten. Um horizontale Linien am Rand der Tabelle oder zwischen einzelnen
 Reihen zu ziehen, kann zu Beginn der Tabelle sowie jeweils hinter einem ``\\``
-die Anweisung ``\hline`` ("horizontal line") geschrieben werden.
+die Anweisung ``\hline`` ("horizontal line") geschrieben werden. Soll ein
+horizontaler Strich nicht über die gesamte Tabelle hinweg gesetzt werden,
+sondern nun für einzelne Spalten gelten, so kann man nach dem Beenden einer
+Zeile mittels ``\\``  auch beispielsweise ``\cline{1-3}`` schreiben, um einen
+waagrechten Strich unter die angegebenen Spalten-Einträge zu setzen. Man kann
+auch beispielsweise ``\\ \cline{1-2} \cline{4-5}`` schreiben, um horizontale
+Striche an genau den angegebenen Spalten zu setzen.
 
 Jede Reihe sollte bei :math:`n` Spalten stets :math:`(n-1)` Spaltentrennzeichen
 ``&`` beinhalten. Ist dies nicht der Fall, verbleibt bei einer umrandeten

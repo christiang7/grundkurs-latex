@@ -31,7 +31,7 @@ Anschließend kann das Repository heruntergeladen werden:
 
 .. code-block:: bash
 
-    git clone https://github.com//grund-wissen/grundkurs-latex.git
+    git clone https://gitlab.com//grund-wissen/grundkurs-latex.git
 
 Im Projektverzeichnis können dann aus den Quelldateien wahlweise HTML-Seiten
 oder ein PDF-Dokument erstellt werden:
@@ -48,7 +48,9 @@ Die fertigen Dokumente befinden sich anschließend im Verzeichnis ``_build/html`
 beziehungsweise ``_build/latex``.
 
 Sollen eigene, lokale Änderungen an der Dokumentation in dieses Repository
-übernommen werden, so wird um einen entsprechenden Pull-Request gebeten.
+übernommen werden, so wird um eine `Email
+<https://www.grund-wissen.de/impressum.html#Email-Adresse>`__ oder einen
+entsprechenden Merge-Request gebeten.
 
 
 Herzlichen Dank an alle Mitwirkenden!

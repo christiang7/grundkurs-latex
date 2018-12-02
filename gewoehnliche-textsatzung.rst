@@ -432,12 +432,13 @@ eines Absatzes begrenzt.
 .. rubric:: Farbiger Text
 
 Um Farben nutzen zu können, muss in der :ref:`Präambel <Präambel>` des
-LaTeX-Dokuments das Paket ``xcolor`` geladen werden: [#]_
+LaTeX-Dokuments das Paket ``xcolor`` geladen werden:
 
+.. \usepackage[table]{xcolor}
 
 .. code-block:: tex
 
-    \usepackage[table]{color}
+    \usepackage{xcolor}
 
 Innerhalb des Dokuments lässt sich dann durch die Anweisung ``\color{farbname}``
 die Standardfarbe auf eine gewünschte Farbe ändern. Der Farbname kann einer
@@ -445,27 +446,85 @@ Standardfarbe (``black``, ``white``, ``darkgray``, ``gray``, ``lightgray``,
 ``brown``, ``red``, ``green``, ``blue``, ``cyan``, ``magenta`` oder ``yellow``)
 entsprechen oder eine selbst definierte Farbe bezeichnen.
 
-.. http://tobiw.de/tbdm/farben
+Um einen Farbwechsel nicht wieder explizit rückgängig machen zu müssen, kann die
+Wirkung des Farbwechsels mittels einer :ref:`Deklaration <Deklaration>` auf
+einen Textblock beschränkt werden, beispielsweise ``Text { \color{red} roter
+Text hier } Text``. Derartige Textblöcke können auch mehrere Absätze umfassen.
 
-.. todo define color
-.. \textcolor[rgb]{1,0.25,0.25}{Hellrot (rgb)}
-.. \textcolor[RGB]{255,64,64}{Hellrot (RGB)}
-.. \textcolor[HTML]{FF4040}{Hellrot (HTML)}
-.. \textcolor[cmyk]{0.8,0.5,0,0.2}{Dunkelblau (cmyk)}
-.. \textcolor[wave]{430}{Blau (wave)} % Wellenlänge
-.. \textcolor[gray]{0.6}{Grau (gray)}
+Eine andere Möglichkeit ist, einen Textabschnitt mittels
+``\textcolor{farbname}{Text}`` hervorzuheben; hierbei ist die Länge des Textes
+allerdings auf maximal einen einzelnen Absatz begrenzt.
 
-.. \definecolor{farbe1}{cmyk}{1,0,0.5,0}
+Neben den Standard-Farben können folgendermaßen auch eigene Farben definiert werden:
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    \textcolor[rgb]{0.85, 0.00, 0.15}{Rot}         \\ % rot-gruen-blau (prozentual)
+    \textcolor[RGB]{ 240,  115,  40}{Orange}       \\ % Rot-Gruen-Blau (Farbwerte 0..255)
+    \textcolor[HTML]{F0E10F}{Gelb}                 \\ % HTML-Code      (hexadeximal)
+    \textcolor[cmyk]{0.25, 0.10, 0.35, 0.08}{Grün} \\ % CMYK-Anteile   (für Druckereien)
+    \textcolor[wave]{450}{Blau}                    \\ % Wellenlänge    (380..750)
+
+    \textcolor[gray]{0.75}{Grau}                   \\ % Grau-Anteil    (0..1)
+
+*Ergebnis:*
+
+.. math::
+
+    &\text{\textcolor[rgb]{0.85, 0.0, 0.15}{Rot}} \\
+    &\text{\textcolor[RGB]{240,115,40}{Orange}} \\
+    &\text{\textcolor[HTML]{F0E10F}{Gelb}} \\
+    &\text{\textcolor[cmyk]{0.25, 0.10, 0.35, 0.08}{Grün}} \\
+    &\text{\textcolor[wave]{450}{Blau}} \\[12pt]
+    &\text{\textcolor[gray]{0.75}{Grau}}
+
+Möchte man eine Farbe nicht nur einmalig verwenden, so kann man ihr einen Namen
+zuweisen; die Farbe kann anschließend wie eine Standard-Farbe verwendet werden:
+
+.. code-block:: tex
+
+    % Eigenen Farbnamen definieren:
+    \definecolor{deeppurple}{RGB}{50, 25, 150}
+
+Mittels des ``xcolor``-Pakets kann Text auch mit einem farbigen Rahmen versehen
+werden:
+
+*Beispiel:*
+
+.. code-block:: tex
+
+    % Text mit farbigem Hintergund:
+    \colorbox{blue}{Text}
+
+    % Text mit farbiger Umrandung:
+    \fcolorbox{blue}{white}{Text}
+
+*Ergebnis:*
+
+.. math::
+
+    &\colorbox{blue}{\text{Text}} \\[6pt]
+    &\fcolorbox{blue}{white}{\text{Text}}
+
+Mit beiden Anweisungen werden :ref:`LR-Boxen <LR-Box>` erzeugt (siehe Abschnitt
+:ref:`Boxen <Boxen>` weiter unten). In einer derartigen Box ist kein allgemein
+kein Zeilenumbruch möglich, außer man umschließt damit eine :ref:`Parbox
+<Parbox>`. Alle von ``xcolor`` bereitgestellten Anweisungen lassen sich auch im
+Mathe-Modus und in Tabellen nutzen; für farbige Texteinträge in Tabellen lohnt
+es sich allerdings, auch einen Blick auf das :ref:`colortbl <colortbl>`-Paket zu
+werfen.
+
+Allgemein sollten Farben sparsam verwendet werden. Zueinander passende Farben
+lassen sich beispielsweise mit dem Programm ``agave`` ausfindig machen -- dieses
+ist über das gleichnamige Paket via :ref:`apt <gwl:apt>` installierbar.
+
 
 .. Farbige Rahmen und/oder Hinterlegungen für einzelne Wörter erzeugen wir mit
 .. \colorbox und \fcolorbox.
 .. \colorbox{yellow}{Gelber Kasten}
 .. \fcolorbox{blue}{yellow}{Gelb-blauer Kasten}
-
-Um einen Farbwechsel nicht wieder explizit rückgängig machen zu müssen, kann die
-Wirkung des Farbwechsels mittels einer :ref:`Deklaration <Deklaration>` auf
-einen Textblock beschränkt werden, beispielsweise ``Text { \color{red} roter
-Text hier } Text``. Derartige Textblöcke können auch mehrere Absätze umfassen.
 
 
 .. index:: \rotatebox{}
@@ -473,10 +532,10 @@ Text hier } Text``. Derartige Textblöcke können auch mehrere Absätze umfassen
 
 .. rubric:: Gedrehter Text
 
-Um Text vertikal oder schräg zu setzen, muss zunächst in der :ref:`Präambel
-<Präambel>` des Dokuments das Paket ``graphicx`` geladen werden. Innerhalb des
-Dokuments lässt sich dann durch die Anweisung ``\rotatebox{Winkel}{Text}`` der
-angegebene Text um den angegebenen Winkel drehen.
+Um Text vertikal oder schräg zu setzen, muss zunächst in der Präambel des
+Dokuments das Paket ``graphicx`` geladen werden. Innerhalb des Dokuments lässt
+sich dann durch die Anweisung ``\rotatebox{Winkel}{Text}`` der angegebene Text
+um den angegebenen Winkel drehen.
 
 *Beispiel:*
 
@@ -545,8 +604,8 @@ Zeilenabstand beibehalten, also beide Werte um den gleichen Faktor skaliert
 werden.
 
 .. index:: Längenmaß, pt (Einheit), em (Einheit), ex (Einheit)
-.. _Einheiten:
 .. _Längenmaße:
+.. _Längeneinheiten:
 
 In LaTeX können allgemein folgende Längenmaße verwendet werden:
 
@@ -742,7 +801,7 @@ Eine sehr ausführliche Übersicht von LaTeX-Symbolen gibt es im `LaTeX-Wikibook
 (Sonderzeichen)
 <https://de.wikibooks.org/wiki/LaTeX-Kompendium:_Sonderzeichen>`_ und in der
 PDF-Datei `Symbols-A4
-<http://mirrors.ctan.org/info/symbols/comprehensive/symbols-a4.pdf>`_.
+<http://ftp.gwdg.de/pub/ctan/info/symbols/comprehensive/symbols-a4.pdf>`_.
 
 
 .. index:: Silbentrennung
@@ -813,11 +872,11 @@ mehrere Möglichkeiten:
 .. index:: Zeilenabstand, spacing (Umgebung)
 
 * Lädt man in der Präambel mittels ``\usepackage{setspace}`` das Zusatz-Paket
-  `setspace <http://ftp.fau.de/ctan/help/Catalogue/entries/setspace.html>`__, so
-  kann man mittels der Anweisungen ``\onehalfspacing`` beziehungsweise
-  ``\doublespacing`` im folgenden Dokumentteil einen eineinhalb-fachen
-  beziehungsweise doppelten Zeilenabstand einstellen. Der ursprüngliche
-  Zeilenabstand kann mittels ``\singlespacing`` wieder hergestellt werden.
+  `setspace <https://ctan.org/pkg/setspace>`__, so kann man mittels der
+  Anweisungen ``\onehalfspacing`` beziehungsweise ``\doublespacing`` im
+  folgenden Dokumentteil einen eineinhalb-fachen beziehungsweise doppelten
+  Zeilenabstand einstellen. Der ursprüngliche Zeilenabstand kann mittels
+  ``\singlespacing`` wieder hergestellt werden.
 
 * Möchte man einen anderen, selbst definierten Zeilenabstand wählen, so ist
   dies mittels der ``spacing``-Umgebung möglich:
@@ -964,6 +1023,7 @@ unter Verwendung des Zusatz-Pakets :ref:`hyperref <hyperref>` beispielsweise
 auch auf Web-Adressen gesetzt werden.
 
 .. index:: Box
+.. _Boxen:
 .. _Boxen, Balken und Minipages:
 
 Boxen, Balken und Minipages
@@ -1033,9 +1093,87 @@ Typen von Boxen sind folgende:
         % Abstand zwischen Rahmen und Inhalt festlegen:
         \setlength{\fboxsep }{0.5cm}
 
-  Da bei LR-Boxen ein Zeilenumbruch nicht möglich ist, muss man selbst darauf
-  achten, dass der Inhalt nicht über den Rand der Box beziehungsweise über den
-  Rand der Seite hinausragt.
+  Um farbige Boxen zu setzen, kann, wie :ref:`weiter oben beschrieben <Farbiger
+  Text>`, in der Präambel das Paket ``xcolor`` geladen werden; innerhalb des
+  Dokuments können dann die Anweisungen ``\colorbox{farbname}{text}``
+  beziehungsweise ``\fcolorbox{rahmenfarbe}{boxfarbe}{Text}`` genutzt werden.
+
+
+  *Beispiel:*
+
+  .. code-block:: tex
+
+      % In der Präambel:
+      % \usepackage{xcolor}
+
+      % ...
+      % Im Dokument:
+
+      \fcolorbox{blue}{white}{\makebox[8.0cm][c]{Hallo Welt!}}
+
+  *Ergebnis:*
+
+  .. math::
+
+      \fcolorbox{blue}{white}{\makebox[8.0cm][c]{Hallo Welt!}}
+
+  Vom Paket `fancybox
+  <ftp://ftp.fu-berlin.de/tex/CTAN/help/Catalogue/entries/fancybox.html>`_
+  werden weitere LR-Boxen bereitgestellt:
+
+  * Mit ``\ovalbox{Text}`` beziehungsweise ``\Ovalbox{Text}`` kann der
+    angegebene Text mit einer ovalen Umrandung versehen werden.
+  * Mit ``\doublebox{Text}`` wird der angegebene Text mit einem doppelten Rahmen
+    versehen.
+  * Mit ``\shadowbox{Text}`` wird der angegebene Text mit einem Rahmen mit
+    Schattierung versehen.
+
+  *Beispiel:*
+
+  .. code-block:: tex
+
+      % In der Präambel:
+      % \usepackage{fancybox}
+
+      % ...
+      % Im Dokument:
+
+
+      % Box mit Schattierung:
+      \shadowbox{\makebox[8.0cm][c]{Hallo Welt!}}
+
+  *Ergebnis:*
+
+  .. math::
+
+      \shadowbox{\makebox[8.0cm][c]{Hallo Welt!}}
+
+  Auch das Paket `shadow
+  <ftp://ftp.fu-berlin.de/tex/CTAN/help/Catalogue/entries/shadow.html>`_ stellt
+  mit der Anweisung ``\shabox{}`` eine schattierte LR-Box bereit; bei dieser
+  sind die Abstände zur Umrandung bewusst groß gewählt, so dass sich diese Box
+  beispielsweise gut für Titelseiten eignet
+
+  *Beispiel:*
+
+  .. code-block:: tex
+
+      % In der Präambel:
+      % \usepackage{shadow}
+
+      % Box mit Schattierung:
+      \shabox{\makebox[8.0cm][c]{Hallo Welt!}}
+
+  *Ergebnis:*
+
+  .. math::
+
+      \shabox{\makebox[8.0cm][c]{Hallo Welt!}}
+
+  Da bei LR-Boxen kein Zeilenumbruch erfolgt, muss man selbst darauf achten,
+  dass der Inhalt nicht über den Rand der Box beziehungsweise über den Rand der
+  Seite hinausragt; ein weiterer Trick besteht in der Nutzung der im folgenden
+  beschriebenen Parboxen.
 
   .. Paket fancybox für Schmuck-Rahmen
 
@@ -1065,6 +1203,31 @@ Typen von Boxen sind folgende:
   auch die Option ``s`` ("stretched") für eine gleichmäßige Verteilung des
   Inhalts auf die gesamte Höhe der Box.
 
+  Parboxen können auch innerhalb von LR-Boxen verwendet werden, um in diesen
+  indirekt Zeilenumbrüche zu ermöglichen. Beispielsweise kann man so einen
+  farbigen Rahmen um eine mehrzeilige Formel zeichnen:
+
+  .. code-block:: tex
+
+      % In der Präambel:
+      % \usepackage{shadow}
+
+      \shabox{
+          \parbox{0.10\textwidth}{
+              Hallo \\
+              Welt!
+          }
+      }
+
+  .. math::
+
+      \shabox{
+          \parbox{0.10\textwidth}{
+              Hallo \\
+              Welt!
+          }
+      }
+
 .. index:: Box; Rule-Box, \rule{}
 .. _Rule-Box:
 
@@ -1079,6 +1242,10 @@ Typen von Boxen sind folgende:
 
       % Horizontale Linie mit 5 cm Breite und 0.5 cm Höhe erstellen:
       % Allgemeine Syntax: \rule[verschiebung]{breite}{hoehe}
+      \rule[0cm]{5.0cm}{0.5cm}
+
+  .. math::
+
       \rule[0cm]{5.0cm}{0.5cm}
 
   Über das erste (optionale) Argument kann eine vertikale Verschiebung des
@@ -1254,6 +1421,26 @@ vertikale Positionierung innerhalb der Parbox erfolgen soll.
 .. setzen. Der Befehl dazu lautet \begin{multicols} {Spaltenanzahl} [Titel]
 .. [Spaltenabstand].
 
+.. https://de.sharelatex.com/learn/Multiple_columns
+.. Allgemein gute Seite!
+
+.. [
+.. \section{First Section}
+.. All human things are subject to decay. And when fate summons, Monarchs must obey.
+.. ]
+.. Hello, here is some text without a meaning.  This text should show what 
+.. a printed text will look like at this place.
+.. If you read this text, you will get no information.  Really?  Is there 
+.. no information?  Is there...
+.. \end{multicols}
+
+.. Spaltenabstand:
+.. \setlength{\columnsep}{1cm}
+
+.. Floating elements (tables and figures) can be inserted in a multicolumn document with wrapfig and wraptable. 
+
+.. http://www.namsu.de/Extra/pakete/Acronym.html
+.. Abkürzungsverzeichnis mit LaTeX
 
 .. raw:: html
 
@@ -1268,9 +1455,6 @@ vertikale Positionierung innerhalb der Parbox erfolgen soll.
     die ``\section*{}``-Anweisung für nicht-nummerierte Abschnitts-Überschriften
     gewählt werden.
 
-.. [#] Die zusätzliche Option ``table`` sollte hierbei gesetzt werden, um Farben
-    auch innerhalb von :ref:`Tabellen <Tabellen>` nutzen zu können.
-
 .. [#] Man kann sich innerhalb des Dokuments auch beispielsweise mittels
     ``\showhyphens{Staubecken}`` ausgeben lassen, wie das angegebene Wort von
     LaTeX automatisch getrennt würde; als Ergebnis erhält man an dieser Stelle
@@ -1281,5 +1465,4 @@ vertikale Positionierung innerhalb der Parbox erfolgen soll.
     :ref:`tabular <tabular>`-Umgebung gesetzte Tabellen enthalten sein; diese
     darf jedoch nicht von einer :ref:`table <table>`-Umgebung umschlossen sein,
     da bei dieser die konkrete Position nicht unmittelbar festgelegt ist.
-
 

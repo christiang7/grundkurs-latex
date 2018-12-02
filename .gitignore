@@ -7,4 +7,5 @@ _build/
 # Ignore this specific file
 grundkurs-latex.pdf
 .hgignore
+.bsync*
 *.log

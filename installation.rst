@@ -18,7 +18,7 @@ Installation von LaTeX
     Aufteilen von umfangreichen Werken in kleinere Bestandteile und eine
     Wiederverwertbarkeit von Code-Stücken, es macht obendrein das Erstellen von
     PDF-Dateien "skriptbar". Einige Wiki-Werkzeuge, beispielsweise :ref:`Sphinx
-    <Sphinx-Tool>`, können so aus einer eigenen (meist kürzeren) Syntax heraus
+    <gwl:Sphinx>`, können so aus einer eigenen (meist kürzeren) Syntax heraus
     LaTeX- bzw. PDF-Dokumente erzeugen.
 
 
@@ -36,6 +36,13 @@ folgende Pakete installiert werden:
 Zur Installation der obigen Pakete wird insgesamt etwa 1 GB an
 Festplattenspeicher benötigt.
 
+Möchte man zusätzlich auf ein umfangreiches Schriftpaket zurückgreifen (siehe
+`LaTeX Font Catalogue <http://www.tug.dk/FontCatalogue/seriffonts.html>`), so
+kann man zusätzlich das Paket ``texlive-fonts-extra`` installieren; dieses hat
+allerdings alleine einen Umfang von rund 800 MB.
+
+.. https://ctan.org/texarchive/fonts
+
 
 .. index:: CTAN, Paket, texhash, mktexlsr
 .. _CTAN-Zusatzpakete installieren:
@@ -44,7 +51,7 @@ Festplattenspeicher benötigt.
 
 LaTeX in seiner Grundform kann durch zahlreiche Pakete erweitert werden. Eine
 ausführliche Übersicht (inklusive der Paket-Dokumentationen) findet sich im so
-genannten `CTAN <http://www.ctan.org/>`_ ("Comprehensive TeX Archive Network").
+genannten `CTAN <https://www.ctan.org/>`_ ("Comprehensive TeX Archive Network").
 
 .. `CTAN-Paket-Index <http://www.bitlib.net/mirror/ctan/help/Catalogue/alpha.html>`_.
 
